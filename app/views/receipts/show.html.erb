@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Receipt desc:</strong>
+  <%= @receipt.receipt_desc %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @receipt.price %>
+</p>
+
+<%= link_to 'Edit', edit_receipt_path(@receipt) %> |
+<%= link_to 'Back', receipts_path %>
