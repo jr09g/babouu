@@ -29,6 +29,8 @@ gem 'devise', '~> 3.5.1'
 gem 'rolify', '~> 5.0'
 #authority to assist in use of roles created by rolify
 gem 'authority', '~> 3.1'
+#paperclip added to enable attachments to receipts
+gem 'paperclip', '~> 4.3.0'
 #windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #use Unicorn as the app server

@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'incoming_mails/create'
-
-  resources :expense_reports
-
   #routes created so that root is the sign in page if not signed in, and the home page if user is signed in
-  #devise_for :users, :controllers => {registrations: 'registrations'}
   devise_for :users, :controllers => {registrations: 'registrations'}
   devise_scope :user do
     authenticated :user do
@@ -19,5 +14,9 @@ Rails.application.routes.draw do
   resources :companies
 
   resources :receipts
+
+  resources :expense_reports
+
+  get 'incoming_mails/create'
 
 end

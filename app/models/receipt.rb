@@ -1,7 +1,11 @@
 class Receipt < ActiveRecord::Base
   belongs_to :company
   belongs_to :user
+  belongs_to :expense_report
   validates :receipt_desc, :company_name, :price, :presence => true
+  #:styles => {:medium => "300x300>", :thumb => "100x100"}
+  #validates_attachment_content_type :image, :content_type=>/\Aimage\/.*\Z/
+  do_not_validate_attachment_file_type :image
 
   #
   #

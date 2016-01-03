@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160103183658) do
+ActiveRecord::Schema.define(version: 20160103203950) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -40,11 +40,15 @@ ActiveRecord::Schema.define(version: 20160103183658) do
   create_table "receipts", force: :cascade do |t|
     t.string   "receipt_desc"
     t.integer  "price"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "company_id"
     t.integer  "user_id"
     t.date     "plain_date"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "receipts", ["company_id"], name: "index_receipts_on_company_id"
