@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
+  #adding user abilities from authority gem
+  include Authority::UserAbilities
+  #method for roles added to user through rolify gem
   rolify
   has_many :receipts
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_many :expense_reports
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 end

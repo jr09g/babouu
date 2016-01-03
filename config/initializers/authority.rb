@@ -60,4 +60,12 @@ Authority.configure do |config|
   # config.logger = Logger.new('log/authority.log')  # Use this file
   # config.logger = Logger.new('/dev/null')          # Don't log at all (on a Unix system)
 
+  #below abilities provide the adjectives for users' interactions with expense reports
+  config.abilities =  {
+     :send => 'sendable',
+     :receive   => 'receivable',
+     :approve => 'approvable',
+     :reject => 'rejectable'
+  }
+
 end

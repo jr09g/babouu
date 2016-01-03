@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102225556) do
+ActiveRecord::Schema.define(version: 20160103183658) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -21,6 +21,22 @@ ActiveRecord::Schema.define(version: 20160102225556) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "expense_report_statuses", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "expense_reports", force: :cascade do |t|
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "status_ind"
+  end
+
+  add_index "expense_reports", ["user_id"], name: "index_expense_reports_on_user_id"
+
   create_table "receipts", force: :cascade do |t|
     t.string   "receipt_desc"
     t.integer  "price"
@@ -28,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160102225556) do
     t.datetime "updated_at",   null: false
     t.integer  "company_id"
     t.integer  "user_id"
+    t.date     "plain_date"
   end
 
   add_index "receipts", ["company_id"], name: "index_receipts_on_company_id"
@@ -57,6 +74,8 @@ ActiveRecord::Schema.define(version: 20160102225556) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

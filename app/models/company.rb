@@ -1,3 +1,4 @@
 class Company < ActiveRecord::Base
-	has_many :receipts
+  has_many :receipts
+  
 end
