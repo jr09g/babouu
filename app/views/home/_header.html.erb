@@ -21,6 +21,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
+          <% if current_user.has_any_role? :admin %>
+            <li><%= link_to 'Companies', companies_path %></li>
+          <% end %>
           <li><%#= link_to 'Analytics', charts_path %></li>
           <li class="dropdown">
             <a href-"#" class="dropdown-toggle" data-toggle="dropdown" role="button">Views<span class="caret"></span></a>

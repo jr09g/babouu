@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
   	#once the user (resource) is created, apply the default role to the user
   	#once ability is added for businesses to invite new users, this will need to be amended to immediately apply
   	#the correct role
-  	resource.add_role :admin
+  	resource.add_role :standard
   end
 
   private
