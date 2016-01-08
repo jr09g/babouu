@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'all_receipts/index'
-
   #routes created so that root is the sign in page if not signed in, and the home page if user is signed in
   devise_for :users, :controllers => {registrations: 'registrations'}
   devise_scope :user do
@@ -20,5 +18,9 @@ Rails.application.routes.draw do
   resources :expense_reports
 
   get 'incoming_mails/create'
+
+  get 'show_users/index'
+
+  get 'all_receipts/index'
 
 end
