@@ -24,7 +24,7 @@ class ReceiptsController < ApplicationController
   # POST /receipts
   # POST /receipts.json
   def create
-    @receipt = Receipt.new(receipt_params)
+    @receipt = current_user.receipts.build(receipt_params)
 
     respond_to do |format|
       if @receipt.save
