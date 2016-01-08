@@ -24,7 +24,7 @@
           <% if current_user.has_any_role? :admin %>
             <li><%= link_to 'Companies', companies_path %></li>
             <li><%= link_to 'Users', show_users_index_path %></li>
-          <% else %>
+          <% elsif current_user.has_any_role? :standard %>
           <li><%#= link_to 'Analytics', charts_path %></li>
           <li class="dropdown">
             <a href-"#" class="dropdown-toggle" data-toggle="dropdown" role="button">Views<span class="caret"></span></a>
@@ -33,9 +33,9 @@
               <li><%#= link_to 'Custom', custom_views_path %></li>
             </ul>
           </li>
+          <% end %>
           <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
           <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-          <% end %>
         <% else %>
           <li><%= link_to 'Login', new_user_session_path %></li>
           <li><%= link_to 'Join', new_user_registration_path %></li>
