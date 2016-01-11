@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160109131711) do
+ActiveRecord::Schema.define(version: 20160111002704) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -72,6 +72,16 @@ ActiveRecord::Schema.define(version: 20160109131711) do
 
   add_index "receipts", ["company_id"], name: "index_receipts_on_company_id"
   add_index "receipts", ["user_id"], name: "index_receipts_on_user_id"
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "business_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "relationships", ["business_id"], name: "index_relationships_on_business_id"
+  add_index "relationships", ["user_id"], name: "index_relationships_on_user_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
