@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   #routes for the business devise model, will be seperate from other users
+  #when I return, build scope like users below
   devise_for :businesses, :controllers => {registrations: 'businesses/registrations'}
 
   #routes created so that root is the sign in page if not signed in, and the home page if user is signed in
