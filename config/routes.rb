@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       root :to => 'relationships#index', as: :authenticated_business_root
     end
     unauthenticated :business do
-      root :to => 'businesses/sessions#new', as: :unauthenticated_business_root
+      root :to => 'devise/sessions#new', as: :unauthenticated_business_root
     end
   end
 
