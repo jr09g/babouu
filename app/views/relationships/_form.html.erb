@@ -10,6 +10,14 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <%#= f.label :custom_view %><br>
+    <%#= f.collection_select(:custom_view_id ,@custom_views, :id, :description) %>
+  </div>
+  <div class="field">
+    <%= f.label :user %><br>
+    <%= f.collection_select(:user_id ,@users, :id, :first_name) %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>

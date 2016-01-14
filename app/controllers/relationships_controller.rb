@@ -16,6 +16,8 @@ class RelationshipsController < ApplicationController
   # GET /relationships/new
   def new
     @relationship = Relationship.new
+    #preliminary list of users for dropdown; business will initially select user for relationship this way
+    @users = User.all
   end
 
   # GET /relationships/1/edit
@@ -25,7 +27,8 @@ class RelationshipsController < ApplicationController
   # POST /relationships
   # POST /relationships.json
   def create
-    @relationship = Relationship.new(relationship_params)
+    #@relationship = Relationship.new(relationship_params)
+    @relationship = current_business.relationships.build(receipt_params)
 
     respond_to do |format|
       if @relationship.save
@@ -70,6 +73,6 @@ class RelationshipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def relationship_params
-      params[:relationship]
+      params.require(:relationship).permit(:user_id)
     end
 end
