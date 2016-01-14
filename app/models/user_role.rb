@@ -1,3 +1,3 @@
-class UserRole < AtiveRecord::Base
+class UserRole < ActiveRecord::Base
 
 end
