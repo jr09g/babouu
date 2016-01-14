@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :businesses, :controllers => {registrations: 'businesses/registrations'}
   devise_scope :business do
     authenticated :business do
-      get 'relationships' => 'relationships#index', as: :authenticated_business_root
+      root :to => 'relationships#index', as: :authenticated_business_root
     end
     #unauthenticated :business do
     #  root :to => 'businesses/sessions#new', as: :unauthenticated_business_root
