@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   rolify
   has_many :receipts
   has_many :expense_reports
+  has_one :relationship
   has_one :business, through: :relationship
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
