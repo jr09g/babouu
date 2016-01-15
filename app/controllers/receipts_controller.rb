@@ -6,6 +6,8 @@ class ReceiptsController < ApplicationController
   # GET /receipts.json
   def index
     @receipts = Receipt.all
+    #
+    @business_name = User.find_business
   end
 
   # GET /receipts/1
