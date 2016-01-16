@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116202310) do
+ActiveRecord::Schema.define(version: 20160116214229) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20160116202310) do
     t.datetime "image_updated_at"
     t.string   "company_name"
     t.integer  "expense_report_id"
+    t.string   "in_reply_to"
   end
 
   add_index "receipts", ["company_id"], name: "index_receipts_on_company_id"
