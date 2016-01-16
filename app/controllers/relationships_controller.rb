@@ -18,6 +18,9 @@ class RelationshipsController < ApplicationController
     @relationship = Relationship.new
     #preliminary list of users for dropdown; business will initially select user for relationship this way
     @users = User.all
+    #
+    @users_retrieve = User.joins(:relationship).select("user.id as id, relationship.business_id as business, user.first_name as name")
+    @available_users = @users_retrieve.where(:business => nil)
   end
 
   # GET /relationships/1/edit

@@ -15,12 +15,12 @@ class User < ActiveRecord::Base
   	@business_num = @relationships.business_id
   	@business_name = Business.where(:id => @business_num)
 
-  	if @business_name?
-  	  return @business_name
-  	else
-  	  return false
-  	end
-  	
+  	#if @business_name?
+  	#  return @business_name
+  	#else
+  	#  return false
+  	#end
+
   end
 
 end
