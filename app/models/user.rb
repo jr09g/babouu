@@ -11,9 +11,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def self.find_business
-  	@relationships = Relationship.where(:user_id => current_user.id)
-  	@business_num = @relationships.business_id
-  	@business_name = Business.where(:id => @business_num)
+  	#@relationships = Relationship.where(:user_id => current_user.id)
+  	#@business_num = @relationships.business_id
+  	#@business_name = Business.where(:id => @business_num)
 
   	#if @business_name?
   	#  return @business_name

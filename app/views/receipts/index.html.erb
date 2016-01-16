@@ -1,30 +1,60 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><%#= notice %></p>
 
-<h1>Listing Receipts</h1>
-<%= @business_name %>
+<h3><%= Date.current.to_formatted_s(:long_ordinal) %></h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Receipt desc</th>
-      <th>Price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div>
 
-  <tbody>
-    <% @receipts.each do |receipt| %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= receipt.receipt_desc %></td>
-        <td><%= receipt.price %></td>
-        <td><%= link_to 'Show', receipt %></td>
-        <td><%= link_to 'Edit', edit_receipt_path(receipt) %></td>
-        <td><%= link_to 'Destroy', receipt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>ID</th>
+        <th>Company</th>
+        <th>Receipt Description</th>
+        <th>Custom View ID</th>
+        <th>Price</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <!-- Below rails look iterates through all receipts for the user who is logged in -->
+      <% @receipt_with_view.each do |receipt| %>
+        <%# if receipt.user == current_user %>
+        <% if receipt.user == current_user %> 
+          <!-- Below statement filters for those receipts that were only sent today -->
+          <% if receipt.plain_date == Date.current %>
+          <tr>
+            <td><%= receipt.id %></td>
+            <td><%= receipt.company_name %></td>
+            <td><%= receipt.receipt_desc %></td>
+            <td><%= receipt.description %></td>
+            <td><p><%= number_to_currency(receipt.price) %></p></td>
+            <!-- provides a link to the .pdf document that is created and saved in S3-->
+            <td>
+              <%= link_to receipt.image.url(:original, false), :target => '_blank' do %>
+                <span class="glyphicon glyphicon-file glyph-style-attachment"></span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to receipt, method: :delete, data: { confirm: 'Are you sure you want to delete this receipt?' } do %>
+                <span class="glyphicon glyphicon-trash glyph-style-trash"></span>
+              <% end %>
+            </td>
+            <td><%= link_to 'Details', receipt %></td>
+          </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  </br>
+  <%= link_to 'Add Receipt', new_receipt_path, class: "btn btn-default" %>
+  </br></br>
+  <%= link_to 'View All Receipts', all_receipts_path, class: "btn btn-default" %>
+  </br></br>
+  <% if @current_day_total.total == nil %>
+    <h4>Sum of Current Day Receipts: <%= number_to_currency(0) %></h4>
+  <% else %>
+    <h4>Sum of Current Day Receipts: <%= number_to_currency(@current_day_total.total) %></h4>
+  <% end %>
 
-<br>
-
-<%= link_to 'New Receipt', new_receipt_path %>
+</div>

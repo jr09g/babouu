@@ -5,9 +5,24 @@ class ReceiptsController < ApplicationController
   # GET /receipts
   # GET /receipts.json
   def index
+    #instance variable to retrieve all records from the user table
+    @users = User.all
+    #instance variable to retrieve all records from the receipt table
     @receipts = Receipt.all
-    #
-    @business_name = User.find_business
+    #instance variable to retrieve all records from the receipt table; joined with expense_report table to bring view name in
+    @receipt_with_view = Receipt.joins(:expense_report).select("receipts.id, receipts.user_id, company_name, receipt_desc, price, name, plain_date")
+    #instance variable to call all companies
+    @companies = Company.all
+    #instance variable to group all records by date created
+    @receipt_dates = Receipt.select("plain_date as receipt_date, count(date(created_at)) as receipt_count, sum(price) as date_total").group("plain_date")
+    #instance variable to group all records by company name
+    @company_receipts = Receipt.joins(:company).select("company_name, count(company_name) as company_count, sum(price) as company_total, company_id, logo").group("company_name, company_id, logo")
+    #instance variable below takes summation of prices for the current date only in order to display that sum in the view
+    @current_day_total = Receipt.select("sum(price) as total").find_by plain_date: Date.current
+    #instance variable takes date range of the current month
+    @current_month_date_range = Date.current.at_beginning_of_month..Time.now
+    #instance variable takes summation of prices for the current month only to display monthly total
+    @current_month_total_test = Receipt.where(:plain_date => @current_month_date_range)
   end
 
   # GET /receipts/1
