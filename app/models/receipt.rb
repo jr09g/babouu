@@ -136,7 +136,7 @@ class Receipt < ActiveRecord::Base
 		#loop goes through each company record, and if the domain matches the domain retrieved from this method, the company name
 		#is stored
 		Company.all.each do |company|
-			if @final_string == company.company_domain
+			if @final_string == company.email_domain
 				if company.company_domain == '@messaging.squareup.com'
 					#something
 					@topic_array = @receipt_topic.split(" ")
