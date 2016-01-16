@@ -137,7 +137,7 @@ class Receipt < ActiveRecord::Base
 		#is stored
 		Company.all.each do |company|
 			if @final_string == company.email_domain
-				if company.company_domain == '@messaging.squareup.com'
+				if company.email_domain == '@messaging.squareup.com'
 					#something
 					@topic_array = @receipt_topic.split(" ")
 					@topic_array.delete("Receipt")
