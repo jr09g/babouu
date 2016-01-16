@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   resources :relationships
 
-  get 'incoming_mails/create'
+  post '/incoming_mails' => 'incoming_mails#create'
 
   get 'show_users/index'
 
