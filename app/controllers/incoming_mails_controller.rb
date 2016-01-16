@@ -1,4 +1,5 @@
 class IncomingMailsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
 
   #below method creates a new receipt from a user forwarded email via a POST request hook from Cloudmailin
   #the relevant information is parsed and saved to the receipt
