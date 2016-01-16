@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116194129) do
+ActiveRecord::Schema.define(version: 20160116202310) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -69,9 +69,11 @@ ActiveRecord::Schema.define(version: 20160116194129) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "company_name"
+    t.integer  "expense_report_id"
   end
 
   add_index "receipts", ["company_id"], name: "index_receipts_on_company_id"
+  add_index "receipts", ["expense_report_id"], name: "index_receipts_on_expense_report_id"
   add_index "receipts", ["user_id"], name: "index_receipts_on_user_id"
 
   create_table "relationships", force: :cascade do |t|
