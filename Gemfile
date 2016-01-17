@@ -32,7 +32,7 @@ gem 'authority', '~> 3.1'
 #paperclip added to enable attachments to receipts
 gem 'paperclip', '~> 4.3.0'
 #aws-sdk provides resources and interface apis for amazon web services
-gem 'aws-sdk', '< 2.0'
+gem 'aws-sdk', '~> 1.6'
 #windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #use Unicorn as the app server
