@@ -1,5 +1,44 @@
 <h1>New Receipt</h1>
 
-<%= render 'form' %>
+<!-- below beginning to the form allows for images to be submitted via the form -->
+<!-- new receipt view has its own form seperate from _form partial because the hidden date field is unique to new receipts -->
+<%= form_for @receipt, html: {multipart: true} do |f| %>
+  <% if @receipt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@receipt.errors.count, "error") %> prohibited this receipt from being saved:</h2>
+
+      <ul>
+      <% @receipt.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%#= currently pausing field where custom view can be selected from receipt; considering whether it should be controlled strictly from the custom view page %>
+  <div class="field">
+    <%#= f.label :custom_view %><br>
+    <%#= f.collection_select(:custom_view_id ,@custom_views, :id, :description) %>
+  </div>
+  <div class="field">
+    <%= f.label :receipt %><br>
+    <%= f.text_field :receipt_desc %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :plain_date, :value => Date.current %>
+  </div>
+  </br></br>
+  <div class="actions">
+    <%= f.submit 'Create Receipt', class: "btn btn-default" %>
+  </div>
+<% end %>
 
 <%= link_to 'Back', receipts_path %>
