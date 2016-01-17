@@ -24,8 +24,6 @@ class IncomingMailsController < ApplicationController
 	@is_duplicate = Receipt.is_duplicate(@receipt_user, @in_reply_to)
 	#below instance variable retrieves the full email domain for an amazon check
 	@email_check = Receipt.amzn_ship_mail_check(@body)
-	#######
-	#@http_check = Receipt.price_link_parse(params[:plain])
 
 	#below if statement checks to see if the is_duplicate method is true or false, then decide whether a receipt is created based on this
 	if @is_duplicate == false
