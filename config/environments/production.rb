@@ -60,7 +60,6 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
 
-  #enable application access to the babou aws s3 account; variables were set via heroku config on command line
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
