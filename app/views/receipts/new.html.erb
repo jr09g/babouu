@@ -17,8 +17,8 @@
 
   <%#= currently pausing field where custom view can be selected from receipt; considering whether it should be controlled strictly from the custom view page %>
   <div class="field">
-    <%#= f.label :custom_view %><br>
-    <%#= f.collection_select(:custom_view_id ,@custom_views, :id, :description) %>
+    <%= f.label :expense_report %><br>
+    <%= f.collection_select(:expense_report_id ,@expense_reports, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :receipt %><br>

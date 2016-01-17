@@ -33,6 +33,8 @@ class ReceiptsController < ApplicationController
   # GET /receipts/new
   def new
     @receipt = Receipt.new
+    #
+    @expense_reports = ExpenseReport.where(user_id: [current_user.id, 0])
   end
 
   # GET /receipts/1/edit
