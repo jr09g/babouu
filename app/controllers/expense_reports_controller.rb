@@ -1,5 +1,6 @@
 class ExpenseReportsController < ApplicationController
   before_action :set_expense_report, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /expense_reports
   # GET /expense_reports.json
@@ -10,6 +11,12 @@ class ExpenseReportsController < ApplicationController
   # GET /expense_reports/1
   # GET /expense_reports/1.json
   def show
+    #instance variable to show all receipts under the selected expense report
+    @receipts = Receipt.all
+    #instance variable is for pie chart to be created
+    @expense_report_receipts = Receipt.joins(:expense_report).select("name, receipt_desc, expense_report_id, price, plain_date, company_name")
+    #
+    @receipts_view_total = 0.00
   end
 
   # GET /expense_reports/new
