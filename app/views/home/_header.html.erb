@@ -28,13 +28,7 @@
             <li><%= link_to 'Users', show_users_index_path %></li>
           <% elsif current_user.has_any_role? :standard %>
           <li><%#= link_to 'Analytics', charts_path %></li>
-          <li class="dropdown">
-            <a href-"#" class="dropdown-toggle" data-toggle="dropdown" role="button">Views<span class="caret"></span></a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><%#= link_to 'By Date', date_views_path %></li>
-              <li><%#= link_to 'Custom', custom_views_path %></li>
-            </ul>
-          </li>
+          <li><%= link_to 'Expense Reports', expense_reports_path %></li>
           <% end %>
           <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
           <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
