@@ -13,12 +13,16 @@
 
   <tbody>
     <% @relationships.each do |relationship| %>
-      <tr>
-        <td><%= relationship.user_id %></td>
-        <td><%= link_to 'Show', relationship %></td>
-        <td><%= link_to 'Edit', edit_relationship_path(relationship) %></td>
-        <td><%= link_to 'Destroy', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% @user_roles.each do |user_role| %>
+        <% if relationship.user_id == user_role.user_id %>
+          <tr>
+            <td><%= relationship.user_id %></td>
+            <td><%= link_to 'Show', relationship %></td>
+            <td><%= link_to 'Edit', edit_relationship_path(relationship) %></td>
+            <td><%= link_to 'Destroy', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      <% end %>
     <% end %>
   </tbody>
 </table>

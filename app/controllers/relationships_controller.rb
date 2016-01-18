@@ -6,6 +6,8 @@ class RelationshipsController < ApplicationController
   # GET /relationships.json
   def index
     @relationships = Relationship.all
+    #
+    @users_roles = UserRole.joins(:user, :role)
   end
 
   # GET /relationships/1
