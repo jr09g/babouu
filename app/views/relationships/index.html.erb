@@ -13,7 +13,7 @@
 
   <tbody>
     <% @relationships.each do |relationship| %>
-      <% @user_roles.each do |user_role| %>
+      <% @users_roles.each do |user_role| %>
         <% if relationship.user_id == user_role.user_id %>
           <tr>
             <td><%= relationship.user_id %></td>
