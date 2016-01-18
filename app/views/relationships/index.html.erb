@@ -19,7 +19,7 @@
       <% @users_roles.each do |user_role| %>
         <% if relationship.user_id == user_role.user %>
           <tr>
-            <td><%= relationship.user_id %></td>
+            <td><%= user_role.user %></td>
             <td><%= user_role.first_name %></td>
             <td><%= user_role.last_name %></td>
             <td><%= user_role.email %></td>
