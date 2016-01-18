@@ -3,10 +3,13 @@
 <h1>Welcome <%= current_business.name %></h1>
 <h1>Listing Relationships</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>User</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,6 +20,9 @@
         <% if relationship.user_id == user_role.user_id %>
           <tr>
             <td><%= relationship.user_id %></td>
+            <td><%= user_role.first_name %></td>
+            <td><%= user_role.last_name %></td>
+            <td><%= user_role.email %></td>
             <td><%= link_to 'Show', relationship %></td>
             <td><%= link_to 'Edit', edit_relationship_path(relationship) %></td>
             <td><%= link_to 'Destroy', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
