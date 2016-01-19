@@ -19,7 +19,7 @@
       <% @users_roles.each do |user_role| %>
         <%# if relationship.business_id == current_business.id %>
           <tr>
-            <td><%#= user_role.user %></td>
+            <td><%= user_role.user %></td>
             <td><%= user_role.first_name %></td>
             <td><%= user_role.last_name %></td>
             <td><%= user_role.email %></td>
