@@ -20,9 +20,9 @@
         <%# if relationship.business_id == current_business.id %>
           <tr>
             <td><%= user_role.user %></td>
-            <td><%#= user_role.first_name %></td>
-            <td><%#= user_role.last_name %></td>
-            <td><%#= user_role.email %></td>
+            <td><%= user_role.first %></td>
+            <td><%= user_role.last %></td>
+            <td><%= user_role.email %></td>
             <td><%= link_to 'Show', relationship %></td>
             <td><%= link_to 'Edit', edit_relationship_path(relationship) %></td>
             <td><%= link_to 'Destroy', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
