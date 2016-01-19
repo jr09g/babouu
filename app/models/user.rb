@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :expense_reports
   has_one :relationship
   has_one :users_role
+  has_one :role, through: :users_roles
   has_one :business, through: :relationship
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
