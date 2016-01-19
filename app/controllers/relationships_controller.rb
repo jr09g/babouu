@@ -13,7 +13,7 @@ class RelationshipsController < ApplicationController
   # GET /relationships/1
   # GET /relationships/1.json
   def show
-    @users_roles = UsersRole.joins(:user, :role).select("users_roles.user_id as user, users.first_name as first, users.last_name as last, users.email as email, roles.name as role")
+    @users_roles = UsersRole.joins(:user, :role).select("users.id as user, users.first_name as first, users.last_name as last, users.email as email, roles.name as role")
   end
 
   # GET /relationships/new
