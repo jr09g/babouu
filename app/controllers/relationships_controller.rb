@@ -7,7 +7,7 @@ class RelationshipsController < ApplicationController
   def index
     @relationships = Relationship.all
     #
-    @users_roles = UsersRole.joins(:user, :role).select("users_roles.user_id as user, users.first_name as first, users.last_name as last, users.email as email, role.name as role")
+    @users_roles = UsersRole.joins(:user, :role).select("users_roles.user_id as user, users.first_name as first, users.last_name as last, users.email as email, roles.name as role")
   end
 
   # GET /relationships/1
