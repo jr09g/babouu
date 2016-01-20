@@ -24,7 +24,8 @@
             <td><%= user_role.last %></td>
             <td><%= user_role.email %></td>
             <td><%= user_role.role %></td>
-            <td><%= link_to 'Show', relationship %></td>
+            <td><%#= link_to 'Show', relationship %></td>
+            <td><%= link_to 'Show', relationship(user_role) %></td>
             <td><%= link_to 'Edit', edit_relationship_path(relationship) %></td>
             <td><%= link_to 'Destroy', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>

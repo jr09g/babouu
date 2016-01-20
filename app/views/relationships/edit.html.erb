@@ -1,12 +1,12 @@
-<h1>Editing Relationship</h1>
+<h1>Editing User Role</h1>
 
-<%= form_for(@relationship) do |f| %>
-  <% if @relationship.errors.any? %>
+<%= form_for(@relationship_user) do |f| %>
+  <% if @relationship_user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@relationship.errors.count, "error") %> prohibited this relationship from being saved:</h2>
+      <h2><%= pluralize(@relationship_user.errors.count, "error") %> prohibited this user role from being updated:</h2>
 
       <ul>
-      <% @relationship.errors.full_messages.each do |message| %>
+      <% @relationship_user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label :role %><br>
-    <%= f.collection_select(:_id ,@available_users, :id, :name) %>
+    <%= f.collection_select(:role_id , @roles, :id, :name) %>
   </div>
 
   <div class="actions">
@@ -24,5 +24,4 @@
   
 <% end %>
 
-<%= link_to 'Show', @relationship %> |
 <%= link_to 'Back', relationships_path %>
