@@ -13,7 +13,7 @@ class RelationshipsController < ApplicationController
   # GET /relationships/1
   # GET /relationships/1.json
   def show
-    @users_roles = UsersRole.joins(:user, :role).select("users_roles.user_id as user, users.first_name as first, users.last_name as last, users.email as email, roles.name as role")
+    @users_roles = User.joins(:users_role).select("users_roles.user_id as user, users.first_name as first, users.last_name as last, users.email as email, users_roles.role_id as role")
   end
 
   # GET /relationships/new
@@ -28,6 +28,7 @@ class RelationshipsController < ApplicationController
 
   # GET /relationships/1/edit
   def edit
+    @roles = Role.all
   end
 
   # POST /relationships

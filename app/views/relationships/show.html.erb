@@ -15,10 +15,9 @@
     <% if @users_roles.user == @relationship.user_id %>
       <tr>
         <td><%= @users_roles.role %></td>
-        <td><%= @users_roles.first_name %></td>
-        <td><%= @users_roles.last_name %></td>
+        <td><%= @users_roles.first %></td>
+        <td><%= @users_roles.last %></td>
         <td><%= @users_roles.email %></td>
-        <td><%= link_to 'Show', relationship %></td>
         <td><%= link_to 'Edit', edit_relationship_path(relationship) %></td>
         <td><%= link_to 'Destroy', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
