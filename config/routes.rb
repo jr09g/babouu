@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   resources :relationships
 
+  resources :users_roles, :only => [:edit, :update]
+
   post '/incoming_mails' => 'incoming_mails#create'
 
   get 'show_users/index'

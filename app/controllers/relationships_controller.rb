@@ -1,6 +1,5 @@
 class RelationshipsController < ApplicationController
   before_action :set_relationship, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:edit, :update]
   before_action :authenticate_business!
 
   # GET /relationships
@@ -80,11 +79,6 @@ class RelationshipsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_relationship
       @relationship = Relationship.find(params[:id])
-    end
-
-    #Set user for editing the role in the set relationship
-    def set_user
-      @user = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
