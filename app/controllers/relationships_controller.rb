@@ -8,6 +8,8 @@ class RelationshipsController < ApplicationController
     @relationships = Relationship.all
     #
     @users_roles = User.joins(:users_role).select("users_roles.user_id as user, users.first_name as first, users.last_name as last, users.email as email, users_roles.role_id as role")
+    #
+    @role_relation = UsersRole.all
   end
 
   # GET /relationships/1
