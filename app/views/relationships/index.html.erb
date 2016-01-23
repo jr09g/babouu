@@ -23,7 +23,8 @@
             <td><%= user_role.first %></td>
             <td><%= user_role.last %></td>
             <td><%= user_role.email %></td>
-            <td><%= user_role.role %></td>
+            <td><%#= user_role.role %></td>
+            <td><%= @role_name.where(:role_id => user_role.role).name %></td>
             <td><%= link_to 'Show', edit_users_role_path(user_role.ur_id) %></td>
             <td><%= link_to 'Edit', edit_relationship_path(relationship) %></td>
             <td><%= link_to 'Destroy', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
