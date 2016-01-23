@@ -1,5 +1,7 @@
 <h1>Editing User Role</h1>
 
+<p>Current Role: <%= @user_role.role_id %></p>
+
 <%= form_for(@user_role) do |f| %>
   <% if @user_role.errors.any? %>
     <div id="error_explanation">
