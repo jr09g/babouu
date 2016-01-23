@@ -9,12 +9,12 @@ class UsersRolesController < ApplicationController
 
   def update
   	respond_to do |format|
-      if @user_role.update(relationship_params)
-        format.html { redirect_to @relationship, notice: 'Relationship was successfully updated.' }
-        format.json { render :show, status: :ok, location: @relationship }
+      if @user_role.update(user_role_params)
+        format.html { redirect_to @user_role, notice: 'Relationship was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user_role }
       else
         format.html { render :edit }
-        format.json { render json: @relationship.errors, status: :unprocessable_entity }
+        format.json { render json: @user_role.errors, status: :unprocessable_entity }
       end
     end
   end
