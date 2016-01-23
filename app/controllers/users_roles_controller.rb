@@ -8,13 +8,25 @@ class UsersRolesController < ApplicationController
   end
 
   def update
-
+  	respond_to do |format|
+      if @user_role.update(relationship_params)
+        format.html { redirect_to @relationship, notice: 'Relationship was successfully updated.' }
+        format.json { render :show, status: :ok, location: @relationship }
+      else
+        format.html { render :edit }
+        format.json { render json: @relationship.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
 
   def set_user_role
   	@user_role = UsersRole.find(params[:id])
+  end
+
+  def user_role_params
+  	params.require(:users_role).permit(:user_id, :role_id)
   end
 
 end
