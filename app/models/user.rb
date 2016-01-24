@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
   has_one :business, through: :relationship
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  #make the User model searchable for businesses who want to add users as employees
+  searchable do 
+    text :email, :first_name, :last_name
+  end
 
   def self.find_business
   	#@relationships = Relationship.where(:user_id => current_user.id)
