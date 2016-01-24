@@ -3,7 +3,7 @@
 <%#= render 'form' %>
 <p>First, search for your user</p>
 
-<%= form_tag("/search", method: "get") do %>
+<%= form_tag("/relatioships/new", method: "get") do %>
   <%= label_tag(:user, "Search for:") %>
   <%= text_field_tag(:user) %>
   <%= submit_tag("Search") %>

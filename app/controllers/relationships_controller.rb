@@ -22,9 +22,8 @@ class RelationshipsController < ApplicationController
   # GET /relationships/new
   def new
     @relationship = Relationship.new
-    #retrieve list of available users with following two lines
-    @users_retrieve = User.joins(:relationship).select("relationships.business_id as business, users.first_name as name")
-    @available_users = @users_retrieve.where(:business => nil)
+    #retrieve list of all users
+    @users = User.all
   end
 
   # GET /relationships/1/edit
