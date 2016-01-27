@@ -35,8 +35,6 @@ gem 'paperclip', '~> 4.3.0'
 gem 'aws-sdk', '~> 1.6'
 #windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-#sunspot_rails to create searching interface for businesses to search for users
-gem 'sunspot_rails', '~> 2.2', '>= 2.2.4'
 #use Unicorn as the app server
 # gem 'unicorn'
 
