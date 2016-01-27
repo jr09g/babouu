@@ -22,9 +22,6 @@ class RelationshipsController < ApplicationController
   # GET /relationships/new
   def new
     @relationship = Relationship.new
-    #retrieve list of all users
-    @users = User.search do 
-      fulltext params[:search]
     end
   end
 
