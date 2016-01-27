@@ -32,7 +32,6 @@ class RelationshipsController < ApplicationController
   # POST /relationships
   # POST /relationships.json
   def create
-    #@relationship = Relationship.new(relationship_params)
     @relationship = current_business.relationships.build(relationship_params)
 
     respond_to do |format|
