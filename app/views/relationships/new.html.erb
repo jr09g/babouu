@@ -3,9 +3,11 @@
 <%#= render 'form' %>
 <p>First, search for your user</p>
 
-<%= form_tag new_relationships_path, :method => :get do %>
-  <%= text_field_tag :search, params[:search] %>
+<%= form_tag("/all_user/:id", method: "get") do %>
+  <%= label_tag(:id, "Search for:") %>
+  <%= text_field_tag(:id) %>
   <%= submit_tag("Search") %>
 <% end %>
+
 
 <%= link_to 'Back', relationships_path %>
