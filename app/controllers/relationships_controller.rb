@@ -22,7 +22,6 @@ class RelationshipsController < ApplicationController
   # GET /relationships/new
   def new
     @relationship = Relationship.new
-    end
   end
 
   # GET /relationships/1/edit
