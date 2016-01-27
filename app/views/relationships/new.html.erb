@@ -3,7 +3,7 @@
 <%#= render 'form' %>
 <p>First, search for your user</p>
 
-<%= form_tag("/all_users/show", method: "get") do %>
+<%= form_tag("/all_users/:id", method: "get") do %>
   <%= label_tag(:id, "Search for:") %>
   <%= text_field_tag(:id) %>
   <%= submit_tag("Search") %>
