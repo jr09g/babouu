@@ -33,7 +33,9 @@ class RelationshipsController < ApplicationController
   # POST /relationships.json
   def create
     #test code that checks if user already has relationship
-    if Relationship.relationship_check(params[:relationship]['user_id']) == true
+    @relationship_check = Relationship.relationship_check(params[:relationship]['user_id'])
+
+    if @relationship_check == true
       @relationship = current_business.relationships.build(relationship_params)
     else
       format.html { redirect_to @relationship, notice: 'Relationship already exists.' }
