@@ -9,7 +9,7 @@ class Relationship < ActiveRecord::Base
   	@does_exist
 
   	#loop through all relatioships to check if user_id already has one
-  	Relationship.each do |relationship|
+  	Relationship.all.each do |relationship|
   	  if relationship.user_id == @user_id
   	  	@does_exist = false
   	  	break
