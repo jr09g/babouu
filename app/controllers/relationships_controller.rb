@@ -41,15 +41,15 @@ class RelationshipsController < ApplicationController
       #format.html { redirect_to @relationship, notice: 'Relationship already exists.' }
     end
 
-    respond_to do |format|
-      if @relationship.save
-        format.html { redirect_to @relationship, notice: 'Relationship was successfully created.' }
-        format.json { render :show, status: :created, location: @relationship }
-      else
-        format.html { render :new }
-        format.json { render json: @relationship.errors, status: :unprocessable_entity }
-      end
-    end
+    #respond_to do |format|
+    #  if @relationship.save
+    #    format.html { redirect_to @relationship, notice: 'Relationship was successfully created.' }
+    #    format.json { render :show, status: :created, location: @relationship }
+    #  else
+    #    format.html { render :new }
+    #    format.json { render json: @relationship.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # PATCH/PUT /relationships/1
