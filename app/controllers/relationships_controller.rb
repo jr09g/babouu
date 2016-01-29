@@ -39,6 +39,7 @@ class RelationshipsController < ApplicationController
       @relationship = current_business.relationships.build(relationship_params)
     else
       #format.html { redirect_to @relationship, notice: 'Relationship already exists.' }
+      render :text => 'success', :status => 200
     end
 
     #respond_to do |format|
