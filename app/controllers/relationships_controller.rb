@@ -38,7 +38,7 @@ class RelationshipsController < ApplicationController
     if @relationship_check == true
       @relationship = current_business.relationships.build(relationship_params)
     else
-      format.html { redirect_to @relationship, notice: 'Relationship already exists.' }
+      #format.html { redirect_to @relationship, notice: 'Relationship already exists.' }
     end
 
     respond_to do |format|
