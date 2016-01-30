@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :groups
+
   #routes for the business devise model, will be seperate from other users
   devise_for :businesses, :controllers => {registrations: 'businesses/registrations'}
   devise_scope :business do
