@@ -25,9 +25,8 @@
             <td><%= user_role.last %></td>
             <td><%= user_role.email %></td>
             <td><%= user_role.ur_id %></td>
-            <td><%= link_to 'Edit', edit_users_role_path(user_role.ur_id) %></td>
-            <td><%= link_to 'Add to Group', new_users_group_path(:user_id => relationship.user_id) %></td>
-            <td><%= link_to 'Destroy', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Manage Role', edit_users_role_path(user_role.ur_id) %></td>
+            <td><%= link_to 'Remove Relationship', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       <% end %>
@@ -38,3 +37,5 @@
 <br>
 
 <%= link_to 'New Relationship', new_relationship_path %>
+
+<%= link_to 'Add Employee/Manager to Group', new_users_group_path %>

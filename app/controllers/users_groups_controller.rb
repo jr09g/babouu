@@ -16,8 +16,8 @@ class UsersGroupsController < ApplicationController
   # GET /users_groups/new
   def new
     @users_group = UsersGroup.new
-    #
-    @current_user_id = params[:user_id]
+    #instance variables to return only those users that have a relationship with the business
+    @business_users = User.joins(:relationship).where(:business_id => current_business.id)
     #instance variable to return groups that belong to the current business
     @business_groups = Group.where(:business_id => current_business.id)
   end
@@ -30,7 +30,6 @@ class UsersGroupsController < ApplicationController
   # POST /users_groups.json
   def create
     #@users_group = UsersGroup.new(users_group_params)
-    @users_group = UsersGroup.new(:user_id => @current_user_id, :group_id => params[:group_id])
 
     respond_to do |format|
       if @users_group.save
