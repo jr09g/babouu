@@ -74,6 +74,6 @@ class UsersGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def users_group_params
-      params[:users_group]
+      params.require(:users:group).permit(:user_id, :group_id)
     end
 end
