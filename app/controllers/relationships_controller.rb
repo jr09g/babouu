@@ -32,25 +32,18 @@ class RelationshipsController < ApplicationController
   # POST /relationships
   # POST /relationships.json
   def create
-    #test code that checks if user already has relationship
-    @relationship_check = Relationship.relationship_check(params[:relationship]['user_id'])
 
-    if @relationship_check == true
-      @relationship = current_business.relationships.build(relationship_params)
-    else
-      #format.html { redirect_to @relationship, notice: 'Relationship already exists.' }
-      render :text => 'success', :status => 200
+    @relationship = current_business.relationships.build(relationship_params)
+
+    respond_to do |format|
+      if @relationship.save
+        format.html { redirect_to @relationship, notice: 'Relationship was successfully created.' }
+        format.json { render :show, status: :created, location: @relationship }
+      else
+        format.html { render :new }
+        format.json { render json: @relationship.errors, status: :unprocessable_entity }
+      end
     end
-
-    #respond_to do |format|
-    #  if @relationship.save
-    #    format.html { redirect_to @relationship, notice: 'Relationship was successfully created.' }
-    #    format.json { render :show, status: :created, location: @relationship }
-    #  else
-    #    format.html { render :new }
-    #    format.json { render json: @relationship.errors, status: :unprocessable_entity }
-    #  end
-    #end
   end
 
   # PATCH/PUT /relationships/1
