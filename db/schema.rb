@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130033143) do
+ActiveRecord::Schema.define(version: 20160130170753) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -61,7 +61,10 @@ ActiveRecord::Schema.define(version: 20160130033143) do
     t.integer  "manager_user_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "business_id"
   end
+
+  add_index "groups", ["business_id"], name: "index_groups_on_business_id"
 
   create_table "receipts", force: :cascade do |t|
     t.string   "receipt_desc"

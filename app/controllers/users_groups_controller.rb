@@ -1,5 +1,6 @@
 class UsersGroupsController < ApplicationController
   before_action :set_users_group, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_business!
 
   # GET /users_groups
   # GET /users_groups.json
@@ -15,6 +16,8 @@ class UsersGroupsController < ApplicationController
   # GET /users_groups/new
   def new
     @users_group = UsersGroup.new
+    #instance variable to return groups that belong to the current business
+    @business_groups = Group.where(:business_id => current_business.id)
   end
 
   # GET /users_groups/1/edit
