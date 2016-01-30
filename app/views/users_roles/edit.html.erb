@@ -2,7 +2,24 @@
 
 <p>Current Role: <%= @user_role.role_id %></p>
 
-<%= @user_role.joins(:role).select("roles name") %>
+<table>
+  <thead>
+    <tr>
+      <th>Current Role Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @roles.each do |role| %>
+      <% if role.id == @user_role.role_id %>
+        <tr>
+          <td><%=role.name %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
 
 <%= form_for(@user_role) do |f| %>
   <% if @user_role.errors.any? %>
