@@ -11,15 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130030139) do
-
-  create_table "add_user_id_to_users_groups", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "add_user_id_to_users_groups", ["user_id"], name: "index_add_user_id_to_users_groups_on_user_id"
+ActiveRecord::Schema.define(version: 20160130032853) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
