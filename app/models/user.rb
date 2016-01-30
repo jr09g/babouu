@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_one :relationship
   has_one :users_role
   has_one :business, through: :relationship
-  belongs_to :group
+  has_many :groups, through: :users_group
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
