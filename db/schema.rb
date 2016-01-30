@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130170753) do
+ActiveRecord::Schema.define(version: 20160130232823) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -48,12 +48,13 @@ ActiveRecord::Schema.define(version: 20160130170753) do
     t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "user_id"
-    t.integer  "status_ind"
+    t.integer  "expense_report_status_id"
   end
 
+  add_index "expense_reports", ["expense_report_status_id"], name: "index_expense_reports_on_expense_report_status_id"
   add_index "expense_reports", ["user_id"], name: "index_expense_reports_on_user_id"
 
   create_table "groups", force: :cascade do |t|

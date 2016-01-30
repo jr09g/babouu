@@ -5,5 +5,10 @@ class ExpenseReport < ActiveRecord::Base
   include Authority::UserAbilities
   belongs_to :user
   has_many :receipts
+  has_many :expense_report_statuses
+
+  def send_to_manager()
+
+  end
 
 end
