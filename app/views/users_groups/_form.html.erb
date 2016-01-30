@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.collection_select(:user_id , @business_users, :id, :first_name) %>
+  </div>
+
+  <div class="field">
     <%= f.label :group_id %><br>
     <%= f.collection_select(:group_id , @business_groups, :id, :name) %>
   </div>
