@@ -2,6 +2,8 @@
 
 <p>Current Role: <%= @user_role.role_id %></p>
 
+<%= @user_role.joins(:role).select("roles name") %>
+
 <%= form_for(@user_role) do |f| %>
   <% if @user_role.errors.any? %>
     <div id="error_explanation">
