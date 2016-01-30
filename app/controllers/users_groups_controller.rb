@@ -29,7 +29,8 @@ class UsersGroupsController < ApplicationController
   # POST /users_groups
   # POST /users_groups.json
   def create
-    @users_group = UsersGroup.new(users_group_params)
+    #@users_group = UsersGroup.new(users_group_params)
+    @users_group = UsersGroup.new(:user_id => @current_user_id, :group_id => params[:group_id])
 
     respond_to do |format|
       if @users_group.save
