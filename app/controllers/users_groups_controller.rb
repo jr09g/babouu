@@ -17,7 +17,7 @@ class UsersGroupsController < ApplicationController
   def new
     @users_group = UsersGroup.new
     #instance variables to return only those users that have a relationship with the business
-    @business_users = User.joins(:relationship).select("relationships.business_id as bus_id, users.id as user, users.first_name as first").where(:bus_id => current_business.id)
+    @business_users = Relationship.joins(:user).select("relationships.business_id as bus_id, users.id as user, users.first_name as first").where(:bus_id => current_business.id)
     #instance variable to return groups that belong to the current business
     @business_groups = Group.where(:business_id => current_business.id)
   end
