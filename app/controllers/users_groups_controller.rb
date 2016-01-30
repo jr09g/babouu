@@ -16,6 +16,8 @@ class UsersGroupsController < ApplicationController
   # GET /users_groups/new
   def new
     @users_group = UsersGroup.new
+    #
+    @current_user_id = params[:user_id]
     #instance variable to return groups that belong to the current business
     @business_groups = Group.where(:business_id => current_business.id)
   end
