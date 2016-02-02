@@ -1,6 +1,8 @@
 
 <h1><%= @expense_report.name %></h1>
 
+</br></br>
+
 <table class="table">
   <thead>
     <tr>
@@ -35,6 +37,10 @@
 
 <%#below line displays the total aggregated from the above criteria for receipts, then converted to a floating number %>
 <h3>Report Total: <%= number_to_currency(@receipts_view_total) %></h3>
+
+</br></br>
+
+<h3>Current Report Status: </h3>
 
 <h1>Activity by Company</h1>
 
