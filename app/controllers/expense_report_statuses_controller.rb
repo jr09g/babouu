@@ -69,6 +69,6 @@ class ExpenseReportStatusesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_report_status_params
-      params[:expense_report_status]
+      params.require(:expense_report_status).permit(:name)
     end
 end
