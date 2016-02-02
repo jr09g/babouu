@@ -22,6 +22,8 @@ class ExpenseReportsController < ApplicationController
   # GET /expense_reports/new
   def new
     @expense_report = ExpenseReport.new
+    #
+    @expense_report.expense_report_id = 1
   end
 
   # GET /expense_reports/1/edit
