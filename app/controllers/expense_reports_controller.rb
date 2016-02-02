@@ -31,7 +31,7 @@ class ExpenseReportsController < ApplicationController
   # POST /expense_reports
   # POST /expense_reports.json
   def create
-    @expense_report = ExpenseReport.new(expense_report_params)
+    @expense_report = current_user.expense_reports.build(expense_report_params)
 
     respond_to do |format|
       if @expense_report.save
@@ -76,6 +76,6 @@ class ExpenseReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_report_params
-      params.require(:expense_report).permit(:name, :start_date, :end_date)
+      params.require(:expense_report).permit(:name, :start_date, :end_date, :expense_report_status_id)
     end
 end
