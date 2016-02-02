@@ -12,6 +12,7 @@
   <tbody>
     <% @expense_report_statuses.each do |expense_report_status| %>
       <tr>
+        <td><%= expense_report_status.name %></td>
         <td><%= link_to 'Show', expense_report_status %></td>
         <td><%= link_to 'Edit', edit_expense_report_status_path(expense_report_status) %></td>
         <td><%= link_to 'Destroy', expense_report_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
