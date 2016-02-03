@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203013555) do
+ActiveRecord::Schema.define(version: 20160203014603) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -40,10 +40,6 @@ ActiveRecord::Schema.define(version: 20160203013555) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "expense_report_statuses", force: :cascade do |t|
-    t.string "name"
-  end
-
   create_table "expense_reports", force: :cascade do |t|
     t.string   "name"
     t.date     "start_date"
@@ -51,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160203013555) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+    t.string   "status"
   end
 
   add_index "expense_reports", ["user_id"], name: "index_expense_reports_on_user_id"
