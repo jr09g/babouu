@@ -22,8 +22,8 @@ class ExpenseReportsController < ApplicationController
   # GET /expense_reports/new
   def new
     @expense_report = ExpenseReport.new
-    #below variable sets status id to 1 for new reports in order to label as in progress
-    @expense_report.expense_report_status_id = 1
+    #below variable sets status id to in progress for all new reports
+    @expense_report.status = "in progress"
   end
 
   # GET /expense_reports/1/edit
@@ -49,6 +49,15 @@ class ExpenseReportsController < ApplicationController
   # PATCH/PUT /expense_reports/1
   # PATCH/PUT /expense_reports/1.json
   def update
+    case @expense_report.status
+    when "in progress"
+      @expense_report.status = "complete - not sent"
+    when "complete - not sent"
+      @expense_report.status = "sent"
+    else
+      return false
+    end
+
     respond_to do |format|
       if @expense_report.update(expense_report_params)
         format.html { redirect_to @expense_report, notice: 'Expense report was successfully updated.' }
@@ -78,6 +87,6 @@ class ExpenseReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_report_params
-      params.require(:expense_report).permit(:name, :start_date, :end_date, :expense_report_status_id)
+      params.require(:expense_report).permit(:name, :start_date, :end_date, :status)
     end
 end

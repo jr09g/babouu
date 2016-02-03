@@ -1,6 +1,71 @@
-<h1>Editing Expense Report</h1>
+<h1><%= @expense_report.name %></h1>
 
-<%= render 'form' %>
+<%# BELOW FORM IS TO UPDATE THE START OR END DATE ONLY %>
+<%= form_for(@expense_report) do |f| %>
+  <% if @expense_report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@expense_report.errors.count, "error") %> prohibited this expense_report from being saved:</h2>
+
+      <ul>
+      <% @expense_report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.date_select :end_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%# BELOW FORM IS TO UPDATE EXPENSE REPORT STATUS ONLY %>
+<%= form_for(@expense_report) do |f| %>
+  <% if @expense_report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@expense_report.errors.count, "error") %> prohibited this expense_report from being saved:</h2>
+
+      <ul>
+      <% @expense_report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @expense_report.status == "in progress" %>
+    <div class="field">
+      <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
+      <%= f.hidden_field :status %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Complete" %>
+    </div>
+  <% elsif @expense_report.status == "complete - not sent" %>
+    <div class="field">
+      <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
+      <%= f.hidden_field :status %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Send" %>
+    </div>
+  <% elsif @expense_report.status == "rejected" %>
+    <div class="field">
+      <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
+      <%= f.hidden_field :status %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Resend" %>
+    </div>
+<% end %>
 
 <%= link_to 'Show', @expense_report %> |
 <%= link_to 'Back', expense_reports_path %>
