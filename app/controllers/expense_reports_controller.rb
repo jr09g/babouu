@@ -49,19 +49,18 @@ class ExpenseReportsController < ApplicationController
   # PATCH/PUT /expense_reports/1
   # PATCH/PUT /expense_reports/1.json
   def update
-    case @expense_report.status
-    when "in progress"
-      @expense_report.status = "complete - not sent"
-    when "complete - not sent"
-      @expense_report.status = "sent"
-    else
-      return false
-    end
 
     respond_to do |format|
       if @expense_report.update(expense_report_params)
-        format.html { redirect_to @expense_report, notice: 'Expense report was successfully updated.' }
-        format.json { render :show, status: :ok, location: @expense_report }
+        if @expense_report.status == "sent"
+          @user_group = UsersGroup.where(:user_id => current_user.id)
+          @group = @user_group.group_id
+          @group_manager = Group.find(@group)
+          @expense_report.update(:manager_id => @group_manager.manager_user_id)
+        else
+          format.html { redirect_to @expense_report, notice: 'Expense report was successfully updated.' }
+          format.json { render :show, status: :ok, location: @expense_report }
+        end
       else
         format.html { render :edit }
         format.json { render json: @expense_report.errors, status: :unprocessable_entity }
