@@ -44,7 +44,7 @@
   <% if @expense_report.status == "in progress" %>
     <div class="field">
       <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
-      <%= f.hidden_field :status %>
+      <%= f.hidden_field :status, :value => "complete - not sent" %>
     </div>
     <div class="actions">
       <%= f.submit "Complete" %>
@@ -52,7 +52,7 @@
   <% elsif @expense_report.status == "complete - not sent" %>
     <div class="field">
       <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
-      <%= f.hidden_field :status %>
+      <%= f.hidden_field :status, :value => "sent" %>
     </div>
     <div class="actions">
       <%= f.submit "Send" %>
@@ -60,7 +60,7 @@
   <% elsif @expense_report.status == "rejected" %>
     <div class="field">
       <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
-      <%= f.hidden_field :status %>
+      <%= f.hidden_field :status, :value => "resent" %>
     </div>
     <div class="actions">
       <%= f.submit "Resend" %>
