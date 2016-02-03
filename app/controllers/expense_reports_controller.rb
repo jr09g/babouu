@@ -14,7 +14,7 @@ class ExpenseReportsController < ApplicationController
     #instance variable to show all receipts under the selected expense report
     @receipts = Receipt.all
     #EDIT THIS BEFORE NEXT PUSH
-    @status = ExpenseReport.joins(:expense_report_status)
+    @status = ExpenseReportStatus.joins(:expense_report)
     #instance variable is for pie chart to be created
     @expense_report_receipts = Receipt.joins(:expense_report).select("name, receipt_desc, expense_report_id, price, plain_date, company_name")
     #
