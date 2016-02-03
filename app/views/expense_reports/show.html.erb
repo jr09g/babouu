@@ -40,7 +40,13 @@
 
 </br></br>
 
-<h3>Current Report Status: </h3>
+<% @status.each do |status| %>
+  <% if status.id == @expense_report.expense_report_status_id %>
+    <h3>Current Report Status: <%= status.name %></h3>
+  <% end %>
+<% end %>
+
+</br></br>
 
 <h1>Activity by Company</h1>
 
