@@ -40,14 +40,6 @@
 
 </br></br>
 
-<% @status.each do |status| %>
-  <% if status.id == @expense_report.expense_report_status_id %>
-    <h3>Current Report Status: <%= status.name %></h3>
-  <% end %>
-<% end %>
-
-</br></br>
-
 <h1>Activity by Company</h1>
 
 <%#= pie_chart @custom_views_receipts.group(:company_name).where(expense_report_id: @expense_report.id, user: current_user).sum(:price), library: {backgroundColor: "#9FF781"}%>
