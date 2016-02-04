@@ -58,9 +58,13 @@ class ExpenseReportsController < ApplicationController
           #select the group id to use in the next instance variable
           @group = @user_group.select("group_id")
           #find the group using the group id
-          @group_manager = Group.find(@group)
+          @group_manager = Group.find(@group.id)
           #update the expense report by adding the group's manager
           @expense_report.update(:manager_id => @group_manager.manager_user_id)
+          #
+          #once updated, redirect to expense report show view
+          format.html { redirect_to @expense_report, notice: 'Expense report was successfully updated.' }
+          format.json { render :show, status: :ok, location: @expense_report }
         else
           format.html { redirect_to @expense_report, notice: 'Expense report was successfully updated.' }
           format.json { render :show, status: :ok, location: @expense_report }
