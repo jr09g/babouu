@@ -1,5 +1,5 @@
 class ReceivedExpenseReportsController < ApplicationController
-  before_action :set_expense_report, only: [:show, :edit, :update, :destroy]
+  before_action :set_received_expense_report, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
 
