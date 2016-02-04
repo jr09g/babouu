@@ -53,9 +53,13 @@ class ExpenseReportsController < ApplicationController
     respond_to do |format|
       if @expense_report.update(expense_report_params)
         if @expense_report.status == "sent"
+          #find the group that the user belongs to
           @user_group = UsersGroup.where(:user_id => current_user.id)
-          @group = @user_group.group_id
+          #select the group id to use in the next instance variable
+          @group = @user_group.select("group_id")
+          #find the group using the group id
           @group_manager = Group.find(@group)
+          #update the expense report by adding the group's manager
           @expense_report.update(:manager_id => @group_manager.manager_user_id)
         else
           format.html { redirect_to @expense_report, notice: 'Expense report was successfully updated.' }
