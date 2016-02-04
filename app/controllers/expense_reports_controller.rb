@@ -63,7 +63,8 @@ class ExpenseReportsController < ApplicationController
           @expense_report.update(:manager_id => @group_manager.manager_user_id)
           #
           #once updated, redirect to expense report show view
-          format.html { redirect_to @expense_report, notice: 'Expense report was successfully updated.' }
+          #format.html { redirect_to @expense_report, notice: 'Expense report was successfully updated.' }
+          format.html { render :edit, notice: 'Status updated to #{@expense_report.status}' }
           format.json { render :show, status: :ok, location: @expense_report }
         else
           format.html { redirect_to @expense_report, notice: 'Expense report was successfully updated.' }

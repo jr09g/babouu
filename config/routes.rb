@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   resources :expense_reports
 
+  resources :received_expense_reports
+
   resources :relationships
 
   resources :groups

@@ -1,0 +1,17 @@
+<%= form_for(@received_expense_report) do |f| %>
+  <% if @received_expense_report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@received_expense_report.errors.count, "error") %> prohibited this received_expense_report from being saved:</h2>
+
+      <ul>
+      <% @received_expense_report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
