@@ -44,6 +44,12 @@
 
 </br></br>
 
+<% if current_user.has_any_role? :manager %>
+  <%= link_to 'Acknowledge', expense_report_path(@expense_report.id), method: :put, data: { confirm: 'Are you sure you want to delete this receipt?', :status => 'acknowledged - in review' } %>
+<% end %>
+
+</br></br>
+
 <h1>Activity by Company</h1>
 
 <%#= pie_chart @custom_views_receipts.group(:company_name).where(expense_report_id: @expense_report.id, user: current_user).sum(:price), library: {backgroundColor: "#9FF781"}%>
