@@ -20,11 +20,11 @@ class ExpenseReportsController < ApplicationController
     #
     #TESTING CHANGING OF STATUS FROM MANAGER END
     if params[:data]['status'] == 'acknowledged - in review'
-      @expense_report.update = (:status => params[:data]['status'])
+      @expense_report.update(:status => params[:data]['status'])
     elsif params[:data]['status'] == 'accepted'
-      @expense_report.update = (:status => params[:data]['status'])
+      @expense_report.update(:status => params[:data]['status'])
     elsif params[:data]['status'] == 'rejected'
-      @expense_report.update = (:status => params[:data]['status'])
+      @expense_report.update(:status => params[:data]['status'])
     else
       return false
     end
