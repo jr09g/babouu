@@ -17,6 +17,17 @@ class ExpenseReportsController < ApplicationController
     @expense_report_receipts = Receipt.joins(:expense_report).select("name, receipt_desc, expense_report_id, price, plain_date, company_name")
     #
     @receipts_view_total = 0.00
+    #
+    #TESTING CHANGING OF STATUS FROM MANAGER END
+    if params[:data]['status'] == 'acknowledged - in review'
+      @expense_report.update = (:status => params[:data]['status'])
+    elsif params[:data]['status'] == 'accepted'
+      @expense_report.update = (:status => params[:data]['status'])
+    elsif params[:data]['status'] == 'rejected'
+      @expense_report.update = (:status => params[:data]['status'])
+    else
+      return false
+    end
   end
 
   # GET /expense_reports/new

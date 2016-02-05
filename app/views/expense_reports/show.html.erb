@@ -45,7 +45,14 @@
 </br></br>
 
 <% if current_user.has_any_role? :employee %>
-  <%= link_to 'Acknowledge', :controller => :expense_reports, :action => :show, data: { :status => 'acknowledged - in review' } %>
+  <% if @expense_report.status == 'sent' %>
+    <%= link_to 'Acknowledge', :controller => :expense_reports, :action => :show, data: { :status => 'acknowledged - in review' } %>
+  <% elsif @expense_report.status == 'acknowledged - in review' %>
+    <%= link_to 'Accept', :controller => :expense_reports, :action => :show, data: { :status => 'accepted' } %>
+    <%= link_to 'Reject', :controller => :expense_reports, :action => :show, data: { :status => 'rejected' } %>
+  <% else %>
+    <%= link_to 'TEST', :controller => :expense_reports, :action => :show, data: { :status => 'acknowledged - in review' } %>
+  <% end %>
 <% end %>
 
 </br></br>
