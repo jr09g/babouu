@@ -45,7 +45,7 @@
 </br></br>
 
 <% if current_user.has_any_role? :employee %>
-  <%= link_to 'Acknowledge', method: :put, data: { :status => 'acknowledged - in review' } %>
+  <%= link_to 'Acknowledge', @expense_report, data: { :status => 'acknowledged - in review' } %>
 <% end %>
 
 </br></br>
