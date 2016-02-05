@@ -45,7 +45,7 @@
 </br></br>
 
 <% if current_user.has_any_role? :employee %>
-  <%= link_to 'Acknowledge', expense_report_path(@expense_report.id), method: :put, data: { confirm: 'Are you sure you want to delete this receipt?', :status => 'acknowledged - in review' } %>
+  <%= link_to 'Acknowledge', expense_report_path(@expense_report.id), method: :put, data: { :status => 'acknowledged - in review' } %>
 <% end %>
 
 </br></br>
