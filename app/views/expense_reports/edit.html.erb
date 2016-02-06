@@ -94,12 +94,12 @@
     <% elsif @expense_report.status == "acknowledged - in review" %>
 
       <div class="field">
-        <%= f.radio_button_tag(:status, "accepted") %>
-        <%= f.label_tag(:status, "Accept") %>
+        <%= f.radio_button :status, "accepted" %>
+        <%= f.label :status, "Accept" %>
       </div>
       <div class="actions">
-      	<%= f.radio_button_tag(:status, "rejected") %>
-        <%= f.label_tag(:status, "Reject") %>
+      	<%= f.radio_button_tag :status, "rejected" %>
+        <%= f.label :status, "Reject" %>
       </div>
       <div class="actions">
         <%= f.submit %>
