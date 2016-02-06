@@ -44,19 +44,6 @@
 
 </br></br>
 
-<% if current_user.has_any_role? :employee %>
-  <% if @expense_report.status == 'sent' %>
-    <%= link_to 'Acknowledge', :controller => :expense_reports, :action => :show, data: { :status => 'acknowledged - in review' } %>
-  <% elsif @expense_report.status == 'acknowledged - in review' %>
-    <%= link_to 'Accept', :controller => :expense_reports, :action => :show, data: { :status => 'accepted' } %>
-    <%= link_to 'Reject', :controller => :expense_reports, :action => :show, data: { :status => 'rejected' } %>
-  <% else %>
-    <%= link_to 'TEST', :controller => :expense_reports, :action => :show, data: { :status => 'acknowledged - in review' } %>
-  <% end %>
-<% end %>
-
-</br></br>
-
 <h1>Activity by Company</h1>
 
 <%#= pie_chart @custom_views_receipts.group(:company_name).where(expense_report_id: @expense_report.id, user: current_user).sum(:price), library: {backgroundColor: "#9FF781"}%>
