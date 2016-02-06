@@ -28,7 +28,7 @@
 <% end %>
 
 <%# below buttons are only for the user of the expense report %>
-<% if current_user.id == @expense_report_status.user_id %>
+<% if current_user.id == @expense_report.user_id %>
   <%# BELOW FORM IS TO UPDATE EXPENSE REPORT STATUS ONLY %>
   <%= form_for(@expense_report) do |f| %>
     <% if @expense_report.errors.any? %>
