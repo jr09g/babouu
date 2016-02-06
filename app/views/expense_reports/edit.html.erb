@@ -27,44 +27,83 @@
   </div>
 <% end %>
 
-<%# BELOW FORM IS TO UPDATE EXPENSE REPORT STATUS ONLY %>
-<%= form_for(@expense_report) do |f| %>
-  <% if @expense_report.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@expense_report.errors.count, "error") %> prohibited this expense_report from being saved:</h2>
+<%# below buttons are only for the user of the expense report %>
+<% if current_user.id == @expense_report_status.user_id %>
+  <%# BELOW FORM IS TO UPDATE EXPENSE REPORT STATUS ONLY %>
+  <%= form_for(@expense_report) do |f| %>
+    <% if @expense_report.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@expense_report.errors.count, "error") %> prohibited this expense_report from being saved:</h2>
 
-      <ul>
-      <% @expense_report.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+        <ul>
+        <% @expense_report.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if @expense_report.status == "in progress" %>
+      <div class="field">
+        <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
+        <%= f.hidden_field :status, :value => "complete - not sent" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Complete" %>
+      </div>
+    <% elsif @expense_report.status == "complete - not sent" %>
+      <div class="field">
+        <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
+        <%= f.hidden_field :status, :value => "sent" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Send" %>
+      </div>
+    <% elsif @expense_report.status == "rejected" %>
+      <div class="field">
+        <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
+        <%= f.hidden_field :status, :value => "resent" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Resend" %>
+      </div>
+    <% end %>
   <% end %>
+<%# below buttons are only for the manager of the expense report %>
+<% elsif current_user.id == @expense_report.manager_id %>
+  <%# BELOW FORM IS TO UPDATE EXPENSE REPORT STATUS ONLY %>
+  <%= form_for(@expense_report) do |f| %>
+    <% if @expense_report.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@expense_report.errors.count, "error") %> prohibited this expense_report from being saved:</h2>
 
-  <% if @expense_report.status == "in progress" %>
-    <div class="field">
-      <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
-      <%= f.hidden_field :status, :value => "complete - not sent" %>
-    </div>
-    <div class="actions">
-      <%= f.submit "Complete" %>
-    </div>
-  <% elsif @expense_report.status == "complete - not sent" %>
-    <div class="field">
-      <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
-      <%= f.hidden_field :status, :value => "sent" %>
-    </div>
-    <div class="actions">
-      <%= f.submit "Send" %>
-    </div>
-  <% elsif @expense_report.status == "rejected" %>
-    <div class="field">
-      <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
-      <%= f.hidden_field :status, :value => "resent" %>
-    </div>
-    <div class="actions">
-      <%= f.submit "Resend" %>
-    </div>
+        <ul>
+        <% @expense_report.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if @expense_report.status == "sent" %>
+      <div class="field">
+        <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
+        <%= f.hidden_field :status, :value => "acknowledged - in review" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Acknowledge" %>
+      </div>
+    <% elsif @expense_report.status == "acknowledged - in review" %>
+      <div class="field">
+        <%#= this field is not visible on the page; it is hidden with a default value of in progress %>
+        <%= f.hidden_field :status, :value => "accepted" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Accept" %>
+      </div>
+    <% elsif @expense_report.status == "accepted" %>
+      <p>Expense Report Complete</p>
+    <% end %>
   <% end %>
 <% end %>
 
