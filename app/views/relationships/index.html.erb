@@ -16,50 +16,16 @@
   </thead>
 
   <tbody>
-    <%# @relationships.each do |relationship| %>
-      <%# @users_roles.each do |user_role| %>
-        <%# if relationship.user_id == user_role.user %>
+    <% @relationships.each do |relationship| %>
+      <% @users_roles.each do |user_role| %>
+        <% if relationship.user_id == user_role.user %>
           <tr>
-            <td><%#= user_role.user %></td>
-            <td><%#= user_role.first %></td>
-            <td><%#= user_role.last %></td>
-            <td><%#= user_role.email %></td>
-            <td><%#= user_role.role %></td>
-            <td><%#= link_to 'Manage Role', edit_users_role_path(user_role.ur_id) %></td>
-            <td><%#= link_to 'Remove Relationship', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <%# end %>
-      <%# end %>
-    <%# end %>
-  </tbody>
-</table>
-
-<br>
-
-<%# TEST %>
-<table class="table">
-  <thead>
-    <tr>
-      <th>User ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Role ID</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @rel_test.each do |rel| %>
-      <% @test.each do |test| %>
-        <% if rel.user_id == test.user %>
-          <tr>
-            <td><%= test.user %></td>
-            <td><%= test.first %></td>
-            <td><%= teste.last %></td>
-            <td><%= test.email %></td>
-            <td><%= test.role %></td>
-            <td><%= link_to 'Manage Role', edit_users_role_path(test.ur_id) %></td>
+            <td><%= user_role.user %></td>
+            <td><%= user_role.first %></td>
+            <td><%= user_role.last %></td>
+            <td><%= user_role.email %></td>
+            <td><%= user_role.role %></td>
+            <td><%= link_to 'Manage Role', edit_users_role_path(user_role.ur_id) %></td>
             <td><%= link_to 'Remove Relationship', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
@@ -67,6 +33,8 @@
     <% end %>
   </tbody>
 </table>
+
+<br>
 
 <%= link_to 'New Relationship', new_relationship_path %><br><br>
 
