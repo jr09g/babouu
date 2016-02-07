@@ -15,11 +15,11 @@
     <% @expense_reports.each do |view| %>
       <% if view.user == current_user %>
         <tr>
-        <td><%= link_to view.name, view %></td>
-        <td><%= view.start_date.to_formatted_s(:long_ordinal) %></td>
-        <td><%= view.end_date.to_formatted_s(:long_ordinal) %></td>
-        <td><%= view.created_at.to_formatted_s(:long_ordinal) %></td>
-        <td><%= link_to 'Delete View', view, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to view.name, view %></td>
+          <td><%= view.start_date.to_formatted_s(:long_ordinal) %></td>
+          <td><%= view.end_date.to_formatted_s(:long_ordinal) %></td>
+          <td><%= view.created_at.to_formatted_s(:long_ordinal) %></td>
+          <td><%= link_to 'Delete View', view, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     <% end %>
@@ -28,4 +28,6 @@
 
 <%#= link_to 'Send View', send_mail_path, class: "btn btn-default" %>
 
-<%= link_to 'New Expense report', new_expense_report_path %>
+<%= link_to 'Received Expense Reports', received_expense_report_path %>
+
+<%= link_to 'New Expense Reports', new_expense_report_path %>
