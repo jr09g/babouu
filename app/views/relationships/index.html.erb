@@ -50,9 +50,9 @@
   </thead>
 
   <tbody>
-    <% @relationships.each do |relationship| %>
+    <% @rel_test.each do |rel| %>
       <% @test.each do |test| %>
-        <% if relationship.user_id == test.user %>
+        <% if rel.user_id == test.user %>
           <tr>
             <td><%= test.user %></td>
             <td><%= test.first %></td>

@@ -10,6 +10,7 @@ class RelationshipsController < ApplicationController
     #
     @users_roles = User.joins(:users_role).select("users_roles.id as ur_id, users_roles.user_id as user, users.first_name as first, users.last_name as last, users.email as email, users_roles.role_id as role")
     #
+    @rel_test = Relationship.all
     @test = UsersRole.joins(:user, :role).select("users_roles.id as ur_id, users_roles.user_id as user, users.first_name as first, users.last_name as last, users.email as email, roles.name as role")
   end
 
