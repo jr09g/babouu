@@ -60,6 +60,7 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
 
+  #in addition to the below credentials, also make sure that the AWS user account has an access policy set in IAM Console
     config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {

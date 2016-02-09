@@ -1,4 +1,8 @@
 class IncomingMailsController < ApplicationController
+  #requiring tempfile so that a temporary file can be created to store the email and eventually send up to S3
+  require 'tempfile'
+  require 'net/http'
+  
   skip_before_filter :verify_authenticity_token
 
   #below method creates a new receipt from a user forwarded email via a POST request hook from Cloudmailin
