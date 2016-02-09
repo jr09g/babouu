@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,10 +14,9 @@
   <tbody>
     <% @received_expense_reports.each do |received_expense_report| %>
       <tr>
-        <td><%= received_expense_report.name %></td>
+        <td><%= link_to received_expense_report.name, received_expense_report %></td>
         <td><%= received_expense_report.status %></td>
-        <td><%= link_to 'Show', received_expense_report %></td>
-        <td><%= link_to 'Edit', edit_expense_report_path(received_expense_report) %></td>
+        <td><%#= link_to 'Edit', edit_expense_report_path(received_expense_report) %></td>
       </tr>
     <% end %>
   </tbody>

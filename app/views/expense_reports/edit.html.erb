@@ -32,6 +32,11 @@
 
 </br></br>
 
+<%#below line displays the total aggregated from the above criteria for receipts, then converted to a floating number %>
+<h3>Report Total: <%= number_to_currency(@receipts_view_total) %></h3>
+
+</br></br>
+
 <%# user will be able to amend the dates of the expense report only if it is in progress %>
 <% if @expense_report.status == "in progress" %>
   <%= form_for(@expense_report) do |f| %>
@@ -117,7 +122,7 @@
       </div>
     <% end %>
 
-    <% if @expense_report.status == "sent" %>
+    <% if @expense_report.status == "sent" || "resent" %>
       <div class="field">
         <%= f.hidden_field :status, :value => "acknowledged - in review" %>
       </div>
