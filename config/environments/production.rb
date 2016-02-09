@@ -61,13 +61,18 @@ Rails.application.configure do
   # config.action_controller.asset_host = 'http://assets.example.com'
 
   #in addition to the below credentials, also make sure that the AWS user account has an access policy set in IAM Console
-    config.paperclip_defaults = {
+  config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
       :bucket => ENV['S3_BUCKET_NAME'],
       :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
+  }
+
+  #disable spoofing for Paperclip and allow text/plain files to be saved as receipts
+  Paperclip.options[:content_type_mappings] = {
+    :pdf => "text/plain"
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
