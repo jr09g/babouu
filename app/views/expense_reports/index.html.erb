@@ -15,7 +15,7 @@
     <% @expense_reports.each do |view| %>
       <% if view.user == current_user %>
         <tr>
-          <td><%= link_to view.name, view %></td>
+          <td><%= link_to view.name, edit_expense_report_path(view) %></td>
           <td><%= view.start_date.to_formatted_s(:long_ordinal) %></td>
           <td><%= view.end_date.to_formatted_s(:long_ordinal) %></td>
           <td><%= view.created_at.to_formatted_s(:long_ordinal) %></td>

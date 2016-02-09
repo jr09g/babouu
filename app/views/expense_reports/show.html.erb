@@ -1,54 +1,15 @@
-
 <h1><%= @expense_report.name %></h1>
-
-</br></br>
-
-<table class="table">
-  <thead>
-    <tr>
-	  <th>Date</th>
-	  <th>Receipt ID</th>
-	  <th>Description</th>
-	  <th>Company</th>
-	  <th>Price</th>
-	  <th colspan="4"></th>    
-	</tr>
-  </thead>
-  <tbody>
-    <% if @expense_report.user == current_user %>
-	    <% @receipts.each do |receipt| %>
-		   <% if receipt.expense_report_id == @expense_report.id %>
-		   <tr>
-	         <td><%= receipt.plain_date.to_formatted_s(:long_ordinal) %></td>
-	         <td><%= receipt.id %></td>
-	         <td><%= receipt.receipt_desc %></td>
-	         <td><%= receipt.company_name %></td>
-	         <td><%= number_to_currency(receipt.price) %></td>
-	         </br></br>
-		   </tr>
-		     <% @receipts_view_total = @receipts_view_total + receipt.price %>
-		   <% end %>
-	    <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-</br></br>
-
-<%#below line displays the total aggregated from the above criteria for receipts, then converted to a floating number %>
-<h3>Report Total: <%= number_to_currency(@receipts_view_total) %></h3>
-
-</br></br>
-
-<h3><%= @expense_report.status %></h3>
-
-</br></br>
 
 <h1>Activity by Company</h1>
 
-<%#= pie_chart @custom_views_receipts.group(:company_name).where(expense_report_id: @expense_report.id, user: current_user).sum(:price), library: {backgroundColor: "#9FF781"}%>
+<%= pie_chart @custom_views_receipts.group(:company_name).where(expense_report_id: @expense_report.id, user: current_user).sum(:price), library: {backgroundColor: "#9FF781"}%>
 
 </br></br>
 
-<%#= link_to 'Add Receipts', edit_custom_view_path(@custom_view) %> |
-<%= link_to 'Back', receipts_path %>
+<h3>Expenses for the month of <%= Date.current.strftime("%B") %></h3>
+  <%#= line_chart [
+    {name: "Expenses", data: @receipts.group_by_day(:plain_date, range: Date.current.at_beginning_of_month..Time.now).where(user: current_user).sum(:price)}], library: {backgroundColor: "#9FF781", width: 1000} %>
+
+</br></br>
+
+<%= link_to 'Back', expense_reports_path %>
