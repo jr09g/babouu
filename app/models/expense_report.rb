@@ -7,8 +7,4 @@ class ExpenseReport < ActiveRecord::Base
   has_many :receipts
   has_one :expense_report_status
 
-  def send_to_manager()
-
-  end
-
 end

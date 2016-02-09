@@ -40,6 +40,9 @@ Rails.application.routes.draw do
 
   resources :roles
 
+  #not sure if this route is needed, not get request should be made for incoming mails
+  get '/incoming_mails' => 'incoming_mails#new'
+  #route used for the hook used by cloudmailin to enter email parameters leading to receipts being created
   post '/incoming_mails' => 'incoming_mails#create'
 
   get 'show_users/index'
