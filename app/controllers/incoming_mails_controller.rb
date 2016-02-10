@@ -17,9 +17,9 @@ class IncomingMailsController < ApplicationController
 	#below instance variable saves the company id
 	@company_id = Receipt.company_id_retrieve(@company_name)
 	#below instance variable sets the path for the email attachment
-	###@attachment = Receipt.file_attachment(params[:headers]['Thread-Topic'], params[:plain])
+	@attachment = Receipt.file_attachment(params[:headers]['Thread-Topic'], params[:plain])
 	#below instance variable saves the unique key that applies to an individual email; will be used to track if an email is a duplicate of an existing receipt
-	###@in_reply_to = Receipt.in_reply_to(params[:headers]['In-Reply-To'])
+	@in_reply_to = Receipt.in_reply_to(params[:headers]['In-Reply-To'])
 	#below instance variable will return a boolean to confirm if the email received has already been converted into a receipt in the current db
 	@is_duplicate = Receipt.is_duplicate(@receipt_user, @in_reply_to)
 	#below instance variable retrieves the full email domain for an amazon check
@@ -44,7 +44,6 @@ class IncomingMailsController < ApplicationController
 	#  else
 	#	#company name matches one from a list and is therefore a receipt; create receipt record
 		@auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 0, plain_date: Date.current, image: @attachment, in_reply_to: @in_reply_to)
-		#@auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 0, plain_date: Date.current)
 	#  end
 	#  render :text => 'success', :status => 200
 	#else

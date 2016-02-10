@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203034112) do
+ActiveRecord::Schema.define(version: 20160210032308) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 20160203034112) do
 
   create_table "receipts", force: :cascade do |t|
     t.string   "receipt_desc"
-    t.integer  "price"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "company_id"
@@ -78,6 +77,7 @@ ActiveRecord::Schema.define(version: 20160203034112) do
     t.string   "company_name"
     t.integer  "expense_report_id"
     t.string   "in_reply_to"
+    t.float    "price"
   end
 
   add_index "receipts", ["company_id"], name: "index_receipts_on_company_id"
