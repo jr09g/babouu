@@ -44,7 +44,7 @@ class IncomingMailsController < ApplicationController
 	  else
 		#company name matches one from a list and is therefore a receipt; create receipt record
 		#@auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 0, plain_date: Date.current, image: @attachment, in_reply_to: @in_reply_to)
-		@auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 0, plain_date: Date.current, in_reply_to: @in_reply_to)
+		@auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 0, plain_date: Date.current)
 	  end
 	  render :text => 'success', :status => 200
 	else
