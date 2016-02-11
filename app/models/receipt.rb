@@ -29,21 +29,22 @@ class Receipt < ActiveRecord::Base
 
 		#loop through each receipt
 		Receipt.all.each do |receipt|
-			#first check is to make sure we only check receipts belonging to the current user
-			if @user = receipt.user_id
-				#second check validates that the unique email key is not currently stored in the db
-				if @in_reply_to == receipt.in_reply_to
-					#if it is a duplicate, return true
-					@duplicate = true
-					break
-				else
-					#if the key cannot be found, it is not a duplicate; return false
-					@duplicate = false
-				end
+		  #first check is to make sure we only check receipts belonging to the current user
+		  if @user = receipt.user_id
+			#second check validates that the unique email key is not currently stored in the db
+			if @in_reply_to == receipt.in_reply_to
+			  #if it is a duplicate, return true
+			  @duplicate = true
+			  break
 			else
-				#if user cannot be found, do nothing
-				##THIS SHOULD NEVER HAPPEN
+			  #if the key cannot be found, it is not a duplicate; return false
+			  @duplicate = false
 			end
+		  else
+			#if user cannot be found, do nothing
+			##THIS SHOULD NEVER HAPPEN
+			@duplicate = false
+		  end
 		end
 
 		return @duplicate 
