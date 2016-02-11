@@ -25,12 +25,13 @@ class Receipt < ActiveRecord::Base
 		#leverage in-reply-to param, as it is a unique key for each email
 		@in_reply_to = in_reply_to
 		@user = user
-		@duplicate 
+		#default this value to false in event that there are o receipts to loop through
+		@duplicate = false
 
 		#loop through each receipt
 		Receipt.all.each do |receipt|
 		  #first check is to make sure we only check receipts belonging to the current user
-		  if @user = receipt.user_id
+		  if @user == receipt.user_id
 			#second check validates that the unique email key is not currently stored in the db
 			if @in_reply_to == receipt.in_reply_to
 			  #if it is a duplicate, return true
@@ -43,7 +44,6 @@ class Receipt < ActiveRecord::Base
 		  else
 			#if user cannot be found, do nothing
 			##THIS SHOULD NEVER HAPPEN
-			@duplicate = false
 		  end
 		end
 
