@@ -31,6 +31,14 @@ gem 'rolify', '~> 5.0'
 gem 'authority', '~> 3.1'
 #paperclip added to enable attachments to receipts
 gem 'paperclip', '~> 4.3.0'
+#gem for google tesseract ocr
+gem 'rtesseract', '~> 1.3', '>= 1.3.1'
+#rmagick installed as a requirement for rtesseract gem
+gem 'mini_magick', '~> 4.3', '>= 4.3.6'
+#chartkick added to implement data charts for spending habits
+gem 'chartkick', '~> 1.4.0'
+#groupdate added to allow for easy date grouping of models for charting through chartkick
+gem 'groupdate', '~> 2.4.0'
 #aws-sdk provides resources and interface apis for amazon web services
 gem 'aws-sdk', '~> 1.6'
 #windows does not include zoneinfo files, so bundle the tzinfo-data gem

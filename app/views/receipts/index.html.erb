@@ -17,8 +17,8 @@
     </thead>
     <tbody>
       <!-- Below rails look iterates through all receipts for the user who is logged in -->
-      <% @receipt_with_view.each do |receipt| %>
-      <%# @receipts.each do |receipt| %>
+      <%# @receipt_with_view.each do |receipt| %>
+      <% @receipts.each do |receipt| %>
         <% if receipt.user == current_user %>
           <!-- Below statement filters for those receipts that were only sent today -->
           <% if receipt.plain_date == Date.current %>
