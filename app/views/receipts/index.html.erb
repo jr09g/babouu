@@ -24,7 +24,7 @@
           <% if receipt.plain_date == Date.current %>
           <tr>
             <td><%= receipt.id %></td>
-            <td><%#= receipt.company_name %></td>
+            <td><%= receipt.company_name %></td>
             <td><%= receipt.receipt_desc %></td>
             <td><%#= receipt.name %></td>
             <td><p><%= number_to_currency(receipt.price) %></p></td>
