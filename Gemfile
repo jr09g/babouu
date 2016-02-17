@@ -41,10 +41,10 @@ gem 'chartkick', '~> 1.4.0'
 gem 'groupdate', '~> 2.4.0'
 #aws-sdk provides resources and interface apis for amazon web services
 gem 'aws-sdk', '~> 1.6'
+#rubyracer added to assist with asset precompile
+gem 'therubyracer', '~> 0.12.2'
 #windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-#use Unicorn as the app server
-# gem 'unicorn'
 
 group :development, :test do
   #call 'debugger' anywhere in the code to stop execution and get a debugger console
@@ -56,7 +56,9 @@ group :development, :test do
 end
 
 group :production do
-  #db used for production environment on heroku server; may need to change this for live hosting server like AWS
-  gem 'pg', '0.17.1'
+  #db used for production environment on aws server
+  gem 'mysql2'
+  #use Unicorn as the app server
+  gem 'unicorn'
   gem 'rails_12factor', '0.0.2'
 end
