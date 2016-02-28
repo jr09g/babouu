@@ -9,7 +9,6 @@ class Receipt < ActiveRecord::Base
   do_not_validate_attachment_file_type :image
 
   #
-  #
   ### below set of methods validate the email coming in to ensure it is the correct receipt email before being saved
   #
   #
