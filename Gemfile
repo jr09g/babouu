@@ -40,7 +40,7 @@ gem 'chartkick', '~> 1.4.0'
 #groupdate added to allow for easy date grouping of models for charting through chartkick
 gem 'groupdate', '~> 2.4.0'
 #aws-sdk provides resources and interface apis for amazon web services
-gem 'aws-sdk', '~> 1.6'
+gem 'aws-sdk-rails', '~> 1.0'
 #rubyracer added to assist with asset precompile
 gem 'therubyracer', '~> 0.12.2'
 #windows does not include zoneinfo files, so bundle the tzinfo-data gem
