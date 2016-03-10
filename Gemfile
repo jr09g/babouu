@@ -57,7 +57,7 @@ end
 
 group :production do
   #db used for production environment on aws server
-  gem 'mysql2'
+  gem 'mysql2', '~> 0.3.18'
   #use Unicorn as the app server
   gem 'unicorn'
   gem 'rails_12factor', '0.0.2'
