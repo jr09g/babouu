@@ -45,7 +45,8 @@ class ReceiptsController < ApplicationController
   # POST /receipts.json
   def create
     @receipt = current_user.receipts.build(receipt_params)
-
+    #@test = Receipt.manual_attachment(@receipt.image)
+    
     respond_to do |format|
       if @receipt.save
         format.html { redirect_to @receipt, notice: 'Receipt was successfully created.' }
