@@ -33,8 +33,6 @@ class ExpenseReportsController < ApplicationController
   def create
     @expense_report = current_user.expense_reports.build(expense_report_params)
 
-    ExpenseReport.create(name: '-NONE-', user_id: 0)
-
     respond_to do |format|
       if @expense_report.save
         format.html { redirect_to @expense_report, notice: 'Expense report was successfully created.' }
