@@ -65,8 +65,8 @@ Rails.application.configure do
     :storage => :s3,
     :s3_credentials => {
       :bucket => 'babouu',
-      :access_key_id => 'AKIAIN4K75M5VTS5WBSQ',
-      :secret_access_key => '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'
+      :access_key_id => '-',
+      :secret_access_key => '-'
     }
   }
 
