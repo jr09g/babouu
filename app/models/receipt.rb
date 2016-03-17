@@ -5,10 +5,10 @@ class Receipt < ActiveRecord::Base
   belongs_to :user
   belongs_to :expense_report
   #validates :receipt_desc, :price, :presence => true
-  #has_attached_file :image
+  has_attached_file :image
   #:styles => {:medium => "300x300>", :thumb => "100x100"}
   #validates_attachment_content_type :image, :content_type=>/\Aimage\/.*\Z/
-  #do_not_validate_attachment_file_type :image
+  do_not_validate_attachment_file_type :image
 
   #
   ### below set of methods validate the email coming in to ensure it is the correct receipt email before being saved
