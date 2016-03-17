@@ -1,14 +1,14 @@
 class Receipt < ActiveRecord::Base
-  require 'rtesseract'
-  require 'mini_magick'
+  #require 'rtesseract'
+  #require 'mini_magick'
   belongs_to :company
   belongs_to :user
   belongs_to :expense_report
-  validates :receipt_desc, :price, :presence => true
-  has_attached_file :image
+  #validates :receipt_desc, :price, :presence => true
+  #has_attached_file :image
   #:styles => {:medium => "300x300>", :thumb => "100x100"}
   #validates_attachment_content_type :image, :content_type=>/\Aimage\/.*\Z/
-  do_not_validate_attachment_file_type :image
+  #do_not_validate_attachment_file_type :image
 
   #
   ### below set of methods validate the email coming in to ensure it is the correct receipt email before being saved
@@ -278,13 +278,13 @@ class Receipt < ActiveRecord::Base
 
 	#below method digitizes the incoming receipt and saves that to AWS
 	def self.manual_attachment(file_name)
-		@file_name = file_name
+		#@file_name = file_name
 
-		@image = RTesseract.new(@file_name, :processor => "mini_magick")
+		#@image = RTesseract.new(@file_name, :processor => "mini_magick")
 
-		@temp_file = Tempfile.new(['ocr', '.txt'])
-		@temp_file.write(@image.to_s)
-		@temp_file.rewind
+		#@temp_file = Tempfile.new(['ocr', '.txt'])
+		#@temp_file.write(@image.to_s)
+		#@temp_file.rewind
 
 		#return @temp_file
 	end
