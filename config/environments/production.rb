@@ -74,8 +74,7 @@ Rails.application.configure do
   :fog_credentials => {
     :provider => 'AWS',
     :aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-    :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
-    :region => 'us-east-1' # in case you need it
+    :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
   },
   :fog_directory => ENV['S3_BUCKET_NAME'], # only one of those is needed but I don't remember which
   :bucket => ENV['S3_BUCKET_NAME']
