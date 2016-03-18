@@ -30,9 +30,9 @@
             <td><p><%= number_to_currency(receipt.price) %></p></td>
             <!-- provides a link to the .pdf document that is created and saved in S3-->
             <td>
-              <%#= link_to receipt.image.url(:original, false), :target => '_blank' do %>
+              <%= link_to receipt.image.url(:original, false), :target => '_blank' do %>
                 <span class="glyphicon glyphicon-file glyph-style-attachment"></span>
-              <%# end %>
+              <% end %>
             </td>
             <td>
               <%= link_to receipt, method: :delete, data: { confirm: 'Are you sure you want to delete this receipt?' } do %>
