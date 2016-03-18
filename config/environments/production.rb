@@ -79,7 +79,7 @@ Rails.application.configure do
   },
   :fog_directory => ENV['S3_BUCKET_NAME'], # only one of those is needed but I don't remember which
   :bucket => ENV['S3_BUCKET_NAME']
-
+  )
 
   #disable spoofing for Paperclip and allow text/plain files to be saved as receipts
   Paperclip.options[:content_type_mappings] = {
