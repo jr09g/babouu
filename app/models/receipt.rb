@@ -278,15 +278,15 @@ class Receipt < ActiveRecord::Base
 
 	#below method digitizes the incoming receipt and saves that to AWS
 	def self.manual_attachment(file_name)
-		#@file_name = file_name
+		@file_name = file_name
 
-		#@image = RTesseract.new(@file_name, :processor => "mini_magick")
+		@image = RTesseract.new(@file_name, :processor => "mini_magick")
 
-		#@temp_file = Tempfile.new(['ocr', '.txt'])
-		#@temp_file.write(@image.to_s)
-		#@temp_file.rewind
+		@temp_file = Tempfile.new(['ocr', '.txt'])
+		@temp_file.write(@image.to_s)
+		@temp_file.rewind
 
-		#return @temp_file
+		return @temp_file
 	end
 
 	#below method will take the digitized receipt and return the price
