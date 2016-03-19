@@ -44,7 +44,7 @@ class ReceiptsController < ApplicationController
   # POST /receipts
   # POST /receipts.json
   def create
-    @tess_test = Receipt.manual_attachment(params[:receipt]['image'].open)
+    @tess_test = Receipt.manual_attachment(params[:receipt]['image'].path)
 
     @auto_receipt = Receipt.create(receipt_desc: params[:receipt_desc], price: params[:price], user_id: current_user.id, expense_report_id: params[:expense_report_id], plain_date: Date.current, image: @tess_test)
     #@receipt = current_user.receipts.build(receipt_params)
