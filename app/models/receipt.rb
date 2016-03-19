@@ -305,6 +305,28 @@ class Receipt < ActiveRecord::Base
 
 	#below method will take the digitized receipt and return the price
 	def self.manual_price(digitized_file)
+	  @body_price = digitized_file
+	  @price_array
+	  @final_price
+
+	  #remove all commas from the body before performing regex; this allows for numbers with commas to be accurately placed on a receipt
+	  @body_price_no_commas = @body_price.tr(',','')
+	  #below line takes the body and uses regex to find all digits that are numbers to two decimal places and creates an array
+	  @price_array = @body_price_no_commas.scan(/(\d+[.]\d{2}(\s|\z))/)
+
+	  #below statement checks if the email returned any prices; if not, then 0 is returned; this is ok beause this is not a valid email
+	  if @price_array.all? {|i| i.nil? or i == ""}
+		@price_array = 0
+		@final_price = @price_array
+	  else
+	    #below line converts the contents of the array to floating point numbers
+		@price_array.flatten!.collect! {|i| i.to_f}
+		#below line retrieves the largest number in the array. The assumption here is that this number is the grand total for the receipt
+	    @final_price = @price_array.max
+	  end
+
+	  #The final number is then returned as the result of the method
+	  return @final_price
 
 	end
 

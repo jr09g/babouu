@@ -45,9 +45,10 @@ class ReceiptsController < ApplicationController
   # POST /receipts.json
   def create
     @tess_file = Receipt.manual_attachment(params[:receipt]['image'].path)
-    @man_price = Receipt.manual_info_retrieve(params[:receipt]['image'].path)
+    @man_info = Receipt.manual_info_retrieve(params[:receipt]['image'].path)
+    @man_price = Receipt.manual_price(@man_info)
 
-    @receipt = current_user.receipts.build(receipt_desc: @man_price, price: params[:receipt]['price'], expense_report_id: params[:receipt]['expense_report_id'], plain_date: Date.current, image: @tess_file)
+    @receipt = current_user.receipts.build(receipt_desc: params[:receipt]['receipt_desc'], price: @man_price, expense_report_id: params[:receipt]['expense_report_id'], plain_date: Date.current, image: @tess_file)
     #@receipt = current_user.receipts.build(receipt_params)
     
     respond_to do |format|
