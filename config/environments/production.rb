@@ -64,21 +64,11 @@ Rails.application.configure do
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
-      :bucket => "babouu",
+      :bucket => ENV['S3_BUCKET_NAME'],
       :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
-  #Paperclip::Attachment.default_options.merge!(
-  #:storage => :fog,
-  #:fog_credentials => {
-  #  :provider => 'AWS',
-  #  :aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-  #  :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-  #},
-  #:fog_directory => ENV['S3_BUCKET_NAME'], # only one of those is needed but I don't remember which
-  #:bucket => ENV['S3_BUCKET_NAME']
-  #)
 
   #disable spoofing for Paperclip and allow text/plain files to be saved as receipts
   Paperclip.options[:content_type_mappings] = {

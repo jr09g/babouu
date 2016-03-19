@@ -43,7 +43,6 @@ gem 'groupdate', '~> 2.4.0'
 gem 'aws-sdk-rails', '~> 1.0'
 #this gem is being bundles specifically for processing with paperclip attachments to S3
 gem 'aws-sdk'#, '~> 1.6'
-#gem 'fog', '~> 1.37'
 #rubyracer added to assist with asset precompile
 gem 'therubyracer', '~> 0.12.2'
 #windows does not include zoneinfo files, so bundle the tzinfo-data gem
