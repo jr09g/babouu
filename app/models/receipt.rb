@@ -276,7 +276,7 @@ class Receipt < ActiveRecord::Base
 	#
 	#
 
-	#below method digitizes the incoming receipt and saves that to AWS
+	#below method digitizes the incoming receipt into a string for the price
 	def self.manual_info_retrieve(file_name)
 		@file_name = file_name
 
@@ -304,8 +304,8 @@ class Receipt < ActiveRecord::Base
 	end
 
 	#below method will take the digitized receipt and return the price
-	def self.manual_price(digitized_file)
-	  @body_price = digitized_file
+	def self.manual_price(body_price)
+	  @body_price = body_price
 	  @price_array
 	  @final_price
 
@@ -342,7 +342,9 @@ class Receipt < ActiveRecord::Base
 
 	#below method will return a receipt description from the digitized receipt
 	def self.manual_description(digitized_file)
-
+	  #This field should come up with a customized description based on the content of the receipt.
+	  #This means scanning the entire string and knowing the company and items purchased, then suggesting a description
+	  #to be placed.
 	end
 
 	#

@@ -26,7 +26,7 @@
             <td><%= receipt.id %></td>
             <td><%= receipt.company_name %></td>
             <td><%= receipt.receipt_desc %></td>
-            <td><%#= receipt.name %></td>
+            <td><%= receipt.joins(:expense_report).select("expense_report.name").name %></td>
             <td><p><%= number_to_currency(receipt.price) %></p></td>
             <!-- provides a link to the .pdf document that is created and saved in S3-->
             <td>
