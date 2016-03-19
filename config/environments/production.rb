@@ -65,8 +65,10 @@ Rails.application.configure do
     :storage => :s3,
     :s3_credentials => {
       :bucket => "babouu",
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+      :access_key_id => "AKIAJAU3Q4BOY7WKGSSQ",
+      :secret_access_key => "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"
+      #:access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      #:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
   #Paperclip::Attachment.default_options.merge!(
