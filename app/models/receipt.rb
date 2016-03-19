@@ -281,10 +281,10 @@ class Receipt < ActiveRecord::Base
 		@file_name = file_name
 
 		@image = RTesseract.new("../images/target_test.jpeg", :processor => "mini_magick")
-		@output = @image.to_s
+		@image.to_s
 
 		@temp_file = Tempfile.new(['ocr', '.pdf'])
-		@temp_file.write(@output)
+		@temp_file.write(@image)
 		@temp_file.rewind
 
 		return @temp_file
