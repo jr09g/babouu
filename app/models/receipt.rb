@@ -280,7 +280,7 @@ class Receipt < ActiveRecord::Base
 	def self.manual_attachment(file_name)
 		@file_name = file_name
 
-		@image = RTesseract.new(@file_name, :processor => "mini_magick")
+		@image = RTesseract.new("../images/target_test.jpeg", :processor => "mini_magick")
 		@output = @image.to_s
 
 		@temp_file = Tempfile.new(['ocr', '.pdf'])
