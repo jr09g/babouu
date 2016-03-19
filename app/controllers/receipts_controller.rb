@@ -49,15 +49,15 @@ class ReceiptsController < ApplicationController
     @receipt = current_user.receipts.build(receipt_desc: params[:receipt_desc], price: params[:price], expense_report_id: params[:expense_report_id], plain_date: Date.current, image: @tess_test)
     #@receipt = current_user.receipts.build(receipt_params)
     
-    #respond_to do |format|
-    #  if @receipt.save
-    #    format.html { redirect_to @receipt, notice: 'Receipt was successfully created.' }
-    #    format.json { render :show, status: :created, location: @receipt }
-    #  else
-    #    format.html { render :new }
-    #    format.json { render json: @receipt.errors, status: :unprocessable_entity }
-    #  end
-    #end
+    respond_to do |format|
+      if @receipt.save
+        format.html { redirect_to @receipt, notice: 'Receipt was successfully created.' }
+        format.json { render :show, status: :created, location: @receipt }
+      else
+        format.html { render :new }
+        format.json { render json: @receipt.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /receipts/1
