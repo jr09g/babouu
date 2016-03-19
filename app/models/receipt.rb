@@ -277,12 +277,24 @@ class Receipt < ActiveRecord::Base
 	#
 
 	#below method digitizes the incoming receipt and saves that to AWS
+	def self.manual_info_retrieve(file_name)
+		@file_name = file_name
+
+		@image = RTesseract.new(@file_name, :processor => "none")
+
+		#@temp_file = Tempfile.new(['ocr', '.pdf'])
+		#@temp_file.write(@image.to_s)
+		#@temp_file.rewind
+
+		return @image.to_s
+	end
+
+	#below method digitizes the incoming receipt and saves that to AWS
 	def self.manual_attachment(file_name)
 		@file_name = file_name
 
 		#@image = RTesseract.new("../images/target_test.jpeg", :processor => "mini_magick")
 		@image = RTesseract.new(@file_name, :processor => "none")
-		#@image.to_s
 
 		@temp_file = Tempfile.new(['ocr', '.pdf'])
 		@temp_file.write(@image.to_s)
