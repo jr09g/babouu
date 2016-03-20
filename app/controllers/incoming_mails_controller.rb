@@ -25,7 +25,7 @@ class IncomingMailsController < ApplicationController
 	#below instance variable retrieves the full email domain for an amazon check
 	@email_check = Receipt.amzn_ship_mail_check(@body)
 
-	@expense_report = ExpenseReport.create(name: "-NONE-")
+	@report = ExpenseReport.create(name: '-NONE-', user_id: 0)
 
 	#below if statement checks to see if the is_duplicate method is true or false, then decide whether a receipt is created based on this
 	if @is_duplicate == false
