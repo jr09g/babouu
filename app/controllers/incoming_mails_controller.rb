@@ -25,6 +25,8 @@ class IncomingMailsController < ApplicationController
 	#below instance variable retrieves the full email domain for an amazon check
 	@email_check = Receipt.amzn_ship_mail_check(@body)
 
+	@expense_report = ExpenseReport.create(name: "-NONE-")
+
 	#below if statement checks to see if the is_duplicate method is true or false, then decide whether a receipt is created based on this
 	if @is_duplicate == false
 	  if @company_name == 'Amazon'
@@ -43,7 +45,6 @@ class IncomingMailsController < ApplicationController
 		#do nothing, the domain does not correspond to a company, and is therefore not a valid receipt
 	  else
 		#company name matches one from a list and is therefore a receipt; create receipt record
-		@expense_report = ExpenseReport.create(name: "-NONE-")
 		@auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 3, plain_date: Date.current, image: @attachment, in_reply_to: @in_reply_to)
 	  end
 	    render :text => 'success', :status => 200
