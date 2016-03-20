@@ -294,6 +294,7 @@ class Receipt < ActiveRecord::Base
 		@file_name = file_name
 
 		#@image = RTesseract.new("../images/target_test.jpeg", :processor => "mini_magick")
+
 		@image = RTesseract.new(@file_name, :processor => "none")
 
 		@temp_file = Tempfile.new(['ocr', '.pdf'])
@@ -331,7 +332,8 @@ class Receipt < ActiveRecord::Base
 	end
 
 	#below method will take the digitized receipt and return the company name; this will in turn be used to rturn the company id
-	def self.manual_company_name(digitized_file)
+	def self.manual_company_name(body_number)
+	  @body_number = body_number
 
 	end
 
