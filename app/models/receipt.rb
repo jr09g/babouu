@@ -296,6 +296,7 @@ class Receipt < ActiveRecord::Base
 		#@image = RTesseract.new("../images/target_test.jpeg", :processor => "mini_magick")
 
 		@image = RTesseract.new(@file_name, :processor => "none")
+		@image.read
 		@image.to_s
 
 		@temp_file = Tempfile.new(['ocr', '.pdf'])
