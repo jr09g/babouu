@@ -286,9 +286,8 @@ class Receipt < ActiveRecord::Base
 		#@temp_file.write(@image.to_s)
 		#@temp_file.rewind
 
-		#return @image.to_s
+		return @image.to_s
 
-		return @image
 	end
 
 	#below method digitizes the incoming receipt and saves that to AWS
@@ -300,11 +299,11 @@ class Receipt < ActiveRecord::Base
 		@image = RTesseract.new(@file_name, :processor => "none")
 		#@image.to_s
 
-		@temp_file = Tempfile.new(['ocr', '.pdf'])
-		@temp_file.write(@image)
-		@temp_file.rewind
+		#@temp_file = Tempfile.new(['ocr', '.pdf'])
+		#@temp_file.write(@image)
+		#@temp_file.rewind
 
-		return @temp_file
+		return @image.to_s #@temp_file
 	end
 
 	#below method will take the digitized receipt and return the price
