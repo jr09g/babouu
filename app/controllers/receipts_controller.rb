@@ -46,7 +46,7 @@ class ReceiptsController < ApplicationController
   def create
     @file_name = params[:receipt]['image'].path
     @to_tiff = system('convert -density 300 ' + @file_name + ' -depth 8 ' + @file_name.sub(/\.[^.]+\z/, ".tiff"))
-    @to_txt = system('tesseract ' + @file_name + ' ' + File.basename( @file_name, ".*" ))
+    @to_txt = system('tesseract ' + @file_name + ' ' + File.basename(@file_name, ".*"))
 
     #@tess_file = Receipt.manual_attachment(params[:receipt]['image'].path)
     #@man_info = Receipt.manual_info_retrieve(params[:receipt]['image'].path)
