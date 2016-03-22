@@ -294,13 +294,14 @@ class Receipt < ActiveRecord::Base
 	def self.manual_attachment(file_name)
 		@file_name = file_name
 
-		#@image = RTesseract.new("../images/target_test.jpeg", :processor => "mini_magick")
-
 		#@image = RTesseract.new(@file_name, :processor => "none")
 		#@image.to_s
 
-		@to_tiff = exec('convert -density 300 ' + @file_name + ' -depth 8 ' + @file_name.sub(/\.[^.]+\z/, ".tiff"))
-		@to_txt = exec('tesseract ' + @file_name + ' ' + File.basename( @file_name, ".*" ))
+		#@to_tiff = system('convert -density 300 ' + @file_name + ' -depth 8 ' + @file_name.sub(/\.[^.]+\z/, ".tiff"))
+		#@to_txt = system('tesseract ' + @file_name + ' ' + File.basename( @file_name, ".*" ))
+
+		@to_tiff = %x(convert -density 300 @file_name -depth 8 @file_name.sub(/\.[^.]+\z/, ".tiff"))
+		@to_txt = %x(tesseract @file_name File.basename( @file_name, ".*" ))
 
 		#@test = system('vi ' + @file_name.sub(/\.[^.]+\z/, ".txt"))
 		@test = `vi #{@file_name.sub(/\.[^.]+\z/, ".txt")}`
