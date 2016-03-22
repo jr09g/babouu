@@ -296,14 +296,20 @@ class Receipt < ActiveRecord::Base
 
 		#@image = RTesseract.new("../images/target_test.jpeg", :processor => "mini_magick")
 
-		@image = RTesseract.new(@file_name, :processor => "none")
+		#@image = RTesseract.new(@file_name, :processor => "none")
 		#@image.to_s
 
-		#@temp_file = Tempfile.new(['ocr', '.pdf'])
-		#@temp_file.write(@image)
-		#@temp_file.rewind
+		#system 'cd /tmp'
+		system 'convert -density 300 #{@file_name} -depth 8 #{@file_name.sub /\.[^.]+\z/, ".tiff"}'
+		system 'tesseract #{@file_name.sub /\.[^.]+\z/, ".tiff"} #{@file_name.sub /\.[^.]+\z/, ".txt"}'
 
-		return @image.to_s #@temp_file
+		@test = '#{Rails.root}/tmp/#{@file_name.sub /\.[^.]+\z/, ".txt"}'
+
+		@temp_file = Tempfile.new(['ocr', '.pdf'])
+		@temp_file.write(@test.read)
+		@temp_file.rewind
+
+		return @temp_file
 	end
 
 	#below method will take the digitized receipt and return the price
