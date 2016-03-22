@@ -300,10 +300,10 @@ class Receipt < ActiveRecord::Base
 		#@image.to_s
 
 		#system 'cd /tmp'
-		system 'convert -density 300 #{@file_name} -depth 8 #{@file_name.sub /\.[^.]+\z/, ".tiff"}'
-		system 'tesseract #{@file_name.sub /\.[^.]+\z/, ".tiff"} #{@file_name.sub /\.[^.]+\z/, ".txt"}'
+		system('convert -density 300 #{@file_name} -depth 8 #{@file_name.sub /\.[^.]+\z/, ".tiff"}')
+		system('tesseract #{@file_name.sub /\.[^.]+\z/, ".tiff"} #{@file_name.sub /\.[^.]+\z/, ""}')
 
-		@test = '#{Rails.root}/tmp/#{@file_name.sub /\.[^.]+\z/, ".txt"}'
+		@test = system('vi #{Rails.root}/tmp#{@file_name.sub /\.[^.]+\z/, ".txt"}')
 
 		@temp_file = Tempfile.new(['ocr', '.pdf'])
 		@temp_file.write(@test.read)
