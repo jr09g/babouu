@@ -280,13 +280,13 @@ class Receipt < ActiveRecord::Base
 	def self.manual_info_retrieve(file_name)
 		@file_name = file_name
 
-		@image = RTesseract.new(@file_name.path, :processor => "none")
+		#@image = RTesseract.new(@file_name, :processor => "none")
 
 		#@temp_file = Tempfile.new(['ocr', '.pdf'])
 		#@temp_file.write(@image.to_s)
 		#@temp_file.rewind
 
-		return @image.to_s
+		#return @image.to_s
 
 	end
 
@@ -301,10 +301,10 @@ class Receipt < ActiveRecord::Base
 
 		#system 'cd /tmp'
 		system('convert -density 300 ' + @file_name + ' -depth 8 ' + @file_name.sub(/\.[^.]+\z/, ".tiff"))
-		system('tesseract ' + @file_name.sub(/\.[^.]+\z/, ".tiff") + @file_name.sub(/\.[^.]+\z/, ""))
+		system('tesseract ' + @file_name.sub(/\.[^.]+\z/, ".tiff") + ' ' + @file_name.sub(/\.[^.]+\z/, ""))
 
 		#@test = system('vi ' + @file_name.sub(/\.[^.]+\z/, ".txt"))
-		@test = '#{vi @file_name.sub(/\.[^.]+\z/, ".txt")}'
+		@test = `#{vi @file_name.sub(/\.[^.]+\z/, ".txt")}`
 
 		@temp_file = Tempfile.new(['ocr', '.pdf'])
 		@temp_file.write(@test)
