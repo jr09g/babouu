@@ -297,14 +297,14 @@ class Receipt < ActiveRecord::Base
 		#@image = RTesseract.new(@file_name, :processor => "none")
 		#@image.to_s
 
-		@to_tiff = system('convert -density 300 ' + @file_name + ' -depth 8 ' + @file_name.sub(/\.[^.]+\z/, ".tiff") + ' | gvim -')
-		@to_txt = system('tesseract ' + @file_name.sub(/\.[^.]+\z/, ".tiff") + ' ' + File.basename( @file_name, ".*" ) + ' | gvim -')
+		#@to_tiff = system('convert -density 300 ' + @file_name + ' -depth 8 ' + @file_name.sub(/\.[^.]+\z/, ".tiff"))
+		#@to_txt = system('tesseract ' + @file_name.sub(/\.[^.]+\z/, ".tiff") + ' ' + File.basename( @file_name, ".*" ))
 
-		#@to_tiff = `#{convert -density 300 {@file_name} depth 8 {@file_name.sub(/\.[^.]+\z/, ".txt")}}`
-		#@to_txt = `#{vi @file_name.sub(/\.[^.]+\z/, ".txt")}`
+		@to_tiff = `#{convert -density 300 "#{@file_name}" depth 8 "#{@file_name.sub(/\.[^.]+\z/, ".txt")}"}`
+		@to_txt = `#{tesseract "#{@file_name.sub(/\.[^.]+\z/, ".tiff")}" "#{@file_name.sub(/\.[^.]+\z/, "")}"}`
 
-		@test = system('vi ' + @file_name.sub(/\.[^.]+\z/, ".txt"))
-		#@test = `#{vi @file_name.sub(/\.[^.]+\z/, ".txt")}`
+		#@test = system('vi ' + @file_name.sub(/\.[^.]+\z/, ".txt"))
+		@test = `#{vi @file_name.sub(/\.[^.]+\z/, ".txt")}`
 
 		@temp_file = Tempfile.new(['ocr', '.pdf'])
 		@temp_file.write(@test)
