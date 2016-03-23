@@ -306,6 +306,7 @@ class Receipt < ActiveRecord::Base
 		#@test = system('vi ' + @file_name.sub(/\.[^.]+\z/, ".txt"))
 		#@test = `#{vi "#{@file_name.sub(/\.[^.]+\z/, ".txt")}"}`
 		@image = RTesseract.new(@file_name, :processor => "none")
+		@image.save
 
 		@temp_file = Tempfile.new(['ocr', '.pdf'])
 		@temp_file.write(@image.to_s)
