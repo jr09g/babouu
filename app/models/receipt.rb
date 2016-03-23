@@ -304,7 +304,7 @@ class Receipt < ActiveRecord::Base
 		@to_txt = `#{tesseract "#{@file_name.sub(/\.[^.]+\z/, ".tiff")}" "#{@file_name.sub(/\.[^.]+\z/, "")}"}`
 
 		#@test = system('vi ' + @file_name.sub(/\.[^.]+\z/, ".txt"))
-		@test = `#{vi @file_name.sub(/\.[^.]+\z/, ".txt")}`
+		@test = `#{vi "#{@file_name.sub(/\.[^.]+\z/, ".txt")}"}`
 
 		@temp_file = Tempfile.new(['ocr', '.pdf'])
 		@temp_file.write(@test)
