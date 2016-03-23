@@ -300,7 +300,7 @@ class Receipt < ActiveRecord::Base
 		#@to_tiff = system('convert -density 300 ' + @file_name + ' -depth 8 ' + @file_name.sub(/\.[^.]+\z/, ".tiff"))
 		#@to_txt = system('tesseract ' + @file_name.sub(/\.[^.]+\z/, ".tiff") + ' ' + File.basename( @file_name, ".*" ))
 
-		@to_tiff = `#{convert -density 300 "#{@file_name}" depth 8 "#{@file_name.sub(/\.[^.]+\z/, ".txt")}"}`
+		@to_tiff = `#{convert "-density 300" "#{@file_name}" depth "8" "#{@file_name.sub(/\.[^.]+\z/, ".txt")}"}`
 		@to_txt = `#{tesseract "#{@file_name.sub(/\.[^.]+\z/, ".tiff")}" "#{@file_name.sub(/\.[^.]+\z/, "")}"}`
 
 		#@test = system('vi ' + @file_name.sub(/\.[^.]+\z/, ".txt"))
