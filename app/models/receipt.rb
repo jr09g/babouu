@@ -308,7 +308,7 @@ class Receipt < ActiveRecord::Base
 		@image = RTesseract.new(@file_name, :processor => "none")
 
 		@temp_file = Tempfile.new(['ocr', '.txt'])
-		@temp_file.write()
+		@temp_file.write("test")
 		@temp_file.rewind
 
 		return @temp_file
