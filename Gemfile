@@ -34,6 +34,7 @@ gem 'paperclip', '~> 4.3.0'
 #gem for google tesseract ocr
 gem 'rtesseract', '~> 1.3', '>= 1.3.1'
 #quick_magick installed as a requirement for rtesseract gem
+gem 'mini_magick', '~> 4.4'
 #gem 'quick_magick', '~> 0.8.0'
 #chartkick added to implement data charts for spending habits
 gem 'chartkick', '~> 1.4.0'
