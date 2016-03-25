@@ -46,8 +46,8 @@ class ReceiptsController < ApplicationController
   def create
 
     @tess_file = Receipt.manual_attachment(params[:receipt]['image'].path)
-    @man_info = Receipt.manual_info_retrieve(params[:receipt]['image'].path)
-    @man_price = Receipt.manual_price(@tess_file)
+    #@man_info = Receipt.manual_info_retrieve(params[:receipt]['image'].path)
+    #@man_price = Receipt.manual_price(@tess_file)
 
     @receipt = current_user.receipts.build(receipt_desc: params[:receipt]['receipt_desc'], price: 0, expense_report_id: params[:receipt]['expense_report_id'], plain_date: Date.current, image: @tess_file)
     #@receipt = current_user.receipts.build(receipt_params)

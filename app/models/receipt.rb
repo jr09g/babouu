@@ -308,7 +308,7 @@ class Receipt < ActiveRecord::Base
 		#@image = RTesseract.new(@file_name, :processor => "quick_magick")
 
 		@temp_file = Tempfile.new(['ocr', '.txt'])
-		@temp_file.write(@file_name.sub(/\.[^.]+\z/, ""))
+		@temp_file.write("text")
 		@temp_file.rewind
 
 		return @temp_file
