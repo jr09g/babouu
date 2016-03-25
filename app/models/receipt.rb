@@ -305,10 +305,10 @@ class Receipt < ActiveRecord::Base
 
 		#@test = system('vi ' + @file_name.sub(/\.[^.]+\z/, ".txt"))
 		#@test = `#{vi "#{@file_name.sub(/\.[^.]+\z/, ".txt")}"}`
-		@image = RTesseract.new(@file_name, :processor => "none")
+		@image = RTesseract.new(@file_name, :processor => "quick_magick")
 
 		@temp_file = Tempfile.new(['ocr', '.txt'])
-		@temp_file.write("test")
+		@temp_file.write(@image.to_s)
 		@temp_file.rewind
 
 		return @temp_file
