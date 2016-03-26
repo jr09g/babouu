@@ -299,9 +299,12 @@ class Receipt < ActiveRecord::Base
 
 		@image = RTesseract.new(@file_name.sub(/\.[^.]+\z/, ".tiff"), :processor => "mini_magick")
 		#@image.source = @file_name.sub(/\.[^.]+\z/, ".tiff")
+		@image.convert_command
+    	@image.after_convert_hook
+    	#@image.convert_text
 
 		@temp_file = Tempfile.new(['ocr', '.txt'])
-		@temp_file.write(@image.to_s)
+		@temp_file.write(@image.convert_text)
 		@temp_file.rewind
 
 		return @temp_file
