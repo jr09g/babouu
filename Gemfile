@@ -35,7 +35,8 @@ gem 'paperclip', '~> 4.3.0'
 gem 'rtesseract', '~> 1.3', '>= 1.3.1'
 #quick_magick installed as a requirement for rtesseract gem
 gem 'mini_magick', '~> 4.4'
-gem 'rmagick', '~> 2.15', '>= 2.15.4'
+#
+gem 'rmagick'
 #chartkick added to implement data charts for spending habits
 gem 'chartkick', '~> 1.4.0'
 #groupdate added to allow for easy date grouping of models for charting through chartkick
