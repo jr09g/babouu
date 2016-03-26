@@ -297,7 +297,7 @@ class Receipt < ActiveRecord::Base
 		#@image = RTesseract.new(@file_name, :processor => "none")
 		#@image.to_s
 
-		#@to_tiff = system('convert -density 300 ' + @file_name + ' -depth 8 ' + @file_name.sub(/\.[^.]+\z/, ".tiff"))
+		@to_tiff = system('convert -density 300 ' + @file_name + ' -depth 8 ' + @file_name.sub(/\.[^.]+\z/, ".tiff"))
 		@to_txt = exec('tesseract ' + @file_name + ' /tmp/result')
 
 		#@to_tiff = `#{convert "-density 300" "#{@file_name}" depth "8" "#{@file_name.sub(/\.[^.]+\z/, ".txt")}"}`

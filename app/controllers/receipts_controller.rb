@@ -45,13 +45,13 @@ class ReceiptsController < ApplicationController
   # POST /receipts.json
   def create
 
-    @to_txt = system('tesseract ' + params[:receipt]['image'].path + ' /tmp/result')
+    @to_txt = exec('tesseract /tmp/RackMultipart20160323-14300-posvtp.tiff /tmp/result')
     #@tess_file = Receipt.manual_attachment(params[:receipt]['image'].path)
     #@man_info = Receipt.manual_info_retrieve(params[:receipt]['image'].path)
     #@man_price = Receipt.manual_price(@tess_file)
 
-    #@receipt = current_user.receipts.build(receipt_desc: params[:receipt]['receipt_desc'], price: 0, expense_report_id: params[:receipt]['expense_report_id'], plain_date: Date.current)#, image: @tess_file)
-    @receipt = current_user.receipts.build(receipt_desc: @to_txt, price: 0)
+    @receipt = current_user.receipts.build(receipt_desc: params[:receipt]['receipt_desc'], price: 0, expense_report_id: params[:receipt]['expense_report_id'], plain_date: Date.current)#, image: @tess_file)
+    #@receipt = current_user.receipts.build(receipt_desc: @to_txt, price: 0)
     
     respond_to do |format|
       if @receipt.save
