@@ -51,8 +51,8 @@ class ReceiptsController < ApplicationController
     #@man_price = Receipt.manual_price(@tess_file)
     @image = RTesseract.new(params[:receipt]['image'].path, :processor => "none")
 
-    @receipt = current_user.receipts.build(receipt_desc: params[:receipt]['receipt_desc'], price: 0, expense_report_id: params[:receipt]['expense_report_id'], plain_date: Date.current)#, image: @tess_file)
-    #@receipt = current_user.receipts.build(receipt_desc: @to_txt, price: 0)
+    @receipt = current_user.receipts.build(receipt_desc: @image.to_s, price: 0, expense_report_id: params[:receipt]['expense_report_id'], plain_date: Date.current)#, image: @tess_file)
+    #@receipt = current_user.receipts.build(receipt_desc: @to_txt, price: 0)params[:receipt]['receipt_desc']
     
     respond_to do |format|
       if @receipt.save
