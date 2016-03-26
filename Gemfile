@@ -32,7 +32,7 @@ gem 'authority', '~> 3.1'
 #paperclip added to enable attachments to receipts
 gem 'paperclip', '~> 4.3.0'
 #gem for google tesseract ocr
-gem 'rtesseract', '~> 1.3', '>= 1.3.1'
+gem 'rtesseract', '~> 1.3.1'#, '>= 1.3.1'
 #quick_magick installed as a requirement for rtesseract gem
 gem 'mini_magick', '~> 4.4'
 #chartkick added to implement data charts for spending habits
