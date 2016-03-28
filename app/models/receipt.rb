@@ -336,8 +336,15 @@ class Receipt < ActiveRecord::Base
 	end
 
 	#below method will take the digitized receipt and return the company name; this will in turn be used to rturn the company id
-	def self.manual_company_name(body_number)
-	  @body_number = body_number
+	def self.manual_company_name(body)
+	  @body = body
+	  @phone_num
+	  @company_name
+
+	  #TEST GET REQUEST TO SEE WHAT PARAMETERS ARE RETURNED
+	  @response = open('https://www.truecaller.com/us/9287738888#').read
+
+	  return @response
 
 	end
 
