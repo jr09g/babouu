@@ -1,6 +1,7 @@
 class Receipt < ActiveRecord::Base
   require 'rtesseract'
   require 'mini_magick'
+  require 'open-uri'
   belongs_to :company
   belongs_to :user
   belongs_to :expense_report
