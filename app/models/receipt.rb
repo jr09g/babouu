@@ -343,7 +343,7 @@ class Receipt < ActiveRecord::Base
 	  @company_name
 
 	  #TEST GET REQUEST TO SEE WHAT PARAMETERS ARE RETURNED
-	  @response = open('https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=9287738888').read
+	  @response = open('https://www.truecaller.com/us/9287738888#').read
 
 	  return @response
 
