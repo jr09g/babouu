@@ -296,13 +296,13 @@ class Receipt < ActiveRecord::Base
 
 		@to_tiff = system('convert -density 300 ' + @file_name + ' -depth 8 ' + @file_name.sub(/\.[^.]+\z/, ".tiff"))
 		#@to_txt = exec('tesseract ' + @file_name + ' /tmp/result')
-		@comm = `tesseract #{@file_name.sub(/\.[^.]+\z/, ".tiff")} #{@file_name.sub(/\.[^.]+\z/, "")}`
-		@to_txt = exec('vi ' + @file_name.sub(/\.[^.]+\z/, ".txt"))
+		#@comm = `tesseract #{@file_name.sub(/\.[^.]+\z/, ".tiff")} #{@file_name.sub(/\.[^.]+\z/, "")}`
+		#@to_txt = exec('vi ' + @file_name.sub(/\.[^.]+\z/, ".txt"))
 
 		@image = RTesseract.new(@file_name.sub(/\.[^.]+\z/, ".tiff"), :processor => "mini_magick")
 
 		@temp_file = Tempfile.new(['ocr', '.txt'])
-		@temp_file.write("text")
+		@temp_file.write(@image.to_s)
 		@temp_file.rewind
 
 		return @temp_file
