@@ -344,7 +344,9 @@ class Receipt < ActiveRecord::Base
 
 	  #TEST GET REQUEST TO SEE WHAT PARAMETERS ARE RETURNED
 	  #@response = open('https://www.truecaller.com/us/9287738888#').read
-	  @response = Net::HTTP.get('https://www.truecaller.com/us/9287738888#')
+	  @str = URI.escape('https://www.truecaller.com/us/9287738888#')
+	  @uri = URI.parse(@str)
+	  @response = Net::HTTP.get(@uri)
 
 	  return @response
 
