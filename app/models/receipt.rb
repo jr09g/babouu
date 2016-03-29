@@ -1,7 +1,7 @@
 class Receipt < ActiveRecord::Base
   require 'rtesseract'
   require 'mini_magick'
-  require 'open-uri'
+  require 'net/http'
   belongs_to :company
   belongs_to :user
   belongs_to :expense_report
@@ -344,7 +344,7 @@ class Receipt < ActiveRecord::Base
 
 	  #TEST GET REQUEST TO SEE WHAT PARAMETERS ARE RETURNED
 	  #@response = open('https://www.truecaller.com/us/9287738888#').read
-	  @response = URI.parse('https://www.truecaller.com/us/9287738888#')
+	  @response = Net::HTTP.get('https://www.truecaller.com/us/9287738888#')
 
 	  return @response
 
