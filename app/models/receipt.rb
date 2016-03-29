@@ -343,7 +343,8 @@ class Receipt < ActiveRecord::Base
 	  @company_name
 
 	  #TEST GET REQUEST TO SEE WHAT PARAMETERS ARE RETURNED
-	  @response = open('https://www.truecaller.com/us/9287738888#').read
+	  #@response = open('https://www.truecaller.com/us/9287738888#').read
+	  @response = URI.parse('https://www.truecaller.com/us/9287738888#')
 
 	  return @response
 
