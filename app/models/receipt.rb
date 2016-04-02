@@ -295,18 +295,19 @@ class Receipt < ActiveRecord::Base
 	def self.manual_attachment(file_name)
 		@file_name = file_name
 
+		#bash command that converts the receipt attachment to a .tiff file, so that rtesseract is able to convert the file
 		@to_tiff = system('convert -density 300 ' + @file_name + ' -depth 8 ' + @file_name.sub(/\.[^.]+\z/, ".tiff"))
-		#@to_txt = exec('tesseract ' + @file_name + ' /tmp/result')
-		#@comm = `tesseract #{@file_name.sub(/\.[^.]+\z/, ".tiff")} #{@file_name.sub(/\.[^.]+\z/, "")}`
-		#@to_txt = exec('vi ' + @file_name.sub(/\.[^.]+\z/, ".txt"))
 
+		#converts the tiff file from the previous command and converts to a temporary .txt file
 		@image = RTesseract.new(@file_name.sub(/\.[^.]+\z/, ".tiff"), :processor => "mini_magick")
 
-		@temp_file = Tempfile.new(['ocr', '.txt'])
-		@temp_file.write(@image.to_s)
-		@temp_file.rewind
+		#TEST TO BE ABLE TO SEE TEXT CREATED FOR ABOVE 
+		#@temp_file = Tempfile.new(['ocr', '.txt'])
+		#@temp_file.write(@image.to_s)
+		#@temp_file.rewind
 
-		return @temp_file
+		#return @temp_file
+		return @image.to_s
 	end
 
 	#below method will take the digitized receipt and return the price
@@ -338,17 +339,28 @@ class Receipt < ActiveRecord::Base
 
 	#below method will take the digitized receipt and return the company name; this will in turn be used to rturn the company id
 	def self.manual_company_name(body)
-	  @body = body
-	  @phone_num
-	  @company_name
+	  #@body = body
+	  #@phone_num
+	  #@company_name
 
 	  #TEST GET REQUEST TO SEE WHAT PARAMETERS ARE RETURNED
 	  #@response = open('https://www.truecaller.com/us/9287738888#').read
-	  @str = URI.escape('https://www.truecaller.com/us/9287738888#')
-	  @uri = URI.parse(@str)
-	  @response = Net::HTTP.get(@uri)
+	  #@str = URI.escape('https://www.truecaller.com/us/9287738888#')
+	  #@uri = URI.parse(@str)
+	  #@response = Net::HTTP.get(@uri)
 
-	  return @response
+	  #return @response
+
+	  @body = body
+	  @price_array
+	  @final_price
+
+	  #remove all commas from the body before performing regex; this allows for numbers with commas to be accurately placed on a receipt
+	  @body_no_commas = @body_price.tr(',','')
+	  #below line takes the body and uses regex to find all digits that are numbers with syntax of a phone number
+	  @phone_array = @body_price_no_commas.scan(/(\S{0,1}\d{3,4}\S{0,1}\d{3}\S{0,1}\d{4})/)
+
+	  return @phone_array
 
 	end
 
