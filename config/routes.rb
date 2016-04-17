@@ -24,7 +24,9 @@ Rails.application.routes.draw do
 
   resources :companies
 
-  resources :receipts
+  resources :receipts do 
+    resources :receipt_items
+  end
 
   resources :expense_reports
 

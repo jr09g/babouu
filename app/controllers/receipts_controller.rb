@@ -28,12 +28,13 @@ class ReceiptsController < ApplicationController
   # GET /receipts/1
   # GET /receipts/1.json
   def show
+    @receipt_items = ReceiptItem.all
   end
 
   # GET /receipts/new
   def new
     @receipt = Receipt.new
-    #
+    #below instance variable shows -NONE- and user expense reports in a dropdown to select for a new receipt
     @expense_reports = ExpenseReport.where(user_id: [current_user.id, 0])
   end
 
