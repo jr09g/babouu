@@ -5,6 +5,7 @@ class Receipt < ActiveRecord::Base
   belongs_to :company
   belongs_to :user
   belongs_to :expense_report
+  has_many :receipt_items
   validates :receipt_desc, :price, :presence => true
   has_attached_file :image
   #:styles => {:medium => "300x300>", :thumb => "100x100"}

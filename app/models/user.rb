@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   #method for roles added to user through rolify gem
   rolify
   has_many :receipts
+  has_many :receipt_items
   has_many :expense_reports
   has_one :relationship
   has_one :users_role
