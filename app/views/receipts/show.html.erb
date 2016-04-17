@@ -22,21 +22,21 @@
       <%# @receipt_with_view.each do |receipt| %>
       <% @receipt_items.each do |item| %>
         <% if item.user == current_user %>
-          <!-- Below statement filters for those receipts that were only sent today -->
-          <%# if receipt.plain_date == Date.current %>
+          <!-- Below statement filters for those receipt items that only belong to this receipt -->
+          <% if item.receipt_id == @receipt.id %>
           <tr>
             <td><%= item.id %></td>
             <td><%= item.description %></td>
             <td><%= number_to_currency(item.price) %></td>
             <td><p><%= number_to_currency(receipt.price) %></p></td>
             <td>
-              <%= link_to receipt_item, method: :delete, data: { confirm: 'Are you sure you want to delete this receipt?' } do %>
+              <%= link_to receipt_item, method: :delete, data: { confirm: 'Are you sure you want to delete this line item?' } do %>
                 <span class="glyphicon glyphicon-trash glyph-style-trash"></span>
               <% end %>
             </td>
             <td><%= link_to 'Add Line Item', new_receipt_item_path, class: "btn btn-default" %></td>
           </tr>
-          <%# end %>
+          <% end %>
         <% end %>
       <% end %>
     </tbody>
