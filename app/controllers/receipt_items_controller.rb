@@ -2,8 +2,11 @@ class ReceiptItemsController < ApplicationController
   before_action :set_receipt_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
+  def index
+  end
+
   def new
-  	@receipt_receipt_item = ReceiptItem.new
+  	@receipt_item = ReceiptItem.new
   end
 
   def create
