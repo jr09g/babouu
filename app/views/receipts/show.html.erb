@@ -34,7 +34,6 @@
                 <span class="glyphicon glyphicon-trash glyph-style-trash"></span>
               <% end %>
             </td>
-            <td><%= link_to 'Add Line Item', new_receipt_item_path, class: "btn btn-default" %></td>
           </tr>
           <% end %>
         <% end %>
@@ -42,7 +41,7 @@
     </tbody>
   </table>
   </br>
-
+  <%= link_to 'Add Line Item', new_receipt_item_path, class: "btn btn-default" %>
 </div>
 
 <p>
