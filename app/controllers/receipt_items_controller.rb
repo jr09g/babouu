@@ -3,7 +3,7 @@ class ReceiptItemsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-  	@receipt_item = ReceiptItem.new
+  	@receipt_receipt_item = ReceiptItem.new
   end
 
   def create
