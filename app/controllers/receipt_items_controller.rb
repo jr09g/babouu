@@ -11,7 +11,7 @@ class ReceiptItemsController < ApplicationController
 
   def create
   	@receipt_item = current_user.receipt_items.build(receipt_item_params)
-  	@receipt_item.receipt_id = current_receipt.id
+  	#@receipt_item.receipt_id = current_receipt.id
 
     respond_to do |format|
       if @receipt_item.save
