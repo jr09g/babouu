@@ -11,11 +11,12 @@ class ReceiptItemsController < ApplicationController
 
   def create
   	@receipt_item = current_user.receipt_items.build(receipt_item_params)
+  	@receipt_item.receipt_id = current_receipt.id
 
     respond_to do |format|
       if @receipt_item.save
         format.html { redirect_to receipt_receipt_items_url, notice: 'Receipt item was successfully created.' }
-        format.json { render :show, status: :created, location: receipt_receipt_items_urlm }
+        format.json { render :show, status: :created, location: receipt_receipt_items_url }
       else
         format.html { render :new }
         format.json { render json: @receipt_item.errors, status: :unprocessable_entity }
