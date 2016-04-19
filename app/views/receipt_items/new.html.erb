@@ -2,35 +2,35 @@
 
 <!-- below beginning to the form allows for images to be submitted via the form -->
 <!-- new receipt view has its own form seperate from _form partial because the hidden date field is unique to new receipts -->
-<%= form_for(@receipt_item) do |f| %>
-  <% if @receipt_item.errors.any? %>
+<%#= form_for(@receipt_item) do |f| %>
+  <%# if @receipt_item.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@receipt_item.errors.count, "error") %> prohibited this receipt from being saved:</h2>
+      <h2><%#= pluralize(@receipt_item.errors.count, "error") %> prohibited this receipt from being saved:</h2>
 
       <ul>
-      <% @receipt_item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+      <%# @receipt_item.errors.full_messages.each do |message| %>
+        <li><%#= message %></li>
+      <%# end %>
       </ul>
     </div>
-  <% end %>
+  <%# end %>
 
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%#= f.label :description %><br>
+    <%#= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :price %><br>
-    <%= f.number_field :price %>
+    <%#= f.label :price %><br>
+    <%#= f.number_field :price %>
   </div>
   <div class="field">
-    <%= f.label :category %>
-    <%= f.text_field :category %>
+    <%#= f.label :category %>
+    <%#= f.text_field :category %>
   </div>
   </br></br>
   <div class="actions">
-    <%= f.submit 'Create Line Item', class: "btn btn-default" %>
+    <%#= f.submit 'Create Line Item', class: "btn btn-default" %>
   </div>
-<% end %>
+<%# end %>
 
 <%#= link_to 'Back', receipts_path %>
