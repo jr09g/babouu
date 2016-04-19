@@ -32,7 +32,7 @@ class ReceiptItemsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def receipt_item_params
-  	params.require(:receipt).permit(:description, :price, :category)
+  	params.require(:receipt_item).permit(:description, :price, :category)
   end
 
 end
