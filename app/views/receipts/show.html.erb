@@ -23,19 +23,19 @@
       <% @receipt_items.each do |item| %>
         <% if item.user == current_user %>
           <!-- Below statement filters for those receipt items that only belong to this receipt -->
-          <% if item.receipt_id == @receipt.id %>
+          <%# if item.receipt_id == @receipt.id %>
           <tr>
             <td><%= item.id %></td>
             <td><%= item.description %></td>
             <td><%= number_to_currency(item.price) %></td>
             <td><p><%= item.category %></p></td>
             <td>
-              <%= link_to receipt_receipt_item, method: :delete, data: { confirm: 'Are you sure you want to delete this line item?' } do %>
+              <%= link_to item, method: :delete, data: { confirm: 'Are you sure you want to delete this line item?' } do %>
                 <span class="glyphicon glyphicon-trash glyph-style-trash"></span>
               <% end %>
             </td>
           </tr>
-          <% end %>
+          <%# end %>
         <% end %>
       <% end %>
     </tbody>
