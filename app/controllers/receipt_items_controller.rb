@@ -10,6 +10,17 @@ class ReceiptItemsController < ApplicationController
   end
 
   def create
+  	@receipt_item = current_user.receipt_items.build(receipt_item_params)
+
+    respond_to do |format|
+      if @receipt_item.save
+        format.html { redirect_to @receipt_item, notice: 'Receipt item was successfully created.' }
+        format.json { render :show, status: :created, location: @receipt_item }
+      else
+        format.html { render :new }
+        format.json { render json: @receipt_item.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def show
@@ -19,9 +30,23 @@ class ReceiptItemsController < ApplicationController
   end
 
   def update
+  	respond_to do |format|
+      if @receipt_item.update(receipt_item_params)
+        format.html { redirect_to @receipt_item, notice: 'Receipt was successfully updated.' }
+        format.json { render :show, status: :ok, location: @receipt_item }
+      else
+        format.html { render :edit }
+        format.json { render json: @receipt_item.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
+  	@receipt_item.destroy
+    respond_to do |format|
+      format.html { redirect_to receipt_items_url, notice: 'Receipt item was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private
