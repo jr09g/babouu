@@ -23,7 +23,7 @@
       <% @receipt_items.each do |item| %>
         <% if item.user == current_user %>
           <!-- Below statement filters for those receipt items that only belong to this receipt -->
-          <% if item.receipt_id == @receipt.id %>
+          <%# if item.receipt_id == @receipt.id %>
           <tr>
             <td><%= item.id %></td>
             <td><%= item.description %></td>
@@ -35,7 +35,7 @@
               <% end %>
             </td>
           </tr>
-          <% end %>
+          <%# end %>
         <% end %>
       <% end %>
     </tbody>
