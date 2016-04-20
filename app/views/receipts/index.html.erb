@@ -49,7 +49,7 @@
   </br>
   <%= link_to 'Add Receipt', new_receipt_path, class: "btn btn-default" %>
   </br></br>
-  <%#= link_to 'View All Receipts', all_receipts_path, class: "btn btn-default" %>
+  <%= link_to 'View All Receipts', all_receipts_path, class: "btn btn-default" %>
   </br></br>
   <% if @current_day_total.total == nil %>
     <h4>Sum of Current Day Receipts: <%= number_to_currency(0) %></h4>

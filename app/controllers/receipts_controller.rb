@@ -49,7 +49,7 @@ class ReceiptsController < ApplicationController
     @man_price = Receipt.manual_price(@tess_file)
     @comp_name = Receipt.manual_company_name(@tess_file)
 
-    @receipt = current_user.receipts.build(receipt_desc: params[:receipt]['receipt_desc'], price: @man_price, expense_report_id: params[:receipt]['expense_report_id'], plain_date: Date.current)#, image: @tess_file)
+    @receipt = current_user.receipts.build(receipt_desc: params[:receipt]['receipt_desc'], company_name: params[:receipt]['company_name'], price: @man_price, expense_report_id: params[:receipt]['expense_report_id'], plain_date: Date.current)#, image: @tess_file)
     #@receipt = current_user.receipts.build(receipt_desc: @to_txt, price: 0)params[:receipt]['receipt_desc']
     
     respond_to do |format|
@@ -95,6 +95,6 @@ class ReceiptsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def receipt_params
-      params.require(:receipt).permit(:receipt_desc, :price, :image, :expense_report_id, :plain_date)
+      params.require(:receipt).permit(:receipt_desc, :price, :image, :expense_report_id, :plain_date, :company_name)
     end
 end
