@@ -110,7 +110,7 @@ class Receipt < ActiveRecord::Base
 		  end
 		end
 
-		@final_name = @company_name.split(" ")
+		#@final_name = @company_name.split(" ")
 		@company_name_final = @final_name[2]
 
 		return @company_name_final
