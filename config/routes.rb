@@ -49,6 +49,6 @@ Rails.application.routes.draw do
 
   get 'show_users/index'
 
-  get 'all_receipts/index'
+  get 'all_receipts/index' => 'all_receipts#index'
 
 end
