@@ -54,24 +54,6 @@ class Receipt < ActiveRecord::Base
 
 	end
 
-	#below method checks the amazon domain as part of the first check that it is an order email
-	def self.amzn_ship_mail_check(body)
-		@body = body
-		@body_array = @body.split(" ")
-		@domain = ""
-
-		#below loop extracts the entire domain associated with the company to store it into the domain instance variable
-		@body_array.each do |string|
-			if string.include? '@'
-				@domain = string
-				break
-			end
-		end
-
-		return @domain
-		
-	end
-
 	#
 	#
 	### below set of methods retreive various parts of the email request and parses the relevant information
@@ -92,14 +74,11 @@ class Receipt < ActiveRecord::Base
 		return @user
 	end
 
-	def self.company_name_parse(body, receipt_topic)
+	#below method parses first portion of body to retrieve company name
+	def self.company_name_parse(body)
 		@body = body
-		@receipt_topic = receipt_topic
 		@body_string = @body.split(" ")
 		@company_name = []
-		@final_name
-		@check_domain = []
-		@final_string = ""
 		@company_name_final
 
 		#below loop extracts the entire domain associated with the company
@@ -110,86 +89,18 @@ class Receipt < ActiveRecord::Base
 		  end
 		end
 
+		#below deletes first element of array, an extended underscore
 		@company_name.delete_at(0)
+		#below deletes the new first element of array, 'from:'
 		@company_name.delete_at(0)
+		#below deletes final element of array, the full email address
 		@company_name.delete_at(-1)
+		#below joins the remaining elements of the array into a string; all that should remain should be the company name
 		@company_name_final = @company_name.join(" ")
 
 		return @company_name_final
 
 	end
-
-	#the below method parses the body of the email and retrieves the company domain name and matches that domain name with the company name in the seed table
-	#def self.company_name_parse(body, receipt_topic)
-		#@body = body
-		#@receipt_topic = receipt_topic
-		#@body_string = @body.split(" ")
-		#@company_domain = ""
-		#@final_domain = []
-		#@check_domain = []
-		#@final_string = ""
-		#@company_name_final = ""
-
-		#below loop extracts the entire domain associated with the company
-		#@body_string.each do |string|
-			#if string.include? '@'
-				#@company_domain = string
-				#break
-			#end
-		#end
-
-		#once domain is retrieved, it is split into an array
-		#@domain_string = @company_domain.split(//)
-
-		#below if statement deletes the domain brackets if the array contains them
-		#if @domain_string[0] == '<'
-			#first bracket is deleted
-			#@domain_string.delete_at(0)
-			#final bracket is deleted
-			#@domain_string.pop
-	    #end
-
-	    #array is reversed so for the following loop to work as intended
-	    #@domain_string.reverse!
-
-		#below loop pushes each element of the domain_string array to a new instance variable up until the @ sign
-		#@domain_string.each do |char|
-			#@final_domain.push(char)
-			#if char == '@'
-				#break
-			#end
-		#end
-
-		#the new array is reversed back into the correct order, then joined into a single string
-		#@final_domain.reverse!
-		#@final_string = @final_domain.join("")
-		#@final_string.downcase!
-
-		#loop goes through each company record, and if the domain matches the domain retrieved from this method, the company name
-		#is stored
-		#Company.all.each do |company|
-			#if @final_string == company.email_domain
-				#if company.email_domain == '@messaging.squareup.com'
-				#	@topic_array = @receipt_topic.split(" ")
-				#	@topic_array.delete("Receipt")
-				#	@topic_array.delete("from")
-				#	@company_name_final = @topic_array.join(" ")
-				#	@company_name_final.downcase!
-					#break
-				#else
-					#@company_name_final = company.name
-				#	@company_name_final = @final_string
-					#break
-				#end
-			#else
-				#if no domain matches any values from the company list, NOT VALID is returned
-				#@company_name_final = "NOT VALID"
-			#end
-		#end
-
-		#once the loop ends, the company name is returned
-		#return @company_name_final
-	#end
 
 	#the below method takes the email subject and returns it
 	def self.receipt_desc_parse(description)
@@ -198,7 +109,7 @@ class Receipt < ActiveRecord::Base
 		return @description 
 	end
 
-	#below method takes the body and 
+	#below method takes the body and returns the text
 	def self.body_parse(body)
 		@body = body
 
@@ -231,57 +142,9 @@ class Receipt < ActiveRecord::Base
 		return @final_price
 	end
 
-	#below method parses price from a hyperlink located in the body; this is determined by price_in value in company record
-	def self.price_link_parse(body)
-		@body = body
-		@body_string = @body.split(" ")
-
-		@body_string.each do |word|
-			if word.include? 'here'
-				word.slice!(0,4)
-				word.slice!(0,1)
-				word.chomp!('>')
-				@link = word
-				break
-			end
-		end
-
-		@url = RestClient.get @link 
-		@url_body = @url.body
-		@url_body_no_commas = @url_body.tr(',','')
-		@url_price_array = @url_body_no_commas.scan(/(\d+[.]\d{2}(\s|\z))/)
-
-		if @url_price_array.all? {|i| i.nil? or i == ""}
-			@url_price_array = 0
-			@final_price = @price_array
-		else
-			#below line converts the contents of the array to floating point numbers
-			@url_price_array.flatten!.collect! {|i| i.to_f}
-			#below line retrieves the largest number in the array. The assumption here is that this number is the grand total for the receipt
-			@final_price = @price_array.max
-		end
-
-		return @final_price
-
-	end
-
 	#below method takes the email's attachments and extracts the price
 	def self.price_attachment_parse(attachment)
 
-	end
-
-	#below method returns the id of a company and applies it to company_id in the receipt table
-	def self.company_id_retrieve(company_name)
-		@company_name = company_name
-		@company_id_final
-
-		Company.all.each do |company|
-			if @company_name == company.name
-				@company_id_final = company.id
-			end
-		end
-
-		return @company_id_final
 	end
 
 	#below method creates an html file from the contents of the email and saves it as an attachment that will be stored in S3 as in Paperclip
