@@ -92,69 +92,92 @@ class Receipt < ActiveRecord::Base
 		return @user
 	end
 
-	#the below method parses the body of the email and retrieves the company domain name and matches that domain name with the company name in the seed table
 	def self.company_name_parse(body, receipt_topic)
 		@body = body
 		@receipt_topic = receipt_topic
 		@body_string = @body.split(" ")
-		@company_domain = ""
-		@final_domain = []
+		@company_name = []
+		@final_name
 		@check_domain = []
 		@final_string = ""
 		@company_name_final = ""
 
 		#below loop extracts the entire domain associated with the company
 		@body_string.each do |string|
-			if string.include? '@'
-				@company_domain = string
-				break
-			end
+		  @company_name << string
+		  if string.include? '@'
+			break
+		  end
 		end
+
+		@final_name = @company_name.split(" ")
+
+		return @final_name
+
+	end
+
+	#the below method parses the body of the email and retrieves the company domain name and matches that domain name with the company name in the seed table
+	#def self.company_name_parse(body, receipt_topic)
+		#@body = body
+		#@receipt_topic = receipt_topic
+		#@body_string = @body.split(" ")
+		#@company_domain = ""
+		#@final_domain = []
+		#@check_domain = []
+		#@final_string = ""
+		#@company_name_final = ""
+
+		#below loop extracts the entire domain associated with the company
+		#@body_string.each do |string|
+			#if string.include? '@'
+				#@company_domain = string
+				#break
+			#end
+		#end
 
 		#once domain is retrieved, it is split into an array
-		@domain_string = @company_domain.split(//)
+		#@domain_string = @company_domain.split(//)
 
 		#below if statement deletes the domain brackets if the array contains them
-		if @domain_string[0] == '<'
+		#if @domain_string[0] == '<'
 			#first bracket is deleted
-			@domain_string.delete_at(0)
+			#@domain_string.delete_at(0)
 			#final bracket is deleted
-			@domain_string.pop
-	    end
+			#@domain_string.pop
+	    #end
 
 	    #array is reversed so for the following loop to work as intended
-	    @domain_string.reverse!
+	    #@domain_string.reverse!
 
 		#below loop pushes each element of the domain_string array to a new instance variable up until the @ sign
-		@domain_string.each do |char|
-			@final_domain.push(char)
-			if char == '@'
-				break
-			end
-		end
+		#@domain_string.each do |char|
+			#@final_domain.push(char)
+			#if char == '@'
+				#break
+			#end
+		#end
 
 		#the new array is reversed back into the correct order, then joined into a single string
-		@final_domain.reverse!
-		@final_string = @final_domain.join("")
-		@final_string.downcase!
+		#@final_domain.reverse!
+		#@final_string = @final_domain.join("")
+		#@final_string.downcase!
 
 		#loop goes through each company record, and if the domain matches the domain retrieved from this method, the company name
 		#is stored
 		#Company.all.each do |company|
 			#if @final_string == company.email_domain
-				if company.email_domain == '@messaging.squareup.com'
-					#something
-					@topic_array = @receipt_topic.split(" ")
-					@topic_array.delete("Receipt")
-					@topic_array.delete("from")
-					@company_name_final = @topic_array.join(" ")
-					@company_name_final.downcase!
-					break
-				else
+				#if company.email_domain == '@messaging.squareup.com'
+				#	@topic_array = @receipt_topic.split(" ")
+				#	@topic_array.delete("Receipt")
+				#	@topic_array.delete("from")
+				#	@company_name_final = @topic_array.join(" ")
+				#	@company_name_final.downcase!
+					#break
+				#else
 					#@company_name_final = company.name
-					@company_name_final = @final_string
-					break
-				end
+				#	@company_name_final = @final_string
+					#break
+				#end
 			#else
 				#if no domain matches any values from the company list, NOT VALID is returned
 				#@company_name_final = "NOT VALID"
@@ -162,8 +185,8 @@ class Receipt < ActiveRecord::Base
 		#end
 
 		#once the loop ends, the company name is returned
-		return @company_name_final
-	end
+		#return @company_name_final
+	#end
 
 	#the below method takes the email subject and returns it
 	def self.receipt_desc_parse(description)
