@@ -112,7 +112,7 @@ class Receipt < ActiveRecord::Base
 
 		@company_name.delete_at(0)
 		@company_name.delete_at(0)
-		@company_name.pop!
+		@company_name.delete_at(-1)
 		@company_name_final = @company_name.join(" ")
 
 		return @company_name_final
