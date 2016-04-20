@@ -100,7 +100,7 @@ class Receipt < ActiveRecord::Base
 		@final_name
 		@check_domain = []
 		@final_string = ""
-		@company_name_final = ""
+		@company_name_final
 
 		#below loop extracts the entire domain associated with the company
 		@body_string.each do |string|
@@ -111,8 +111,9 @@ class Receipt < ActiveRecord::Base
 		end
 
 		@final_name = @company_name.split(" ")
+		@company_name_final = @final_name[2]
 
-		return @final_name
+		return @company_name_final
 
 	end
 
