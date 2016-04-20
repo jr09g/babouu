@@ -110,8 +110,10 @@ class Receipt < ActiveRecord::Base
 		  end
 		end
 
-		#@final_name = @company_name.split(" ")
-		@company_name_final = @company_name[2]
+		@company_name.delete[0]
+		@company_name.delete[0]
+		@company_name.pop!
+		@company_name_final = @company_name.join(" ")
 
 		return @company_name_final
 
