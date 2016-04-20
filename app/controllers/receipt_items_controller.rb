@@ -45,7 +45,7 @@ class ReceiptItemsController < ApplicationController
   def destroy
   	@receipt_item.destroy
     respond_to do |format|
-      format.html { redirect_to receipt_receipt_items_url, notice: 'Receipt item was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Receipt item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
