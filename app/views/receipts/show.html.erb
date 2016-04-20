@@ -12,30 +12,30 @@
       <tr>
         <th>ID</th>
         <th>Description</th>
-        <th>Price</th>
+        <th>Amount</th>
         <th>Category</th>
         <th colspan="3"></th>
       </tr>
     </thead>
     <tbody>
       <!-- Below rails look iterates through all receipts for the user who is logged in -->
-      <%# @receipt_with_view.each do |receipt| %>
       <% @receipt_items.each do |item| %>
         <% if item.user == current_user %>
           <!-- Below statement filters for those receipt items that only belong to this receipt -->
-          <%# if item.receipt_id == @receipt.id %>
+          <% if item.receipt_id == @receipt.id %>
           <tr>
             <td><%= item.id %></td>
             <td><%= item.description %></td>
             <td><%= number_to_currency(item.price) %></td>
             <td><p><%= item.category %></p></td>
             <td>
+              <!-- Below path used in lieu of 'item' because it is the correct path for the nested receipt item resource -->
               <%= link_to receipt_receipt_item_path(@receipt, item), method: :delete, data: { confirm: 'Are you sure you want to delete this line item?' } do %>
                 <span class="glyphicon glyphicon-trash glyph-style-trash"></span>
               <% end %>
             </td>
           </tr>
-          <%# end %>
+          <% end %>
         <% end %>
       <% end %>
     </tbody>

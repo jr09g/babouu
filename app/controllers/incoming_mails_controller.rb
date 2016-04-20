@@ -27,24 +27,24 @@ class IncomingMailsController < ApplicationController
 
 	#below if statement checks to see if the is_duplicate method is true or false, then decide whether a receipt is created based on this
 	if @is_duplicate == false
-	  if @company_name == 'Amazon'
-		if @email_check == 'auto-confirm@amazon.com'
-		  @auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 4, plain_date: Date.current, image: @attachment, in_reply_to: @in_reply_to)
-		else
+	  #if @company_name == 'Amazon'
+		#if @email_check == 'auto-confirm@amazon.com'
+		  #@auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 4, plain_date: Date.current, image: @attachment, in_reply_to: @in_reply_to)
+		#else
 		  #do nothing, it is not a valid domain for amazon order confirmation
-		end
-	  elsif @company_name == 'Tennis Warehouse'
-		if @receipt_desc == 'Tennis Warehouse Shipment'
+		#end
+	  #elsif @company_name == 'Tennis Warehouse'
+		#if @receipt_desc == 'Tennis Warehouse Shipment'
 		  #do nothing, emails from Tennis Warehouse using this subject are only shipping notices, not receipts
-		else
-		  @auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 4, plain_date: Date.current, image: @attachment, in_reply_to: @in_reply_to)
-		end
-	  elsif @company_name == "NOT VALID"
+		#else
+		  #@auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 4, plain_date: Date.current, image: @attachment, in_reply_to: @in_reply_to)
+		#end
+	  #elsif @company_name == "NOT VALID"
 		#do nothing, the domain does not correspond to a company, and is therefore not a valid receipt
-	  else
+	  #else
 		#company name matches one from a list and is therefore a receipt; create receipt record
 		@auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 4, plain_date: Date.current, image: @attachment, in_reply_to: @in_reply_to)
-	  end
+	  #end
 	    render :text => 'success', :status => 200
 	else
 	  #do nothing; if email is a duplicate, no new receipt will be created

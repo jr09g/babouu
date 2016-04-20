@@ -46,7 +46,6 @@ class ReceiptsController < ApplicationController
   # POST /receipts.json
   def create
     @tess_file = Receipt.manual_attachment(params[:receipt]['image'].path)
-    #@man_info = Receipt.manual_info_retrieve(params[:receipt]['image'].path)
     @man_price = Receipt.manual_price(@tess_file)
     @comp_name = Receipt.manual_company_name(@tess_file)
 

@@ -17,7 +17,7 @@ class Receipt < ActiveRecord::Base
   #
   #
 
-	#below method checks to make sure that the email is a vailid receipt and not another email from the same domain ex: shipping and packing notice
+	#below method checks to make sure that the email is a valid receipt and not another email from the same domain ex: shipping and packing notice
 	def self.proper_email(company_name)
 		@company_name = company_name 
 
@@ -136,27 +136,30 @@ class Receipt < ActiveRecord::Base
 		#the new array is reversed back into the correct order, then joined into a single string
 		@final_domain.reverse!
 		@final_string = @final_domain.join("")
+		@final_string.downcase!
 
 		#loop goes through each company record, and if the domain matches the domain retrieved from this method, the company name
 		#is stored
-		Company.all.each do |company|
-			if @final_string == company.email_domain
+		#Company.all.each do |company|
+			#if @final_string == company.email_domain
 				if company.email_domain == '@messaging.squareup.com'
 					#something
 					@topic_array = @receipt_topic.split(" ")
 					@topic_array.delete("Receipt")
 					@topic_array.delete("from")
 					@company_name_final = @topic_array.join(" ")
+					@company_name_final.downcase!
 					break
 				else
-					@company_name_final = company.name
+					#@company_name_final = company.name
+					@company_name_final = @final_string
 					break
 				end
-			else
+			#else
 				#if no domain matches any values from the company list, NOT VALID is returned
-				@company_name_final = "NOT VALID"
-			end
-		end
+				#@company_name_final = "NOT VALID"
+			#end
+		#end
 
 		#once the loop ends, the company name is returned
 		return @company_name_final
@@ -278,21 +281,7 @@ class Receipt < ActiveRecord::Base
 	#
 	#
 
-	#below method digitizes the incoming receipt into a string for the price
-	def self.manual_info_retrieve(file_name)
-		@file_name = file_name
-
-		#@image = RTesseract.new(@file_name, :processor => "none")
-
-		#@temp_file = Tempfile.new(['ocr', '.pdf'])
-		#@temp_file.write(@image.to_s)
-		#@temp_file.rewind
-
-		#return @image.to_s
-
-	end
-
-	#below method digitizes the incoming receipt and saves that to AWS
+	#below method digitizes the incoming receipt and uses this to provide text for further analysis
 	def self.manual_attachment(file_name)
 		@file_name = file_name
 
@@ -335,55 +324,6 @@ class Receipt < ActiveRecord::Base
 
 	  #The final number is then returned as the result of the method
 	  return @final_price
-
-	end
-
-	#below method will take the digitized receipt and return the company name; this will in turn be used to rturn the company id
-	def self.manual_company_name(body)
-	  #@body = body
-	  #@phone_num
-	  #@company_name
-
-	  #TEST GET REQUEST TO SEE WHAT PARAMETERS ARE RETURNED
-	  #@response = open('https://www.truecaller.com/us/9287738888#').read
-	  #@str = URI.escape('https://www.truecaller.com/us/9287738888#')
-	  #@uri = URI.parse(@str)
-	  #@response = Net::HTTP.get(@uri)
-
-	  #return @response
-
-	  @body = body
-	  @price_array
-	  @final_price
-
-	  #remove all commas from the body before performing regex; this allows for numbers with commas to be accurately placed on a receipt
-	  @body_no_commas = @body_price.tr(',','')
-	  #below line takes the body and uses regex to find all digits that are numbers with syntax of a phone number
-	  @phone_array = @body_price_no_commas.scan(/(\S{0,1}\d{3,4}\S{0,1}\d{3}\S{0,1}\d{4})/)
-
-	  return @phone_array
-
-	end
-
-	#below method will take the company name returned from the above method and return the company id for the receipt
-	def self.manual_company_id(company_name)
-
-	end
-
-	#below method will return a receipt description from the digitized receipt
-	def self.manual_description(digitized_file)
-	  #This field should come up with a customized description based on the content of the receipt.
-	  #This means scanning the entire string and knowing the company and items purchased, then suggesting a description
-	  #to be placed.
-	end
-
-	#
-	#
-	#below are the methods for any new companies that subscribe to have receipts created and sent to the app as emails
-	#
-	#
-
-	def self.sample(sample)
 
 	end
 
