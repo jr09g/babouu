@@ -15,7 +15,7 @@ class ReceiptItemsController < ApplicationController
 
     respond_to do |format|
       if @receipt_item.save
-        format.html { redirect_to receipt_receipt_items_url, notice: 'Receipt item was successfully created.' }
+        format.html { redirect_to :back, notice: 'Receipt item was successfully created.' }
         format.json { render :show, status: :created, location: receipt_receipt_items_url }
       else
         format.html { render :new }
