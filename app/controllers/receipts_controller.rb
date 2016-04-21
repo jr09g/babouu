@@ -13,6 +13,8 @@ class ReceiptsController < ApplicationController
     @receipt_with_view = Receipt.joins(:expense_report).select("receipts.id, receipts.user_id as user, company_name, receipt_desc, price, name, plain_date")
     #instance variable to call all companies
     #@companies = Company.all
+    ###
+    @expense_reports = ExpenseReport.all
     #instance variable to group all records by date created
     @receipt_dates = Receipt.select("plain_date as receipt_date, count(date(created_at)) as receipt_count, sum(price) as date_total").group("plain_date")
     #instance variable to group all records by company name

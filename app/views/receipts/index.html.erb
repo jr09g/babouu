@@ -26,7 +26,7 @@
             <td><%= receipt.id %></td>
             <td><%= receipt.company_name %></td>
             <td><%= receipt.receipt_desc %></td>
-            <td><%= ExpenseReport.where(:id => receipt.expense_report_id).select("name").name %></td>
+            <td><%= @expense_reports.where(:id => receipt.expense_report_id).name %></td>
             <td><p><%= number_to_currency(receipt.price) %></p></td>
             <!-- provides a link to the .pdf document that is created and saved in S3-->
             <td>
