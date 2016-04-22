@@ -1,4 +1,10 @@
-<h1>Expenditures in the Last 7 Days</h1>
+<h3>Expenditures in the Last 7 Days</h3>
+
+<h3>By Category</h3>
+
+<h3>By Company</h3>
+
+<h3>Average Transaction</h3>
 
 <%#= line_chart [
 	{name: "Expenses", data: @receipts.group_by_day(:plain_date, range: 1.week.ago.midnight..Time.now).where(user: current_user).sum(:price)}

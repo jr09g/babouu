@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong><%= @receipt.receipt_desc %>: <%= @receipt.price %></strong>
+  <strong><%= @receipt.receipt_desc %>: <%= number_to_currency(@receipt.price) %></strong>
 </p>
 
 <div>
