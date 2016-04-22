@@ -2,5 +2,31 @@
 	display: inline;
 }
 
+.click-me {
+	display: inline-block;
+	width: 100%;
+	border-style: solid;
+	border-color: black;
+}
+
+.click-me:hover {
+	color: #31363d;
+  	cursor: pointer; 
+  	-webkit-transition: color 1s;
+  	transition: color 1s;
+}
+
+.by_date {
+	display: none;
+}
+
+.all_receipts_price {
+	float: right;
+}
+
+.table {
+	border-spacing : 10px;
+}
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
