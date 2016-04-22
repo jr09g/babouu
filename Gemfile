@@ -38,7 +38,9 @@ gem 'mini_magick', '~> 4.4'
 #chartkick added to implement data charts for spending habits
 gem 'chartkick', '~> 1.4', '>= 1.4.2'
 #groupdate added to allow for easy date grouping of models for charting through chartkick
-gem 'groupdate', '~> 2.4.0'
+gem 'groupdate', '~> 2.5', '>= 2.5.2'
+#active_median takes the average of selected objects
+gem 'active_median', '~> 0.1.3'
 #aws-sdk provides resources and interface apis for amazon web services
 gem 'aws-sdk-rails', '~> 1.0'
 #this gem is being bundles specifically for processing with paperclip attachments to S3

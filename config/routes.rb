@@ -42,6 +42,11 @@ Rails.application.routes.draw do
 
   resources :roles
 
+  #routecreated for charts page as part of analytics
+  get 'spending_trends/charts' => 'spending_trends#charts', as: :charts
+  #route created as part of companies analyitics
+  get 'spending_trends/companies' => 'spending_trends#companies', as: :company_data
+
   #not sure if this route is needed, not get request should be made for incoming mails
   get '/incoming_mails' => 'incoming_mails#new'
   #route used for the hook used by cloudmailin to enter email parameters leading to receipts being created

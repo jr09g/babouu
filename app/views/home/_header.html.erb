@@ -29,6 +29,7 @@
           <% elsif current_user.has_any_role? :standard, :employee, :manager %>
             <li><%= link_to 'Expense Reports', expense_reports_path %></li>
           <% end %>
+          <li><%= link_to 'Trends', charts_path %></li>
           <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
           <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
         <% elsif business_signed_in? %>
