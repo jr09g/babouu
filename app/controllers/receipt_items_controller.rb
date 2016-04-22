@@ -10,12 +10,14 @@ class ReceiptItemsController < ApplicationController
   end
 
   def create
+    #@receipt = Receipt.where(:id => params[:receipt_id])
+
   	@receipt_item = current_user.receipt_items.build(receipt_item_params)
   	@receipt_item.receipt_id = params[:receipt_id]
 
     respond_to do |format|
       if @receipt_item.save
-        format.html { redirect_to :back, notice: 'Receipt item was successfully created.' }
+        format.html { redirect_to receipt_path(params[:receipt_id]), notice: 'Receipt item was successfully created.' }
         format.json { render :show, status: :created, location: receipt_receipt_items_url }
       else
         format.html { render :new }

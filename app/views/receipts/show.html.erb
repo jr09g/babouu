@@ -1,8 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Receipt desc:</strong>
-  <%= @receipt.receipt_desc %>
+  <strong><%= @receipt.receipt_desc %>: <%= @receipt.price %></strong>
 </p>
 
 <div>
@@ -44,10 +43,6 @@
   <%= link_to 'Add Line Item', new_receipt_receipt_item_path(@receipt), class: "btn btn-default" %>
 </div>
 
-<p>
-  <strong>Receipt Total:</strong>
-  <%= @receipt.price %>
-</p>
-
+</br></br>
 <%= link_to 'Edit', edit_receipt_path(@receipt) %> |
 <%= link_to 'Back', receipts_path %>
