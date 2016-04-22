@@ -1,12 +1,12 @@
 <p id="notice"><%#= notice %></p>
 
-<h3> 
-  Today, <%= Date.current.to_formatted_s(:long_ordinal) %>: <% if @current_day_total.total == nil %>
+<div class="line-up"> 
+  <h3>Today, <%= Date.current.to_formatted_s(:long_ordinal) %>: </h3> <% if @current_day_total.total == nil %>
     <h3><%= number_to_currency(0) %></h3>
   <% else %>
     <h3><%= number_to_currency(@current_day_total.total) %></h3>
   <% end %>
-</h3>
+</div>
 
 <div>
 
@@ -54,13 +54,7 @@
   </table>
   </br>
   <%= link_to 'Add Receipt', new_receipt_path, class: "btn btn-default" %>
-  </br></br>
+  
   <%= link_to 'View All Receipts', all_receipts_path, class: "btn btn-default" %>
-  </br></br>
-  <% if @current_day_total.total == nil %>
-    <h4>Sum of Current Day Receipts: <%= number_to_currency(0) %></h4>
-  <% else %>
-    <!--<h4>Sum of Current Day Receipts: <%= number_to_currency(@current_day_total.total) %></h4>-->
-  <% end %>
 
 </div>
