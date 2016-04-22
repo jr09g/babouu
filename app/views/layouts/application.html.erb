@@ -4,6 +4,8 @@
   <title>Babouu</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%# adding below tag to include the javascript required for the chartkick gem %>
+  <%= javascript_include_tag '//www.google.com/jsapi', 'chartkick' %>
   <%= csrf_meta_tags %>
 </head>
 

@@ -36,7 +36,7 @@ gem 'rtesseract', '~> 1.3', '>= 1.3.1'
 #quick_magick installed as a requirement for rtesseract gem
 gem 'mini_magick', '~> 4.4'
 #chartkick added to implement data charts for spending habits
-gem 'chartkick', '~> 1.4.0'
+gem 'chartkick', '~> 1.4', '>= 1.4.2'
 #groupdate added to allow for easy date grouping of models for charting through chartkick
 gem 'groupdate', '~> 2.4.0'
 #aws-sdk provides resources and interface apis for amazon web services
