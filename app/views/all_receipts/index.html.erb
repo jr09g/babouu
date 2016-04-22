@@ -4,8 +4,8 @@
 
 <% @receipt_dates.each do |date| %>
     <div class="click-me">
-      <h3><%= date.plain_date.to_formatted_s(:long_ordinal) %></h3>
-      <h3 class="all_receipts_price"><%= number_to_currency(date.price_by_date) %></h3>
+      <h3 class="line-up"><%= date.plain_date.to_formatted_s(:long_ordinal) %></h3>
+      <h3 class="line-up"><%= number_to_currency(date.price_by_date) %></h3>
     </div>
     <!-- <input type="button" value="<%= date.plain_date %>" onclick="$('.by_date').toggle()"> -->
     <table class="table by_date">
