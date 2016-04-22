@@ -10,8 +10,6 @@ class ReceiptItemsController < ApplicationController
   end
 
   def create
-    #@receipt = Receipt.where(:id => params[:receipt_id])
-
   	@receipt_item = current_user.receipt_items.build(receipt_item_params)
   	@receipt_item.receipt_id = params[:receipt_id]
 

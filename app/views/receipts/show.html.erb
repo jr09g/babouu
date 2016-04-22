@@ -9,7 +9,6 @@
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
         <th>Description</th>
         <th>Amount</th>
         <th>Category</th>
@@ -23,7 +22,6 @@
           <!-- Below statement filters for those receipt items that only belong to this receipt -->
           <% if item.receipt_id == @receipt.id %>
           <tr>
-            <td><%= item.id %></td>
             <td><%= item.description %></td>
             <td><%= number_to_currency(item.price) %></td>
             <td><p><%= item.category %></p></td>
