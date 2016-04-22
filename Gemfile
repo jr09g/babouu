@@ -35,8 +35,8 @@ gem 'paperclip', '~> 4.3.0'
 gem 'rtesseract', '~> 1.3', '>= 1.3.1'
 #quick_magick installed as a requirement for rtesseract gem
 gem 'mini_magick', '~> 4.4'
-#chartkick added to implement data charts for spending habits
-gem 'chartkick', '~> 1.4', '>= 1.4.2'
+#lazy_high_charts added to implement data charts for spending habits
+gem 'lazy_high_charts', '~> 1.5', '>= 1.5.5'
 #groupdate added to allow for easy date grouping of models for charting through chartkick
 gem 'groupdate', '~> 2.5', '>= 2.5.2'
 #active_median takes the average of selected objects
