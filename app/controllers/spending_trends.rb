@@ -39,7 +39,7 @@ class SpendingTrendsController < ApplicationController
   		  f.series(name: "Average Transaction", yAxis: 0, data: @final)
 
   		  f.yAxis [
-    	  {title: {text: "Amount($)", margin: 70} },
+    	  {title: {text: "Amount($)", margin: 70} }
   	  	  ]
 
   	  	  f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
