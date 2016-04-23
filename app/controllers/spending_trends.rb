@@ -2,6 +2,7 @@ class SpendingTrendsController < ApplicationController
 	def charts
 		@user_receipts = Receipt.where(:user_id => current_user.id)
 		@names = @user_receipts.uniq.pluck(:company_name)
+		@names.sort!
 		@final = []
 
 		@prices = Receipt.where(:user_id => current_user.id).group(:company_name).average(:price)
