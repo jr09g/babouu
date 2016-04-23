@@ -5,7 +5,6 @@ class SpendingTrendsController < ApplicationController
 		@final = []
 
 		@prices = Receipt.where(:user_id => current_user.id).group(:company_name).average(:price)
-		#@prices_avg = @prices.pluck(:price)
 
 		@prices.each do |avg|
 		  @final << avg[1].to_digits
@@ -50,12 +49,12 @@ class SpendingTrendsController < ApplicationController
 		@test = LazyHighCharts::HighChart.new('graph') do |f|
   		  f.title(text: "Average Transaction Per Company")
   		  f.xAxis(categories: @names)
-  		  f.series(name: "Sample Avg", yAxis: 0, data: @prices.each_value.to_digits)
-  		  f.series(name: "Population in Millions", yAxis: 1, data: [310, 127, 1340, 81, 65])
+  		  f.series(name: "Sample Avg", yAxis: 0, data: @final)
+  		  #f.series(name: "Population in Millions", yAxis: 1, data: [310, 127, 1340, 81, 65])
 
   		  f.yAxis [
     	  {title: {text: "Sample Avg", margin: 70} },
-    	  {title: {text: "Population in Millions"}, opposite: true},
+    	  #{title: {text: "Population in Millions"}, opposite: true},
   	  	  ]
 
   	  	  f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
