@@ -8,7 +8,7 @@ class SpendingTrendsController < ApplicationController
 		#@prices_avg = @prices.pluck(:price)
 
 		@prices.each do |avg|
-		  @final << avg.price.to_f
+		  @final << avg.value.to_digit
 		end
 
 		#@company_receipts = Receipt.joins(:company)
