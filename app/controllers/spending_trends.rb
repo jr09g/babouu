@@ -3,7 +3,7 @@ class SpendingTrendsController < ApplicationController
 		@user_receipts = Receipt.where(:user_id => current_user.id)
 		@names = @user_receipts.uniq.pluck(:company_name)
 
-		@prices = Receipt.where(:user_id => current_user.id).group("company_name").count
+		@prices = Receipt.where(:user_id => current_user.id).group("company_name").average("price")
 		#@prices_total = @prices.uniq.pluck(:total)
 
 		#@company_receipts = Receipt.joins(:company)
