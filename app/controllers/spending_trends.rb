@@ -4,7 +4,7 @@ class SpendingTrendsController < ApplicationController
 		@names = @user_receipts.uniq.pluck(:company_name)
 
 		@prices = Receipt.where(:user_id => current_user.id).average(:price, :group => "company_name")
-		@prices_avg = @prices.uniq.pluck(:price)
+		@prices_avg = @prices.pluck(:price)
 
 		#@company_receipts = Receipt.joins(:company)
 		#@companies = Receipt.joins(:company).group_by_day(:plain_date, range: 1.week.ago.midnight..Time.now)
