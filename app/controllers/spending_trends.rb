@@ -2,7 +2,7 @@ class SpendingTrendsController < ApplicationController
 	def charts
 		@user_receipts = Receipt.where(:user_id => current_user.id)
 		@names = @user_receipts.uniq.pluck(:company_name)
-		@names.order(company_name: :desc)
+		@names.sort
 
 		#@company_receipts = Receipt.joins(:company)
 		#@companies = Receipt.joins(:company).group_by_day(:plain_date, range: 1.week.ago.midnight..Time.now)
