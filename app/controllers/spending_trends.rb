@@ -1,6 +1,13 @@
 class SpendingTrendsController < ApplicationController
 	def charts
 		@receipts = Receipt.all
+
+		@user_receipts = Receipt.where(:user_id = current_user.id)
+		@company_names = []
+
+		@user_receipts.each do |name|
+			@company_names = name.collect!
+		end
 		#@company_receipts = Receipt.joins(:company)
 		#@companies = Receipt.joins(:company).group_by_day(:plain_date, range: 1.week.ago.midnight..Time.now)
 		@chart = LazyHighCharts::HighChart.new('graph') do |f|
@@ -35,6 +42,21 @@ class SpendingTrendsController < ApplicationController
   		  )
   		  f.lang(thousandsSep: ",")
   		  f.colors(["#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354"])
+		end
+
+		@test = LazyHighCharts::HighChart.new('graph') do |f|
+  		  f.title(text: "Average Transaction Per Company")
+  		  f.xAxis(categories: @company_names)
+  		  f.series(name: "GDP in Billions", yAxis: 0, data: [14119, 5068, 4985, 3339, 2656])
+  		  f.series(name: "Population in Millions", yAxis: 1, data: [310, 127, 1340, 81, 65])
+
+  		  f.yAxis [
+    	  {title: {text: "GDP in Billions", margin: 70} },
+    	  {title: {text: "Population in Millions"}, opposite: true},
+  	  	  ]
+
+  	  	  f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+  	  	  f.chart({defaultSeriesType: "column"})
 		end
 	end
 
