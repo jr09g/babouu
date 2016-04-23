@@ -7,7 +7,7 @@ class SpendingTrendsController < ApplicationController
 		@prices = Receipt.where(:user_id => current_user.id).group(:company_name).average(:price)
 
 		@prices.each do |avg|
-		  @final << avg[1].to_digits
+		  @final << avg[1].to_f
 		end
 
 		#@company_receipts = Receipt.joins(:company)
