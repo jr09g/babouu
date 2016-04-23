@@ -1,25 +1,45 @@
 <h3>Expenditures in the Last 7 Days</h3>
 
+</br></br>
+
 <h3>By Category</h3>
-
-<h3>By Company</h3>
-
-<h3>Average Transaction</h3>
-
-<div id="container" style="height: 400px"></div>
-<button id="button" class="autocompare">Add plot band</button>
-
-<%#= high_chart_globals(@chart_globals) %>
-<%= high_chart("some_id", @chart) %>
-
-</br></br></br></br>
-
-<%= high_chart("some_id", @test) %>
-
-</br></br></br></br>
-
-<%= @prices %>
 
 </br></br>
 
-<%= @final %>
+<h3>By Company</h3>
+
+<div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Total</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Below rails look iterates through all receipts for the user who is logged in -->
+      <% @price_sum.each do |sum| %>
+        <!-- Below statement filters for those receipts that were only sent today -->
+        <tr>
+          <td><%= sum.company %></td>
+          <td><%= number_to_currency(sum.total) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
+
+</br></br>
+
+<h3>Average Transaction</h3>
+<%= high_chart("id_one", @avg_chart) %>
+<%#= high_chart_globals(@chart_globals) %>
+
+</br></br>
+
+<%#= high_chart("id_two", @test_pie) %>
+
+</br></br>

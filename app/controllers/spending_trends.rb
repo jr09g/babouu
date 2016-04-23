@@ -4,29 +4,15 @@ class SpendingTrendsController < ApplicationController
 		@names = @user_receipts.uniq.pluck(:company_name)
 		@names.sort!
 		@final = []
+		@price_avg = Receipt.where(:user_id => current_user.id).group(:company_name).average(:price)
+		@price_sum = Receipt.where(:user_id => current_user.id).select("company_name as company, sum(price) as total").group(:company_name)
 
-		@prices = Receipt.where(:user_id => current_user.id).group(:company_name).average(:price)
-
-		@prices.each do |avg|
+		@price_avg.each do |avg|
 		  @final << avg[1].to_f
 		end
 
 		#@company_receipts = Receipt.joins(:company)
 		#@companies = Receipt.joins(:company).group_by_day(:plain_date, range: 1.week.ago.midnight..Time.now)
-		@chart = LazyHighCharts::HighChart.new('graph') do |f|
-  		  f.title(text: "Population vs GDP For 5 Big Countries [2009]")
-  		  f.xAxis(categories: ["United States", "Japan", "China", "Germany", "France"])
-  		  f.series(name: "GDP in Billions", yAxis: 0, data: [14119, 5068, 4985, 3339, 2656])
-  		  f.series(name: "Population in Millions", yAxis: 1, data: [310, 127, 1340, 81, 65])
-
-  		  f.yAxis [
-    	  {title: {text: "GDP in Billions", margin: 70} },
-    	  {title: {text: "Population in Millions"}, opposite: true},
-  	  	  ]
-
-  	  	  f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
-  	  	  f.chart({defaultSeriesType: "column"})
-		end
 
 		@chart_globals = LazyHighCharts::HighChartGlobals.new do |f|
   		  f.global(useUTC: false)
@@ -47,20 +33,31 @@ class SpendingTrendsController < ApplicationController
   		  f.colors(["#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354"])
 		end
 
-		@test = LazyHighCharts::HighChart.new('graph') do |f|
+		@avg_chart = LazyHighCharts::HighChart.new('graph') do |f|
   		  f.title(text: "Average Transaction Per Company")
   		  f.xAxis(categories: @names)
-  		  f.series(name: "Sample Avg", yAxis: 0, data: @final)
-  		  #f.series(name: "Population in Millions", yAxis: 1, data: [310, 127, 1340, 81, 65])
+  		  f.series(name: "Average Transaction", yAxis: 0, data: @final)
 
   		  f.yAxis [
-    	  {title: {text: "Sample Avg", margin: 70} },
-    	  #{title: {text: "Population in Millions"}, opposite: true},
+    	  {title: {text: "Amount($)", margin: 70} },
   	  	  ]
 
   	  	  f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
   	  	  f.chart({defaultSeriesType: "column"})
 		end
+
+		#@test_pie = LazyHighCharts::HighChart.new('graph') do |f|
+  		#  f.title(text: "Total by Company")
+  		#  f.xAxis(categories: @names)
+  		#  f.series(name: "Average Transaction", yAxis: 0, data: @final)
+
+  		#  f.yAxis [
+    	#  {title: {text: "Amount($)", margin: 70} },
+  	  	#  ]
+
+  	  	#  f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+  	  	#  f.chart({defaultSeriesType: "pie"})
+		#end
 	end
 
 	def companies
