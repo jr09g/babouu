@@ -4,11 +4,8 @@ class SpendingTrendsController < ApplicationController
 
 		@user_receipts = Receipt.where(:user_id => current_user.id)
 		@names = @user_receipts.uniq.pluck(:company_name)
-		@company_names = []
+		@names.sort_by(&:downcase)
 
-		@user_receipts.each do |name|
-			@company_names << name.company_name
-		end
 		#@company_receipts = Receipt.joins(:company)
 		#@companies = Receipt.joins(:company).group_by_day(:plain_date, range: 1.week.ago.midnight..Time.now)
 		@chart = LazyHighCharts::HighChart.new('graph') do |f|
@@ -47,7 +44,7 @@ class SpendingTrendsController < ApplicationController
 
 		@test = LazyHighCharts::HighChart.new('graph') do |f|
   		  f.title(text: "Average Transaction Per Company")
-  		  f.xAxis(categories: @names.sort_by { |word| word.downcase })
+  		  f.xAxis(categories: @names)
   		  f.series(name: "GDP in Billions", yAxis: 0, data: [14119, 5068, 4985, 3339, 2656])
   		  f.series(name: "Population in Millions", yAxis: 1, data: [310, 127, 1340, 81, 65])
 
