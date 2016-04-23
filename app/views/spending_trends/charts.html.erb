@@ -23,7 +23,7 @@
       <% @price_sum.each do |sum| %>
         <!-- Below statement filters for those receipts that were only sent today -->
         <tr>
-          <td><%= sum.company %></td>
+          <td><%#= sum.company %></td>
           <td><%= number_to_currency(sum.total) %></td>
         </tr>
       <% end %>
