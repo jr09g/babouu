@@ -10,7 +10,7 @@ class ReceiptsController < ApplicationController
     #instance variable to retrieve all records from the receipt table
     @receipts = Receipt.all
     #instance variable to retrieve all records from the receipt table; joined with expense_report table to bring view name in
-    @receipt_with_view = Receipt.joins(:expense_report).select("receipts.id, receipts.user_id as user, company_name, receipt_desc, price, name, plain_date")
+    @receipt_with_view = Receipt.joins(:expense_report).select("receipts.id, receipts.user_id as user, receipts.company_name, receipts.receipt_desc, receipts.price, expense_reports.name as name, receipts.plain_date")
     #instance variable to call all companies
     #@companies = Company.all
     ###

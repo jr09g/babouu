@@ -26,7 +26,7 @@
     </thead>
     <tbody>
       <!-- Below rails look iterates through all receipts for the user who is logged in -->
-      <%# @receipt_with_view.each do |receipt| %>
+      <% @receipt_with_view.each do |receipt| %>
       <% @receipts.each do |receipt| %>
         <% if receipt.user == current_user %>
           <!-- Below statement filters for those receipts that were only sent today -->
@@ -35,7 +35,7 @@
             <td><%= receipt.id %></td>
             <td><%= receipt.company_name %></td>
             <td><%= receipt.receipt_desc %></td>
-            <td><%= receipt.expense_report_id %></td>
+            <td><%= receipt.name %></td>
             <td><p><%= number_to_currency(receipt.price) %></p></td>
             <!-- provides a link to the .pdf document that is created and saved in S3-->
             <td>
@@ -57,7 +57,7 @@
   </table>
 
   </br></br>
-  
+
   <%= link_to 'Add Receipt', new_receipt_path, class: "btn btn-default" %>
   
   <%= link_to 'View All Receipts', all_receipts_path, class: "btn btn-default" %>
