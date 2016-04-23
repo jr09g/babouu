@@ -1,10 +1,8 @@
 class SpendingTrendsController < ApplicationController
 	def charts
-		@receipts = Receipt.all
-
 		@user_receipts = Receipt.where(:user_id => current_user.id)
 		@names = @user_receipts.uniq.pluck(:company_name)
-		@names.sort_by(&:downcase)
+		@names.order(company_name: :desc)
 
 		#@company_receipts = Receipt.joins(:company)
 		#@companies = Receipt.joins(:company).group_by_day(:plain_date, range: 1.week.ago.midnight..Time.now)
