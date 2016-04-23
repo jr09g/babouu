@@ -50,7 +50,7 @@ class SpendingTrendsController < ApplicationController
 		@test = LazyHighCharts::HighChart.new('graph') do |f|
   		  f.title(text: "Average Transaction Per Company")
   		  f.xAxis(categories: @names)
-  		  f.series(name: "Sample Avg", yAxis: 0, data: @final)
+  		  f.series(name: "Sample Avg", yAxis: 0, data: @prices.each_value.to_digits)
   		  f.series(name: "Population in Millions", yAxis: 1, data: [310, 127, 1340, 81, 65])
 
   		  f.yAxis [
