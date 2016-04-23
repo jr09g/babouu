@@ -6,7 +6,7 @@ class SpendingTrendsController < ApplicationController
 		@company_names = []
 
 		@user_receipts.each do |name|
-			@company_names = name.collect!
+			@company_names << name.company_name
 		end
 		#@company_receipts = Receipt.joins(:company)
 		#@companies = Receipt.joins(:company).group_by_day(:plain_date, range: 1.week.ago.midnight..Time.now)
