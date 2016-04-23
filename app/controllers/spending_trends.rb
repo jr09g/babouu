@@ -3,7 +3,7 @@ class SpendingTrendsController < ApplicationController
 		@user_receipts = Receipt.where(:user_id => current_user.id)
 		@names = @user_receipts.uniq.pluck(:company_name)
 
-		@prices = Receipt.where(:user_id => current_user.id).group(:company_name).maximum(:price)
+		@prices = Receipt.where(:user_id => current_user.id).group(:company_name).average(:price)
 		#@prices_avg = @prices.pluck(:price)
 
 		#@company_receipts = Receipt.joins(:company)
@@ -45,7 +45,7 @@ class SpendingTrendsController < ApplicationController
 		@test = LazyHighCharts::HighChart.new('graph') do |f|
   		  f.title(text: "Average Transaction Per Company")
   		  f.xAxis(categories: @names)
-  		  f.series(name: "Sample Avg", yAxis: 0, data: @prices.each_value)
+  		  f.series(name: "Sample Avg", yAxis: 0, data: @prices.each_value.to_f)
   		  f.series(name: "Population in Millions", yAxis: 1, data: [310, 127, 1340, 81, 65])
 
   		  f.yAxis [
