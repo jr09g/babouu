@@ -5,7 +5,7 @@ class SpendingTrendsController < ApplicationController
 		@names.sort!
 		@final = []
 		@price_avg = Receipt.where(:user_id => current_user.id).group(:company_name).average(:price)
-		@price_sum = Receipt.where(:user_id => current_user.id).select("company_name as company, sum(price) as total").group(:company_name)
+		@price_sum = Receipt.where(:user_id => current_user.id).select("company_name, sum(price) as total").group("company_name")
 
 		@price_avg.each do |avg|
 		  @final << avg[1].to_f
