@@ -3,6 +3,7 @@ class SpendingTrendsController < ApplicationController
 		@receipts = Receipt.all
 
 		@user_receipts = Receipt.where(:user_id => current_user.id)
+		@names = @user_receipts.uniq.pluck(:company_name)
 		@company_names = []
 
 		@user_receipts.each do |name|
@@ -46,7 +47,7 @@ class SpendingTrendsController < ApplicationController
 
 		@test = LazyHighCharts::HighChart.new('graph') do |f|
   		  f.title(text: "Average Transaction Per Company")
-  		  f.xAxis(categories: @company_names)
+  		  f.xAxis(categories: @names)
   		  f.series(name: "GDP in Billions", yAxis: 0, data: [14119, 5068, 4985, 3339, 2656])
   		  f.series(name: "Population in Millions", yAxis: 1, data: [310, 127, 1340, 81, 65])
 

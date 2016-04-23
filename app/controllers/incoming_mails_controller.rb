@@ -23,7 +23,7 @@ class IncomingMailsController < ApplicationController
 
 	#below if statement checks to see if the is_duplicate method is true or false, then decide whether a receipt is created based on this
 	if @is_duplicate == false
-	  #email is NOT a duplicate and record is created
+	  #email is NOT a duplicate and record is
 	  #@auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, company_id: @company_id, expense_report_id: 4, plain_date: Date.current, image: @attachment, in_reply_to: @in_reply_to)
 	  @auto_receipt = Receipt.create(receipt_desc: @receipt_desc, company_name: @company_name, price: @price, user_id: @receipt_user, expense_report_id: 4, plain_date: Date.current, in_reply_to: @in_reply_to)
 	  render :text => 'success', :status => 200
