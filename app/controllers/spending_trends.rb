@@ -2,12 +2,12 @@ class SpendingTrendsController < ApplicationController
 	def charts
 		@receipts = Receipt.all
 
-		@user_receipts = Receipt.where(:user_id = current_user.id)
+		@user_receipts = Receipt.where(:user_id => current_user.id)
 		@company_names = []
 
-		#@user_receipts.each do |name|
-		#	@company_names = name.collect!
-		#end
+		@user_receipts.each do |name|
+			@company_names = name.collect!
+		end
 		#@company_receipts = Receipt.joins(:company)
 		#@companies = Receipt.joins(:company).group_by_day(:plain_date, range: 1.week.ago.midnight..Time.now)
 		@chart = LazyHighCharts::HighChart.new('graph') do |f|
