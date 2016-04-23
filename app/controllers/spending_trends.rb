@@ -47,7 +47,7 @@ class SpendingTrendsController < ApplicationController
 
 		@test = LazyHighCharts::HighChart.new('graph') do |f|
   		  f.title(text: "Average Transaction Per Company")
-  		  f.xAxis(categories: @names.sort_by(&:downcase))
+  		  f.xAxis(categories: @names.sort_by { |word| word.downcase })
   		  f.series(name: "GDP in Billions", yAxis: 0, data: [14119, 5068, 4985, 3339, 2656])
   		  f.series(name: "Population in Millions", yAxis: 1, data: [310, 127, 1340, 81, 65])
 
