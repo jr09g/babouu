@@ -14,6 +14,7 @@
           <th>ID</th>
           <th>Company</th>
           <th>Receipt Description</th>
+          <th>Expense Report</th>
           <th>Price</th>
           <th colspan="3"></th>
         </tr>
@@ -29,6 +30,7 @@
                 <td><%= receipt.id %></td>
   	            <td><%= receipt.company_name %></td>
   	            <td><%= receipt.receipt_desc %></td>
+                <td><%= receipt.name %></td>
   	            <td><p><%= number_to_currency(receipt.price) %></p></td>
   	            <!-- provides a link to the .txt document that is created and saved in S3-->
   	            <td>
