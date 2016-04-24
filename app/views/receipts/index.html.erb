@@ -1,7 +1,7 @@
 <p id="notice"><%#= notice %></p>
 
 <div> 
-  <h3 class="line-up">Today, <%= Date.current.to_formatted_s(:long_ordinal) %>: </h3> 
+  <h3 class="line-up">Today(<%= Date.current.to_formatted_s(:long_ordinal) %>): </h3> 
   <% if @current_day_total.total == nil %>
     <h3 class="line-up"><%= number_to_currency(0) %></h3>
   <% else %>
@@ -29,7 +29,7 @@
       <% @receipt_with_view.each do |receipt| %>
         <% if receipt.user_id == current_user.id %>
           <!-- Below statement filters for those receipts that were only sent today -->
-          <%# if receipt.plain_date == Date.current %>
+          <% if receipt.plain_date == Date.current %>
           <tr>
             <td><%= receipt.id %></td>
             <td><%= receipt.company_name %></td>
@@ -49,7 +49,7 @@
             </td>
             <td><%= link_to 'Details', receipt %></td>
           </tr>
-          <%# end %>
+          <% end %>
         <% end %>
       <% end %>
     </tbody>
@@ -62,3 +62,5 @@
   <%= link_to 'View All Receipts', all_receipts_path, class: "btn btn-default" %>
 
 </div>
+
+</br></br>
