@@ -50,7 +50,7 @@ class ReceiptsController < ApplicationController
     @tess_file = Receipt.manual_attachment(params[:receipt]['image'].path)
     @man_price = Receipt.manual_price(@tess_file)
 
-    @receipt = current_user.receipts.build(receipt_desc: params[:receipt]['receipt_desc'], company_name: params[:receipt]['company_name'], price: @man_price, expense_report_id: params[:receipt]['expense_report_id'], plain_date: params[:receipt]['expense_report_id'])#Date.current, image: @tess_file)
+    @receipt = current_user.receipts.build(receipt_desc: params[:receipt]['receipt_desc'], company_name: params[:receipt]['company_name'], price: @man_price, expense_report_id: params[:receipt]['expense_report_id'], plain_date: params[:receipt]['plain_date'])#Date.current, image: @tess_file)
     #@receipt = current_user.receipts.build(receipt_desc: @to_txt, price: 0)params[:receipt]['receipt_desc']
     
     respond_to do |format|

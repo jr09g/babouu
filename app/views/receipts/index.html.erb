@@ -29,7 +29,7 @@
       <% @receipt_with_view.each do |receipt| %>
         <% if receipt.user_id == current_user.id %>
           <!-- Below statement filters for those receipts that were only sent today -->
-          <% if receipt.plain_date == Date.current %>
+          <%# if receipt.plain_date == Date.current %>
           <tr>
             <td><%= receipt.id %></td>
             <td><%= receipt.company_name %></td>
@@ -49,7 +49,7 @@
             </td>
             <td><%= link_to 'Details', receipt %></td>
           </tr>
-          <% end %>
+          <%# end %>
         <% end %>
       <% end %>
     </tbody>
