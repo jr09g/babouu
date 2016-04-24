@@ -42,6 +42,8 @@ class ReceiptsController < ApplicationController
 
   # GET /receipts/1/edit
   def edit
+    #below instance variable shows -NONE- and user expense reports in a dropdown to change for existing receipt
+    @expense_reports = ExpenseReport.where(user_id: [current_user.id, 0])
   end
 
   # POST /receipts
