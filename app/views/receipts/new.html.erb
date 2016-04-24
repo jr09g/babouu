@@ -18,7 +18,7 @@
   <%#= currently pausing field where custom view can be selected from receipt; considering whether it should be controlled strictly from the custom view page %>
   <div class="field">
     <%= f.label :date %>
-    <%= f.date_select :plain_date %>
+    <%= f.date_field :plain_date %>
     <%#= f.hidden_field :plain_date, :value => Date.current %>
   </div>
   <div class="field">
