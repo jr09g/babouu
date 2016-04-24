@@ -13,6 +13,14 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :date %>
+    <%= f.date_select :plain_date %>
+  </div>
+  <div class="field">
+    <%= f.label :expense_report %><br>
+    <%= f.collection_select(:expense_report_id , @expense_reports, :id, :name) %>
+  </div>
+  <div class="field">
     <%= f.label :receipt_desc %><br>
     <%= f.text_field :receipt_desc %>
   </div>

@@ -17,6 +17,11 @@
 
   <%#= currently pausing field where custom view can be selected from receipt; considering whether it should be controlled strictly from the custom view page %>
   <div class="field">
+    <%= f.label :date %>
+    <%= f.date_select :plain_date %>
+    <%#= f.hidden_field :plain_date, :value => Date.current %>
+  </div>
+  <div class="field">
     <%= f.label :expense_report %><br>
     <%= f.collection_select(:expense_report_id , @expense_reports, :id, :name) %>
   </div>
@@ -31,9 +36,6 @@
   <div class="field">
     <%= f.label :image %>
     <%= f.file_field :image %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :plain_date, :value => Date.current %>
   </div>
   </br></br>
   <div class="actions">
