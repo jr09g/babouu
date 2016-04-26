@@ -1,12 +1,19 @@
 class SpendingTrendsController < ApplicationController
 	def charts
+    #Variables for weekly charts
+    @current_week_date_range = Date.current.all_week(:sunday)
+    @week_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where(:plain_date => @current_month_date_range)
+    @names_week = @week_receipts.uniq.pluck(:category)
+    @names_week.sort!
+
+    #Variables for monthly charts
     @current_month_date_range = Date.current.all_month
-		@user_receipts = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range)
-		@names = @user_receipts.uniq.pluck(:company_name)
-		@names.sort!
+		@month_receipts = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range)
+		@names_month = @month_receipts.uniq.pluck(:company_name)
+		@names_month.sort!
 		@final = []
 		@price_avg = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range).group(:company_name).average(:price)
-		@price_sum = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range).select("company_name, sum(price) as total").group("company_name")
+		@price_sum = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where(:plain_date => @current_week_date_range).select("receipt.category, sum(receipt_item.price) as total").group("receipt_item.category")
 
 		@price_avg.each do |avg|
 		  @final << avg[1].to_f
@@ -36,8 +43,8 @@ class SpendingTrendsController < ApplicationController
 
 		@avg_chart = LazyHighCharts::HighChart.new('graph') do |f|
   		  f.title(text: "Average Transaction Per Company")
-  		  f.xAxis(categories: @names)
-  		  f.series(name: "Average Transaction", yAxis: 0, data: @final)
+  		  f.xAxis(categories: @names_week)
+  		  f.series(name: "Average Transaction", yAxis: 0, data: @price_sum)
 
   		  f.yAxis [
     	  {title: {text: "Amount($)", margin: 70} }
