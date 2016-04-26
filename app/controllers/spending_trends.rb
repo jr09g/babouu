@@ -38,6 +38,25 @@ class SpendingTrendsController < ApplicationController
 		  @sum_month << sum[1].to_f
 		end
 
+    #Variables for yearly charts
+    @current_year_date_range = Date.current.all_year
+    @year_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_year_date_range)
+    @names_year = @year_receipts.uniq.pluck(:category)
+    @names_year.sort!
+    
+    @price_avg_year = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_year_date_range).group("receipt_items.category").average(:price)
+    @price_sum_year = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_year_date_range).group("receipt_items.category").sum(:price)
+    @avg_year = []
+    @sum_year = []
+
+    @price_avg_year.each do |avg|
+      @avg_year << avg[1].to_f
+    end
+
+    @price_sum_year.each do |sum|
+      @sum_year << sum[1].to_f
+    end
+
 		@chart_globals = LazyHighCharts::HighChartGlobals.new do |f|
   		  f.global(useUTC: false)
   		  f.chart(
@@ -109,18 +128,32 @@ class SpendingTrendsController < ApplicationController
           f.chart({defaultSeriesType: "column"})
     end
 
-		#@test_pie = LazyHighCharts::HighChart.new('graph') do |f|
-  		#  f.title(text: "Total by Company")
-  		#  f.xAxis(categories: @names)
-  		#  f.series(name: "Average Transaction", yAxis: 0, data: @final)
+    @sum_chart_year = LazyHighCharts::HighChart.new('graph') do |f|
+        f.title(text: "Total Expenses by Category")
+        f.xAxis(categories: @names_year)
+        f.series(name: "Sum", yAxis: 0, data: @sum_year)
 
-  		#  f.yAxis [
-    	#  {title: {text: "Amount($)", margin: 70} },
-  	  	#  ]
+        f.yAxis [
+        {title: {text: "Amount($)", margin: 70} }
+          ]
 
-  	  	#  f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
-  	  	#  f.chart({defaultSeriesType: "pie"})
-		#end
+          f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+          f.chart({defaultSeriesType: "column"})
+    end
+
+    @avg_chart_year = LazyHighCharts::HighChart.new('graph') do |f|
+        f.title(text: "Average Expense by Category")
+        f.xAxis(categories: @names_year)
+        f.series(name: "Avg", yAxis: 0, data: @avg_year)
+
+        f.yAxis [
+        {title: {text: "Amount($)", margin: 70} }
+          ]
+
+          f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+          f.chart({defaultSeriesType: "column"})
+    end
+
 	end
 
 	def companies
