@@ -1,10 +1,11 @@
 class SpendingTrendsController < ApplicationController
 	def charts
-		@user_receipts = Receipt.where(:user_id => current_user.id)
+    @current_month_date_range = Date.current.at_beginning_of_month..Time.now
+		@user_receipts = Receipt.where(:user_id => current_user.id, :plain_date => @current_month_date_range)
 		@names = @user_receipts.uniq.pluck(:company_name)
 		@names.sort!
 		@final = []
-		@price_avg = Receipt.where(:user_id => current_user.id).group(:company_name).average(:price)
+		@price_avg = Receipt.where(:user_id => current_user.id, :plain_date => @current_month_date_range).group(:company_name).average(:price)
 		@price_sum = Receipt.where(:user_id => current_user.id).select("company_name, sum(price) as total").group("company_name")
 
 		@price_avg.each do |avg|

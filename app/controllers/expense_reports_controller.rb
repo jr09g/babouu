@@ -13,6 +13,19 @@ class ExpenseReportsController < ApplicationController
     @expense_report_receipts = Receipt.joins(:expense_report).select("name, receipt_desc, expense_report_id, price, plain_date, company_name")
     #
     @receipts_view_total = 0.00
+
+    @avg_chart = LazyHighCharts::HighChart.new('graph') do |f|
+        f.title(text: "Average Transaction Per Company")
+        f.xAxis(categories: @names)
+        f.series(name: "Average Transaction", yAxis: 0, data: @final)
+
+        f.yAxis [
+        {title: {text: "Amount($)", margin: 70} }
+          ]
+
+          f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+          f.chart({defaultSeriesType: "column"})
+    end
   end
 
   def new
