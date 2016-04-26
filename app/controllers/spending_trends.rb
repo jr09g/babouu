@@ -1,18 +1,18 @@
 class SpendingTrendsController < ApplicationController
 	def charts
     #Variables for weekly charts
-    @current_week_date_range = Date.current.all_week(:sunday)
-    @week_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipt.plain_date" => @current_month_date_range)
+    @current_week_date_range = Date.current.all_week
+    @week_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipt.plain_date" => @current_week_date_range)
     @names_week = @week_receipts.uniq.pluck(:category)
     @names_week.sort!
 
     #Variables for monthly charts
-    @current_month_date_range = Date.current.all_month
-		@month_receipts = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range)
-		@names_month = @month_receipts.uniq.pluck(:company_name)
-		@names_month.sort!
+    #@current_month_date_range = Date.current.all_month
+		#@month_receipts = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range)
+		#@names_month = @month_receipts.uniq.pluck(:company_name)
+		#@names_month.sort!
 		@final = []
-		@price_avg = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range).group(:company_name).average(:price)
+		#@price_avg = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range).group(:company_name).average(:price)
 		@price_sum = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipt.plain_date" => @current_week_date_range).select("receipt.category, sum(receipt_item.price) as total").group("receipt_item.category")
 
 		@price_avg.each do |avg|
@@ -42,9 +42,9 @@ class SpendingTrendsController < ApplicationController
 		end
 
 		@avg_chart = LazyHighCharts::HighChart.new('graph') do |f|
-  		  f.title(text: "Average Transaction Per Company")
+  		  f.title(text: "Expenses by Line Item")
   		  f.xAxis(categories: @names_week)
-  		  f.series(name: "Average Transaction", yAxis: 0, data: @price_sum)
+  		  f.series(name: "Sum", yAxis: 0, data: @price_sum)
 
   		  f.yAxis [
     	  {title: {text: "Amount($)", margin: 70} }
