@@ -16,13 +16,13 @@
     </thead>
     <tbody>
       <!-- Below rails look iterates through all receipts for the user who is logged in -->
-      <% @price_sum.each do |sum| %>
+      <%# @price_sum.each do |sum| %>
         <!-- Below statement filters for those receipts that were only sent today -->
         <tr>
-          <td><%= sum.company_name %></td>
-          <td><%= number_to_currency(sum.total) %></td>
+          <td><%#= sum.company_name %></td>
+          <td><%#= number_to_currency(sum.total) %></td>
         </tr>
-      <% end %>
+      <%# end %>
     </tbody>
   </table>
 
