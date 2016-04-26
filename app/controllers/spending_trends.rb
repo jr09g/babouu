@@ -13,7 +13,7 @@ class SpendingTrendsController < ApplicationController
 		#@names_month.sort!
 		@final = []
 		#@price_avg = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range).group(:company_name).average(:price)
-		@price_sum = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).select("receipts.category, sum(receipt_items.price) as total").group("receipt_items.category")
+		@price_sum = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).select("receipt_items.category, sum(receipt_items.price) as total").group("receipt_items.category")
 
 		#@price_avg.each do |avg|
 		#  @final << avg[1].to_f
