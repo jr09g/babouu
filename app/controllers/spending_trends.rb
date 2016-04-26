@@ -1,6 +1,6 @@
 class SpendingTrendsController < ApplicationController
 	def charts
-    @current_month_date_range = Date.current.beginning_of_month..Time.now
+    @current_month_date_range = Date.current.all_month
 		@user_receipts = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range)
 		@names = @user_receipts.uniq.pluck(:company_name)
 		@names.sort!
