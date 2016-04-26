@@ -6,6 +6,19 @@ class SpendingTrendsController < ApplicationController
     @names_week = @week_receipts.uniq.pluck(:category)
     @names_week.sort!
 
+    @price_avg_week = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).group("receipt_items.category").average(:price)
+    @price_sum_week = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).group("receipt_items.category").sum(:price)
+    @avg_week = []
+    @sum_week = []
+
+    @price_avg_week.each do |avg|
+      @avg_week << avg[1].to_f
+    end
+
+    @price_sum_week.each do |sum|
+      @sum_week << sum[1].to_f
+    end
+
     #Variables for monthly charts
     #@current_month_date_range = Date.current.all_month
 		#@month_receipts = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range)
@@ -13,9 +26,9 @@ class SpendingTrendsController < ApplicationController
 		#@names_month.sort!
 		@final = []
 		#@price_avg = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range).group(:company_name).average(:price).select("receipt_items.category, sum(receipt_items.price) as total")
-		@price_sum = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).group("receipt_items.category").sum(:price)
+		@price_sum_month = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_month_date_range).group("receipt_items.category").sum(:price)
 
-		@price_sum.each do |sum|
+		@price_sum_month.each do |sum|
 		  @final << sum[1].to_f
 		end
 
@@ -41,10 +54,10 @@ class SpendingTrendsController < ApplicationController
   		  f.colors(["#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354"])
 		end
 
-		@avg_chart = LazyHighCharts::HighChart.new('graph') do |f|
-  		  f.title(text: "Expenses by Line Item")
+		@sum_chart = LazyHighCharts::HighChart.new('graph') do |f|
+  		  f.title(text: "Total Expenses by Category")
   		  f.xAxis(categories: @names_week)
-  		  f.series(name: "Sum", yAxis: 0, data: @final)
+  		  f.series(name: "Sum", yAxis: 0, data: @sum_week)
 
   		  f.yAxis [
     	  {title: {text: "Amount($)", margin: 70} }
@@ -53,6 +66,19 @@ class SpendingTrendsController < ApplicationController
   	  	  f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
   	  	  f.chart({defaultSeriesType: "column"})
 		end
+
+    @avg_chart = LazyHighCharts::HighChart.new('graph') do |f|
+        f.title(text: "Average Expense by Category")
+        f.xAxis(categories: @names_week)
+        f.series(name: "Avg", yAxis: 0, data: @avg_week)
+
+        f.yAxis [
+        {title: {text: "Amount($)", margin: 70} }
+          ]
+
+          f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+          f.chart({defaultSeriesType: "column"})
+    end
 
 		#@test_pie = LazyHighCharts::HighChart.new('graph') do |f|
   		#  f.title(text: "Total by Company")

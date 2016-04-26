@@ -1,41 +1,13 @@
-<h3>This Week</h3>
-
-
-
-<h3>By Company</h3>
-
-<div>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Company</th>
-        <th>Total</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Below rails look iterates through all receipts for the user who is logged in -->
-      <%# @price_sum.each do |sum| %>
-        <!-- Below statement filters for those receipts that were only sent today -->
-        <tr>
-          <td><%#= sum.company_name %></td>
-          <td><%#= number_to_currency(sum.total) %></td>
-        </tr>
-      <%# end %>
-    </tbody>
-  </table>
-
-</div>
+<h2>This Week</h2>
 
 </br></br>
 
-<h3>Average Transaction</h3>
-<%= high_chart("id_one", @avg_chart) %>
+<%= high_chart("avg", @avg_chart) %>
 <%#= high_chart_globals(@chart_globals) %>
 
 </br></br>
 
+<%= high_chart("sum", @sum_chart) %>
 <%#= high_chart("id_two", @test_pie) %>
-<%= @price_sum %>
+
 </br></br>
