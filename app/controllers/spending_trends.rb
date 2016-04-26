@@ -2,7 +2,7 @@ class SpendingTrendsController < ApplicationController
 	def charts
     #Variables for weekly charts
     @current_week_date_range = Date.current.all_week
-    @week_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipt.plain_date" => @current_week_date_range)
+    @week_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range)
     @names_week = @week_receipts.uniq.pluck(:category)
     @names_week.sort!
 
@@ -13,7 +13,7 @@ class SpendingTrendsController < ApplicationController
 		#@names_month.sort!
 		@final = []
 		#@price_avg = Receipt.where(:user_id => current_user.id).where(:plain_date => @current_month_date_range).group(:company_name).average(:price)
-		@price_sum = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipt.plain_date" => @current_week_date_range).select("receipt.category, sum(receipt_item.price) as total").group("receipt_item.category")
+		@price_sum = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).select("receipts.category, sum(receipt_items.price) as total").group("receipt_items.category")
 
 		@price_avg.each do |avg|
 		  @final << avg[1].to_f
