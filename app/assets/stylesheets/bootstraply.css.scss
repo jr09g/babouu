@@ -26,5 +26,10 @@
 	border-spacing : 10px;
 }
 
+.chart {
+	display: none;
+	width: 100%;
+}
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
