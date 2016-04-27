@@ -1,41 +1,53 @@
-<h2>This Week</h2>
+<div class="click-me">
+  <h2>This Week</h2>
+</div>
 
 </br></br>
 
-<%= high_chart("avg_week", @avg_chart_week) %>
-<%#= high_chart_globals(@chart_globals) %>
+<div class="by_date">
+  <%= high_chart("avg_week", @avg_chart_week) %>
+  <%#= high_chart_globals(@chart_globals) %>
+
+  </br></br>
+
+  <%= high_chart("sum_week", @sum_chart_week) %>
+  <%#= high_chart("id_two", @test_pie) %>
+</div>
 
 </br></br>
 
-<%= high_chart("sum_week", @sum_chart_week) %>
-<%#= high_chart("id_two", @test_pie) %>
+<div class="click-me">
+  <h2>This Month</h2>
+</div>
 
 </br></br>
 
-<h2>This Month</h2>
+<div class="by_date">
+  <%= high_chart("avg_month", @avg_chart_month) %>
+  <%#= high_chart_globals(@chart_globals) %>
+
+  </br></br>
+
+  <%= high_chart("sum_month", @sum_chart_month) %>
+  <%#= high_chart("id_two", @test_pie) %>
+</div>
 
 </br></br>
 
-<%= high_chart("avg_month", @avg_chart_month) %>
-<%#= high_chart_globals(@chart_globals) %>
+<div class="click-me">
+  <h2>This Year</h2>
+</div>
 
 </br></br>
 
-<%= high_chart("sum_month", @sum_chart_month) %>
-<%#= high_chart("id_two", @test_pie) %>
+<div class="by_date">
+  <%= high_chart("avg_year", @avg_chart_year) %>
+  <%#= high_chart_globals(@chart_globals) %>
 
-</br></br>
+  </br></br>
 
-<h2>This Year</h2>
-
-</br></br>
-
-<%= high_chart("avg_month", @avg_chart_year) %>
-<%#= high_chart_globals(@chart_globals) %>
-
-</br></br>
-
-<%= high_chart("sum_month", @sum_chart_year) %>
-<%#= high_chart("id_two", @test_pie) %>
+  <%= high_chart("sum_year", @sum_chart_year) %>
+  <%#= high_chart("id_two", @test_pie) %>
+</div>
 
 </br></br>
