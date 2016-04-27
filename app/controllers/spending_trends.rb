@@ -49,11 +49,11 @@ class SpendingTrendsController < ApplicationController
     @avg_year = []
     @sum_year = []
 
-    @price_avg_year.each do |avg|
+    @price_avg_year.sort.each do |avg|
       @avg_year << avg[1].to_f
     end
 
-    @price_sum_year.each do |sum|
+    @price_sum_year.sort.each do |sum|
       @sum_year << sum[1].to_f
     end
 
