@@ -11,11 +11,11 @@ class SpendingTrendsController < ApplicationController
     @avg_week = []
     @sum_week = []
 
-    @price_avg_week.each do |avg|
+    @price_avg_week.sort.each do |avg|
       @avg_week << avg[1].to_f
     end
 
-    @price_sum_week.each do |sum|
+    @price_sum_week.sort.each do |sum|
       @sum_week << sum[1].to_f
     end
 
@@ -30,11 +30,11 @@ class SpendingTrendsController < ApplicationController
     @avg_month = []
     @sum_month = []
 
-    @price_avg_month.each do |avg|
+    @price_avg_month.sort.each do |avg|
       @avg_month << avg[1].to_f
     end
 
-		@price_sum_month.each do |sum|
+		@price_sum_month.sort.each do |sum|
 		  @sum_month << sum[1].to_f
 		end
 
