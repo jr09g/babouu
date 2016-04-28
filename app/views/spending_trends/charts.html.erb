@@ -1,6 +1,4 @@
-<h2>This Week</h2></br>
-<%= @week_avg_total %></br>
-<%= @week_sum_total %></br>
+<h2>This Week- <%= number_to_currency(@week_sum_total) %></h2>
 
 <%= high_chart("avg_week", @avg_chart_week) %>
 <%#= high_chart_globals(@chart_globals) %>
@@ -8,11 +6,10 @@
 </br></br>
 
 <%= high_chart("sum_week", @sum_chart_week) %>
-<%#= high_chart("id_two", @test_pie) %>
 
 </br></br>
 
-<h2>This Month</h2>
+<h2>This Month- <%= number_to_currency(@month_sum_total) %></h2>
 
 <%= high_chart("avg_month", @avg_chart_month) %>
 <%#= high_chart_globals(@chart_globals) %>
@@ -20,11 +17,10 @@
 </br></br>
 
 <%= high_chart("sum_month", @sum_chart_month) %>
-<%#= high_chart("id_two", @test_pie) %>
 
 </br></br>
 
-<h2>This Year</h2>
+<h2>This Year- <%= @year_sum_total %></h2>
 
 <%= high_chart("avg_year", @avg_chart_year) %>
 <%#= high_chart_globals(@chart_globals) %>
@@ -32,6 +28,5 @@
 </br></br>
 
 <%= high_chart("sum_year", @sum_chart_year) %>
-<%#= high_chart("id_two", @test_pie) %>
 
 </br></br>

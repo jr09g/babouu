@@ -22,7 +22,6 @@ class SpendingTrendsController < ApplicationController
       @sum_week << sum[1].to_f
     end
 
-    @week_avg_total = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_report_id" => @expense_reports.id).average(:price)
     @week_sum_total = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_report_id" => @expense_reports.id).sum(:price)
 
     #Variables for monthly charts
@@ -44,6 +43,8 @@ class SpendingTrendsController < ApplicationController
 		  @sum_month << sum[1].to_f
 		end
 
+    @month_sum_total = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_month_date_range).where("receipts.expense_report_id" => @expense_reports.id).sum(:price)
+
     #Variables for yearly charts
     @current_year_date_range = Date.current.all_year
     @year_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_year_date_range).where("receipts.expense_report_id" => @expense_reports.id)
@@ -62,6 +63,8 @@ class SpendingTrendsController < ApplicationController
     @price_sum_year.sort.each do |sum|
       @sum_year << sum[1].to_f
     end
+
+    @year_sum_total = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_year_date_range).where("receipts.expense_report_id" => @expense_reports.id).sum(:price)
 
 		@chart_globals = LazyHighCharts::HighChartGlobals.new do |f|
   		  f.global(useUTC: false)
