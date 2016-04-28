@@ -8,7 +8,7 @@ class ExpenseReportsController < ApplicationController
 
   def show
     #Variables for expense report
-    @expense_report_receipts = ReceiptItem.joins(:receipt).where(:expense_report_id => @expense_report.id)
+    @expense_report_receipts = ReceiptItem.joins(:receipt).where("receipts.expense_report_id" => @expense_report.id)
     @names_expense_report = @expense_report_receipts.uniq.pluck(:category)
     @names_expense_report.sort!
 
