@@ -64,9 +64,9 @@ Rails.application.configure do
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
-      :bucket => "",
-      :access_key_id => "",
-      :secret_access_key => ""
+      :bucket => "babouu",
+      :access_key_id => "AKIAI3RQJI57GFO3CCWQ",
+      :secret_access_key => "O27aoa/cGEoN7K+p8xR7mzELCkXmfml/8CdUZe1"
     }
   }
 
