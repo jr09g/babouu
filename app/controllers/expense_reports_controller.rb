@@ -40,7 +40,7 @@ class ExpenseReportsController < ApplicationController
 
     @avg_chart_report = LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: "Average Expense by Category")
-        f.xAxis(categories: @names_expense_report+)
+        f.xAxis(categories: @names_expense_report)
         f.series(name: "Avg", yAxis: 0, data: @avg_report)
 
         f.yAxis [
