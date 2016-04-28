@@ -25,10 +25,10 @@ class ExpenseReportsController < ApplicationController
       @sum_report << sum[1].to_f
     end
 
-    @sum_chart_week = LazyHighCharts::HighChart.new('graph') do |f|
+    @sum_chart_report = LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: "Total Expenses by Category")
-        f.xAxis(categories: @names_week)
-        f.series(name: "Sum", yAxis: 0, data: @sum_week)
+        f.xAxis(categories: @names_expense_report)
+        f.series(name: "Sum", yAxis: 0, data: @sum_report)
 
         f.yAxis [
         {title: {text: "Amount($)", margin: 70} }
@@ -38,10 +38,10 @@ class ExpenseReportsController < ApplicationController
           f.chart({defaultSeriesType: "pie"})
     end
 
-    @avg_chart_week = LazyHighCharts::HighChart.new('graph') do |f|
+    @avg_chart_report = LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: "Average Expense by Category")
-        f.xAxis(categories: @names_week)
-        f.series(name: "Avg", yAxis: 0, data: @avg_week)
+        f.xAxis(categories: @names_expense_report)
+        f.series(name: "Avg", yAxis: 0, data: @avg_report)
 
         f.yAxis [
         {title: {text: "Amount($)", margin: 70} }
