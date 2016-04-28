@@ -22,6 +22,9 @@ class SpendingTrendsController < ApplicationController
       @sum_week << sum[1].to_f
     end
 
+    @week_avg_total = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_report_id" => @expense_reports.id).average(:price)
+    @week_sum_total = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_report_id" => @expense_reports.id).sum(:price)
+
     #Variables for monthly charts
     @current_month_date_range = Date.current.all_month
 		@month_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_month_date_range).where("receipts.expense_report_id" => @expense_reports.id)
