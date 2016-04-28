@@ -7,17 +7,41 @@ class ExpenseReportsController < ApplicationController
   end
 
   def show
-    #instance variable to show all receipts under the selected expense report
-    @receipts = Receipt.all
-    #instance variable is for pie chart to be created
-    @expense_report_receipts = Receipt.joins(:expense_report).select("name, receipt_desc, expense_report_id, price, plain_date, company_name")
-    #
-    @receipts_view_total = 0.00
+    #Variables for expense report
+    @expense_report_receipts = ReceiptItem.joins(:receipt).where(:expense_report_id => @expense_report.id)
+    @names_expense_report = @expense_report_receipts.uniq.pluck(:category)
+    @names_expense_report.sort!
 
-    @avg_chart = LazyHighCharts::HighChart.new('graph') do |f|
-        f.title(text: "Average Transaction Per Company")
-        f.xAxis(categories: @names)
-        f.series(name: "Average Transaction", yAxis: 0, data: @final)
+    @price_avg_report = ReceiptItem.joins(:receipt).where(:expense_report_id => @expense_report.id).group("receipt_items.category").average(:price)
+    @price_sum_report = ReceiptItem.joins(:receipt).where(:expense_report_id => @expense_report.id).group("receipt_items.category").sum(:price)
+    @avg_report = []
+    @sum_report = []
+
+    @price_avg_report.sort.each do |avg|
+      @avg_report << avg[1].to_f
+    end
+
+    @price_sum_report.sort.each do |sum|
+      @sum_report << sum[1].to_f
+    end
+
+    @sum_chart_week = LazyHighCharts::HighChart.new('graph') do |f|
+        f.title(text: "Total Expenses by Category")
+        f.xAxis(categories: @names_week)
+        f.series(name: "Sum", yAxis: 0, data: @sum_week)
+
+        f.yAxis [
+        {title: {text: "Amount($)", margin: 70} }
+          ]
+
+          f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+          f.chart({defaultSeriesType: "pie"})
+    end
+
+    @avg_chart_week = LazyHighCharts::HighChart.new('graph') do |f|
+        f.title(text: "Average Expense by Category")
+        f.xAxis(categories: @names_week)
+        f.series(name: "Avg", yAxis: 0, data: @avg_week)
 
         f.yAxis [
         {title: {text: "Amount($)", margin: 70} }
@@ -26,6 +50,8 @@ class ExpenseReportsController < ApplicationController
           f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
           f.chart({defaultSeriesType: "column"})
     end
+
+
   end
 
   def new

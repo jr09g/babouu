@@ -1,15 +1,9 @@
 <h1><%= @expense_report.name %></h1>
 
-<h1>Activity by Company</h1>
-
-<%#= pie_chart @expense_report_receipts.group(:company_name).where(expense_report_id: @expense_report.id, user: current_user).sum(:price), library: {backgroundColor: "#9FF781"}%>
-
-</br></br>
-
-<h3>Expenses for the month of <%= Date.current.strftime("%B") %></h3>
-  <%#= line_chart [
-    {name: "Expenses", data: @receipts.group_by_day(:plain_date, range: Date.current.at_beginning_of_month..Time.now).where(user: current_user).sum(:price)}], library: {backgroundColor: "#9FF781", width: 1000} %>
+<%= high_chart("avg_report", @avg_chart_report) %>
+<%#= high_chart_globals(@chart_globals) %>
 
 </br></br>
 
-<%= link_to 'Back', expense_reports_path %>
+<%= high_chart("sum_report", @sum_chart_report) %>
+<%#= high_chart("id_two", @test_pie) %>
