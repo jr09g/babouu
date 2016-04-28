@@ -12,8 +12,8 @@ class ExpenseReportsController < ApplicationController
     @names_expense_report = @expense_report_receipts.uniq.pluck(:category)
     @names_expense_report.sort!
 
-    @price_avg_report = ReceiptItem.joins(:receipt).where(:expense_report_id => @expense_report.id).group("receipt_items.category").average(:price)
-    @price_sum_report = ReceiptItem.joins(:receipt).where(:expense_report_id => @expense_report.id).group("receipt_items.category").sum(:price)
+    @price_avg_report = ReceiptItem.joins(:receipt).where("receipts.expense_report_id" => @expense_report.id).group("receipt_items.category").average(:price)
+    @price_sum_report = ReceiptItem.joins(:receipt).where("receipts.expense_report_id" => @expense_report.id).group("receipt_items.category").sum(:price)
     @avg_report = []
     @sum_report = []
 
