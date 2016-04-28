@@ -35,12 +35,12 @@ class ExpenseReportsController < ApplicationController
           ]
 
           f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
-          f.chart({defaultSeriesType: "pie"})
+          f.chart({defaultSeriesType: "column"})
     end
 
     @avg_chart_report = LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: "Average Expense by Category")
-        f.xAxis(categories: @names_expense_report)
+        f.xAxis(categories: @names_expense_report+)
         f.series(name: "Avg", yAxis: 0, data: @avg_report)
 
         f.yAxis [

@@ -1,13 +1,16 @@
 class SpendingTrendsController < ApplicationController
 	def charts
+    #prevent receipt items tied to an expense report from showing
+    @expense_reports = ExpenseReport.where(user_id: 0)
+
     #Variables for weekly charts
     @current_week_date_range = Date.current.all_week
-    @week_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range)
+    @week_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_reports_id" => @expense_reports.id)
     @names_week = @week_receipts.uniq.pluck(:category)
     @names_week.sort!
 
-    @price_avg_week = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).group("receipt_items.category").average(:price)
-    @price_sum_week = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).group("receipt_items.category").sum(:price)
+    @price_avg_week = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_reports_id" => @expense_reports.id).group("receipt_items.category").average(:price)
+    @price_sum_week = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_reports_id" => @expense_reports.id).group("receipt_items.category").sum(:price)
     @avg_week = []
     @sum_week = []
 
