@@ -20,7 +20,7 @@
 
 </br></br>
 
-<h2>This Year- <%= @year_sum_total %></h2>
+<h2>This Year- number_to_currency(<%= @year_sum_total) %></h2>
 
 <%= high_chart("avg_year", @avg_chart_year) %>
 <%#= high_chart_globals(@chart_globals) %>
