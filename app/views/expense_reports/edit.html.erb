@@ -21,7 +21,6 @@
 	         <td><%= receipt.receipt_desc %></td>
 	         <td><%= receipt.company_name %></td>
 	         <td><%= number_to_currency(receipt.price) %></td>
-	         </br></br>
 		   </tr>
 		     <% @receipts_view_total = @receipts_view_total + receipt.price %>
 		   <% end %>
