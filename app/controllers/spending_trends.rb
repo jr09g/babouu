@@ -5,12 +5,12 @@ class SpendingTrendsController < ApplicationController
 
     #Variables for weekly charts
     @current_week_date_range = Date.current.all_week
-    @week_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_reports_id" => @expense_reports.id)
+    @week_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_report_id" => @expense_reports.id)
     @names_week = @week_receipts.uniq.pluck(:category)
     @names_week.sort!
 
-    @price_avg_week = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_reports_id" => @expense_reports.id).group("receipt_items.category").average(:price)
-    @price_sum_week = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_reports_id" => @expense_reports.id).group("receipt_items.category").sum(:price)
+    @price_avg_week = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_report_id" => @expense_reports.id).group("receipt_items.category").average(:price)
+    @price_sum_week = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_week_date_range).where("receipts.expense_report_id" => @expense_reports.id).group("receipt_items.category").sum(:price)
     @avg_week = []
     @sum_week = []
 
@@ -24,12 +24,12 @@ class SpendingTrendsController < ApplicationController
 
     #Variables for monthly charts
     @current_month_date_range = Date.current.all_month
-		@month_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_month_date_range)
+		@month_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_month_date_range).where("receipts.expense_report_id" => @expense_reports.id)
 		@names_month = @month_receipts.uniq.pluck(:category)
 		@names_month.sort!
 		
-		@price_avg_month = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_month_date_range).group("receipt_items.category").average(:price)
-		@price_sum_month = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_month_date_range).group("receipt_items.category").sum(:price)
+		@price_avg_month = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_month_date_range).where("receipts.expense_report_id" => @expense_reports.id).group("receipt_items.category").average(:price)
+		@price_sum_month = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_month_date_range).where("receipts.expense_report_id" => @expense_reports.id).group("receipt_items.category").sum(:price)
     @avg_month = []
     @sum_month = []
 
@@ -43,12 +43,12 @@ class SpendingTrendsController < ApplicationController
 
     #Variables for yearly charts
     @current_year_date_range = Date.current.all_year
-    @year_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_year_date_range)
+    @year_receipts = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_year_date_range).where("receipts.expense_report_id" => @expense_reports.id)
     @names_year = @year_receipts.uniq.pluck(:category)
     @names_year.sort!
     
-    @price_avg_year = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_year_date_range).group("receipt_items.category").average(:price)
-    @price_sum_year = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_year_date_range).group("receipt_items.category").sum(:price)
+    @price_avg_year = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_year_date_range).where("receipts.expense_report_id" => @expense_reports.id).group("receipt_items.category").average(:price)
+    @price_sum_year = ReceiptItem.joins(:receipt).where(:user_id => current_user.id).where("receipts.plain_date" => @current_year_date_range).where("receipts.expense_report_id" => @expense_reports.id).group("receipt_items.category").sum(:price)
     @avg_year = []
     @sum_year = []
 
