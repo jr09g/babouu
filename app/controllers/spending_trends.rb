@@ -1,6 +1,6 @@
 class SpendingTrendsController < ApplicationController
 	def charts
-    #prevent receipt items tied to an expense report from showing
+    #prevent receipt items tied to an expense report from being returned in graphs
     @expense_reports = ExpenseReport.where(user_id: 0)
 
     #Variables for weekly charts
