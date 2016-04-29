@@ -174,7 +174,7 @@ class SpendingTrendsController < ApplicationController
 
     @sum_biz = @biz_users.group("receipt_items.category").sum("receipt_items.price")
 
-    @names_biz = @sum_biz.uniq.pluck("receipt_items.category")
+    @names_biz = @biz_users.uniq.pluck("receipt_items.category")
     @names_biz.sort!
 
     @biz_year = []
