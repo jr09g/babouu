@@ -167,11 +167,11 @@ class SpendingTrendsController < ApplicationController
 
 	def biz_trends
     #
-    @biz_users = Relationship.joins(:user).where(:business_id => current_business.id)
-    @users_receipts = @biz_users.joins(:receipt).where.not(:expense_report_id => nil)
-    @users_receipt_items = @users_receipts.joins(:receipt_items)
+    @biz_users = User.joins(:relationships, :receipts, :receipt_items)#.where(:business_id => current_business.id)
+    #@users_receipts = @biz_users.joins(:receipt).where.not(:expense_report_id => nil)
+    #@users_receipt_items = @users_receipts.joins(:receipt_items)
 
-    @sum = @users_receipt_items.sum(:price)
+    @sum = @users_receipt_items.sum("receipt_items.price")
 		
 	end
 end
