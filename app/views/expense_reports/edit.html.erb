@@ -18,9 +18,14 @@
 	         <td><%= receipt.receipt_desc %></td>
 	         <td><%= number_to_currency(receipt.price) %></td>
            <td>
-            <%= link_to receipt_path(receipt.id) do %>
-              <span class="glyphicon glyphicon-list"></span>
-            <% end %>
+             <%= link_to receipt_path(receipt.id) do %>
+               <span class="glyphicon glyphicon-list"></span>
+             <% end %>
+           </td>
+           <td>
+             <%= link_to receipt, method: :delete, data: { confirm: 'Are you sure you want to delete this receipt?' } do %>
+               <span class="glyphicon glyphicon-trash glyph-style-trash"></span>
+             <% end %>
            </td>
 		   </tr>
 		     <% @receipts_view_total = @receipts_view_total + receipt.price %>
