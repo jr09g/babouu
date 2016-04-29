@@ -44,8 +44,8 @@ Rails.application.routes.draw do
 
   #routecreated for charts page as part of analytics
   get 'spending_trends/charts' => 'spending_trends#charts', as: :charts
-  #route created as part of companies analyitics
-  get 'spending_trends/companies' => 'spending_trends#companies', as: :company_data
+  #route created as part of analytics for businesses
+  get 'spending_trends/biz_trends' => 'spending_trends#biz_trends', as: :biz_data
 
   #not sure if this route is needed, not get request should be made for incoming mails
   get '/incoming_mails' => 'incoming_mails#new'

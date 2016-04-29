@@ -33,6 +33,7 @@
           <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
           <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
         <% elsif business_signed_in? %>
+          <li><%= link_to 'Analytics', biz_data_path %></li>
           <li><%= link_to 'Groups', groups_path %></li>
           <li><%= link_to 'Edit Profile', edit_business_registration_path %></li>
           <li><%= link_to 'Logout', destroy_business_session_path, method: :delete %></li>

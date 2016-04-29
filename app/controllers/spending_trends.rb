@@ -165,7 +165,10 @@ class SpendingTrendsController < ApplicationController
 
 	end
 
-	def companies
-		#@company_receipts = Receipt.joins
+	def biz_trends
+    #
+    @biz_users = Relationship.joins(:users).where(:business_id => current_business.id)
+    @users_receipts = @biz_users.joins(:receipts).where.not(:expense_report_id => nil)
+		
 	end
 end
