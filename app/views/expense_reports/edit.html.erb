@@ -4,9 +4,7 @@
   <thead>
   <tr>
 	  <th>Date</th>
-	  <th>Receipt ID</th>
 	  <th>Description</th>
-	  <th>Company</th>
 	  <th>Price</th>
 	  <th colspan="4"></th>    
 	</tr>
@@ -17,10 +15,13 @@
 		   <% if receipt.expense_report_id == @expense_report.id %>
 		   <tr>
 	         <td><%= receipt.plain_date.to_formatted_s(:long_ordinal) %></td>
-	         <td><%= receipt.id %></td>
 	         <td><%= receipt.receipt_desc %></td>
-	         <td><%= receipt.company_name %></td>
 	         <td><%= number_to_currency(receipt.price) %></td>
+           <td>
+            <%= link_to receipt_path(receipt.id) do %>
+              <span class="glyphicon glyphicon-list"></span>
+            <% end %>
+           </td>
 		   </tr>
 		     <% @receipts_view_total = @receipts_view_total + receipt.price %>
 		   <% end %>
