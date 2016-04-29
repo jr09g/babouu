@@ -171,7 +171,7 @@ class SpendingTrendsController < ApplicationController
     #@users_receipts = @biz_users.joins(:receipt).where.not(:expense_report_id => nil)
     #@users_receipt_items = @users_receipts.joins(:receipt_items)
 
-    @sum = @users_receipt_items.sum("receipt_items.price")
+    @sum = @biz_users.sum("receipt_items.price")
 		
 	end
 end
