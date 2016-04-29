@@ -168,11 +168,33 @@ class SpendingTrendsController < ApplicationController
 	def biz_trends
     #
     @this_year = Date.current.all_year
-    @biz_users = User.joins(:relationship, :receipts, :receipt_items).where("receipts.plain_date" => @this_year).where("relationships.business_id" => current_business.id).where.not("receipts.expense_report_id" => nil)
+    @biz_users = User.joins(:relationship, :receipts, :receipt_items).where("receipts.plain_date" => @this_year).where("relationships.business_id" => current_business.id).where.not("receipts.expense_report_id" => 4)
     #@users_receipts = @biz_users.joins(:receipt).where.not(:expense_report_id => nil)
     #@users_receipt_items = @users_receipts.joins(:receipt_items)
 
-    @sum = @biz_users.sum("receipt_items.price")
+    @sum_biz = @biz_users.group("receipt_items.category").sum("receipt_items.price")
+
+    @names_biz = @sum_biz.uniq.pluck("receipt_items.category")
+    @names_biz.sort!
+
+    @biz_year = []
+
+    @sum_biz.sort.each do |sum|
+      @biz_year << sum[1].to_f
+    end
+
+    @biz_chart_year = LazyHighCharts::HighChart.new('graph') do |f|
+        f.title(text: "Total Expenses by Category")
+        f.xAxis(categories: @names_biz)
+        f.series(name: "Sum", yAxis: 0, data: @sum_biz)
+
+        f.yAxis [
+        {title: {text: "Amount($)", margin: 70} }
+          ]
+
+          f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+          f.chart({defaultSeriesType: "column"})
+    end
 		
 	end
 end
