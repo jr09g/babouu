@@ -186,7 +186,7 @@ class SpendingTrendsController < ApplicationController
     @biz_chart_year = LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: "Total Expenses by Category")
         f.xAxis(categories: @names_biz)
-        f.series(name: "Sum", yAxis: 0, data: @sum_biz)
+        f.series(name: "Sum", yAxis: 0, data: @biz_year)
 
         f.yAxis [
         {title: {text: "Amount($)", margin: 70} }
