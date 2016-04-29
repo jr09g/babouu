@@ -169,6 +169,9 @@ class SpendingTrendsController < ApplicationController
     #
     @biz_users = Relationship.joins(:users).where(:business_id => current_business.id)
     @users_receipts = @biz_users.joins(:receipts).where.not(:expense_report_id => nil)
+    @users_receipt_items = @users_receipts.joins(:receipt_items)
+
+    @sum = @users_receipt_items.sum(:price)
 		
 	end
 end
