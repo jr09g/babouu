@@ -19,9 +19,9 @@
       <!-- Below rails look iterates through all receipts for the user who is logged in -->
       <% @biz_users.each do |biz| %>
           <tr>
-            <td><%= biz.select("receipts.id") %></td>
-            <td><%= receipt.select("receipt_items.id") %></td>
-            <td><p><%= number_to_currency(biz.select("receipt_items.price")) %></p></td>
+            <td><%= biz.receipt_id %></td>
+            <td><%= receipt.receipt_item.id %></td>
+            <td><p><%= number_to_currency(biz.receipt_item.price) %></p></td>
           </tr>
       <% end %>
     </tbody>
