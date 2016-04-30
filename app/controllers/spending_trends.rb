@@ -168,25 +168,44 @@ class SpendingTrendsController < ApplicationController
 	def biz_trends
     #
     @this_year = Date.current.all_year
-    @biz_users = User.joins(:relationship, :receipts, :receipt_items).where("receipts.plain_date" => @this_year).where("relationships.business_id" => current_business.id).where.not("receipts.expense_report_id" => 4).uniq
+    @biz_users = User.joins(:relationship, :receipts, :receipt_items).where("receipts.plain_date" => @this_year).where("relationships.business_id" => current_business.id).where.not("receipts.expense_report_id" => 4)
     #@users_receipts = @biz_users.joins(:receipt).where.not(:expense_report_id => nil)
     #@users_receipt_items = @users_receipts.joins(:receipt_items)
 
     @sum_biz = @biz_users.group("receipt_items.category").sum("receipt_items.price")
+    @avg_biz = @biz_users.group("receipt_items.category").average("receipt_items.price")
 
     @names_biz = @biz_users.uniq.pluck("receipt_items.category")
     @names_biz.sort!
 
-    @biz_year = []
+    @biz_sum_year = []
+    @biz_avg_year = []
 
     @sum_biz.sort.each do |sum|
-      @biz_year << sum[1].to_f
+      @biz_sum_year << sum[1].to_f
     end
 
-    @biz_chart_year = LazyHighCharts::HighChart.new('graph') do |f|
+    @avg_biz.sort.each do |avg|
+      @biz_avg_year << avg[1].to_f
+    end
+
+    @biz_chart_sum_year = LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: "Total Expenses by Category")
         f.xAxis(categories: @names_biz)
-        f.series(name: "Sum", yAxis: 0, data: @biz_year)
+        f.series(name: "Sum", yAxis: 0, data: @biz_sum_year)
+
+        f.yAxis [
+        {title: {text: "Amount($)", margin: 70} }
+          ]
+
+          f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+          f.chart({defaultSeriesType: "column"})
+    end
+
+    @biz_chart_avg_year = LazyHighCharts::HighChart.new('graph') do |f|
+        f.title(text: "Total Expenses by Category")
+        f.xAxis(categories: @names_biz)
+        f.series(name: "Sum", yAxis: 0, data: @biz_avg_year)
 
         f.yAxis [
         {title: {text: "Amount($)", margin: 70} }
