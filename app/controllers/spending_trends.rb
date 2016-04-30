@@ -168,13 +168,9 @@ class SpendingTrendsController < ApplicationController
 	def biz_trends
     #
     @this_year = Date.current.all_year
-    @biz_users_pre = Receipt.joins(:receipt_items).where("receipts.plain_date" => @this_year)#.where("relationships.business_id" => current_business.id)#.where.not("receipts.expense_report_id" => 4)
+    @biz_users_pre = Receipt.joins(:receipt_items).where("receipts.plain_date" => @this_year)
     @biz_users_pre_pre = @biz_users_pre.joins("LEFT OUTER JOIN relationships ON relationships.user_id = receipts.user_id")
     @biz_users = @biz_users_pre_pre.select("receipts.id as receipt_id, receipt_items.id as receipt_item_id, receipt_items.price as receipt_item_price").where("relationships.business_id" => current_business.id).where.not("receipts.expense_report_id" => 4)
-    #@biz_users_pro = @biz_users_pre.select("receipts.id").distinct.where("receipts.plain_date" => @this_year)
-    #@biz_users = @biz_users_pro.select("receipt_items.category, receipt_items.price")
-    #@users_receipts = @biz_users.joins(:receipt).where.not(:expense_report_id => nil)
-    #@users_receipt_items = @users_receipts.joins(:receipt_items)
 
     @sum_biz = @biz_users.group("receipt_items.category").sum("receipt_items.price")
     @avg_biz = @biz_users.group("receipt_items.category").average("receipt_items.price")
@@ -194,7 +190,7 @@ class SpendingTrendsController < ApplicationController
     end
 
     @biz_chart_sum_year = LazyHighCharts::HighChart.new('graph') do |f|
-        f.title(text: "Total Expenses by Category")
+        f.title(text: "Total by Category")
         f.xAxis(categories: @names_biz)
         f.series(name: "Sum", yAxis: 0, data: @biz_sum_year)
 
@@ -207,9 +203,9 @@ class SpendingTrendsController < ApplicationController
     end
 
     @biz_chart_avg_year = LazyHighCharts::HighChart.new('graph') do |f|
-        f.title(text: "Total Expenses by Category")
+        f.title(text: "Average by Category")
         f.xAxis(categories: @names_biz)
-        f.series(name: "Sum", yAxis: 0, data: @biz_avg_year)
+        f.series(name: "Avg", yAxis: 0, data: @biz_avg_year)
 
         f.yAxis [
         {title: {text: "Amount($)", margin: 70} }
