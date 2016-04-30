@@ -8,23 +8,6 @@
 
 </br></br>
 
-<table class="table">
-    <thead>
-      <tr>
-        <th>Receipt ID</th>
-        <th>Receipt Item ID</th>
-        <th>Receipt Item Price</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Below rails look iterates through all receipts for the user who is logged in -->
-      <% @biz_users.each do |biz| %>
-          <tr>
-            <td><%= biz.receipt_id %></td>
-            <td><%= biz.receipt_item_id %></td>
-            <td><p><%= number_to_currency(biz.receipt_item_price) %></p></td>
-          </tr>
-      <% end %>
-    </tbody>
-  </table>
+<%= high_chart("biz_sum_monthly", @biz_chart_sum_by_month) %>
+
+</br></br>

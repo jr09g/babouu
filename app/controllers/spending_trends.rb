@@ -166,11 +166,11 @@ class SpendingTrendsController < ApplicationController
 	end
 
 	def biz_trends
-    #
+    #expenses for all employees for the current year
     @this_year = Date.current.all_year
-    @biz_users_pre = Receipt.joins(:receipt_items).where("receipts.plain_date" => @this_year)
-    @biz_users_pre_pre = @biz_users_pre.joins("LEFT OUTER JOIN relationships ON relationships.user_id = receipts.user_id")
-    @biz_users = @biz_users_pre_pre.select("receipts.id as receipt_id, receipt_items.id as receipt_item_id, receipt_items.price as receipt_item_price").where("relationships.business_id" => current_business.id).where.not("receipts.expense_report_id" => 4)
+    @receipt_join = Receipt.joins(:receipt_items).where("receipts.plain_date" => @this_year)
+    @relationship_join = @receipt_join.joins("LEFT OUTER JOIN relationships ON relationships.user_id = receipts.user_id")
+    @biz_users = @relationship_join.where("relationships.business_id" => current_business.id).where.not("receipts.expense_report_id" => 4)
 
     @sum_biz = @biz_users.group("receipt_items.category").sum("receipt_items.price")
     @avg_biz = @biz_users.group("receipt_items.category").average("receipt_items.price")
@@ -189,6 +189,11 @@ class SpendingTrendsController < ApplicationController
       @biz_avg_year << avg[1].to_f
     end
 
+    #total expenses this year month by month
+    @months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    @monthly_total = @biz_users.select("date_trunc('month', receipts.plain_date) as month and receipt_items.price").group("month").sum("receipt_items.price")
+
+    #all charts below
     @biz_chart_sum_year = LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: "Total by Category")
         f.xAxis(categories: @names_biz)
@@ -206,6 +211,19 @@ class SpendingTrendsController < ApplicationController
         f.title(text: "Average by Category")
         f.xAxis(categories: @names_biz)
         f.series(name: "Avg", yAxis: 0, data: @biz_avg_year)
+
+        f.yAxis [
+        {title: {text: "Amount($)", margin: 70} }
+          ]
+
+          f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+          f.chart({defaultSeriesType: "column"})
+    end
+
+    @biz_chart_sum_by_month = LazyHighCharts::HighChart.new('graph') do |f|
+        f.title(text: "Monthly Total")
+        f.xAxis(categories: @months)
+        f.series(name: "Sum", yAxis: 0, data: @monthly_total)
 
         f.yAxis [
         {title: {text: "Amount($)", margin: 70} }
