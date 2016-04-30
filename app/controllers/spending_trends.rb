@@ -191,7 +191,7 @@ class SpendingTrendsController < ApplicationController
 
     #total expenses this year month by month
     @months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    @monthly_total = @biz_users.select("date_trunc('month', receipts.plain_date) as month, receipt_items.price").group("month").sum("receipt_items.price")
+    @monthly_total = @biz_users.select("date_trunc('month', receipts.plain_date), receipt_items.price").group("date_trunc('month', receipts.plain_date)").sum("receipt_items.price")
 
     #all charts below
     @biz_chart_sum_year = LazyHighCharts::HighChart.new('graph') do |f|
