@@ -168,9 +168,9 @@ class SpendingTrendsController < ApplicationController
 	def biz_trends
     #
     @this_year = Date.current.all_year
-    @biz_users_pre_pre = User.joins(:relationship, :receipts, :receipt_items).where("receipts.plain_date" => @this_year).where("relationships.business_id" => current_business.id)#.where.not("receipts.expense_report_id" => 4)
-    @biz_users = @biz_users_pre_pre.select("receipts.user_id").distinct
-    #@biz_users_pro = @biz_users_pre.select("receipts.id").distinct
+    @biz_users_pre_pre = User.joins(:relationship, :receipt_items).where("relationships.business_id" => current_business.id)#.where.not("receipts.expense_report_id" => 4)
+    @biz_users = @biz_users_pre_pre.joins(:receipt)
+    #@biz_users_pro = @biz_users_pre.select("receipts.id").distinct.where("receipts.plain_date" => @this_year)
     #@biz_users = @biz_users_pro.select("receipt_items.category, receipt_items.price")
     #@users_receipts = @biz_users.joins(:receipt).where.not(:expense_report_id => nil)
     #@users_receipt_items = @users_receipts.joins(:receipt_items)
