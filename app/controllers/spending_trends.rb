@@ -168,7 +168,7 @@ class SpendingTrendsController < ApplicationController
 	def biz_trends
     #
     @this_year = Date.current.all_year
-    @biz_users_pre = Receipt.joins(:receipt_items)#.where("relationships.business_id" => current_business.id)#.where.not("receipts.expense_report_id" => 4)
+    @biz_users_pre = Receipt.joins(:receipt_items).where("receipts.plain_date" => @this_year)#.where("relationships.business_id" => current_business.id)#.where.not("receipts.expense_report_id" => 4)
     @biz_users_pre_pre = @biz_users_pre.joins("LEFT OUTER JOIN relationships ON relationships.user_id = receipts.user_id")
     @biz_users = @biz_users_pre_pre.select("receipts.id as receipt_id, receipt_items.id as receipt_item_id, receipt_items.price as receipt_item_price").where.not("receipts.expense_report_id" => 4)
     #@biz_users_pro = @biz_users_pre.select("receipts.id").distinct.where("receipts.plain_date" => @this_year)
