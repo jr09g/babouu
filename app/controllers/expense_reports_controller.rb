@@ -71,7 +71,7 @@ class ExpenseReportsController < ApplicationController
 
   def create
     @expense_report = current_user.expense_reports.build(expense_report_params)
-    @none_report = ExpenseReport.create(name: "-NONE-", user_id: 0)
+    #@none_report = ExpenseReport.create(name: "-NONE-", user_id: 0)
 
     respond_to do |format|
       if @expense_report.save
