@@ -4,18 +4,22 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    #@groups = Group.all
-    #
+    #below variable is a custom join of groups and users tables to retrieve manager name
     @groups_with_manager_name = Group.joins('INNER JOIN users ON users.id = groups.manager_user_id')
-    #
-    #@groups = @groups_with_manager_name.select("groups.id as id, groups.name as name, groups.manager_user_id as man_id,users.first_name as first, users.last_name as last")
+    #below variable allows to view a groups index with the full manager name concatenated to one field
     @groups = @groups_with_manager_name.select("groups.id as id, groups.name as name, CONCAT(users.first_name, ' ', users.last_name) as man_name")
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
-    @users_group = UsersGroup.where(:group_id => @group.id)
+    @users_group = UsersGroup.joins(:user).where(:group_id => @group.id)
+    #below variable is a custom join of groups and users tables to retrieve manager name
+    @manager_join = Group.joins('INNER JOIN users ON users.id = groups.manager_user_id').where(:id => @group.id)
+    #
+    @manager_name = @manager_join.select("CONCAT(users.first_name, ' ', users.last_name) as man_name")
+    #below variable allows to view a groups index with the full manager name concatenated to one field
+    @group_show = @users_group.select("CONCAT(users.first_name, ' ', users.last_name) as emp_name")
   end
 
   # GET /groups/new
