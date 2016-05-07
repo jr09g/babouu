@@ -12,7 +12,8 @@ class RelationshipsController < ApplicationController
     #TEST LEAVE FOR LATER
     #@users_roles = @users_roles_pre.joins(:role).select("users_roles.id as ur_id, users.id as user, users.first_name as first, users.last_name as last, users.email as email, roles.name as role")
     #TEST QUERY
-    @users_roles_query = UsersRole.joins('INNER JOIN users ON users.id = users_roles.user_id INNER JOIN roles ON roles.id = users_roles.role_id')
+    #@users_roles_query = UsersRole.joins('INNER JOIN users ON users.id = users_roles.user_id INNER JOIN roles ON roles.id = users_roles.role_id')
+    @users_roles_query = UsersRole.joins(:user, :role)
     #TEST SELECT
     @users_roles = @users_roles_query.select("users_roles.id as ur_id, users.id as user, users.first_name as first, users.last_name as last, users.email as email, roles.name as role")
   end
