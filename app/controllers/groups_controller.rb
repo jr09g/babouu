@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
     @groups_with_manager_name = Group.joins('INNER JOIN users ON users.id = groups.manager_user_id')
     #
     #@groups = @groups_with_manager_name.select("groups.id as id, groups.name as name, groups.manager_user_id as man_id,users.first_name as first, users.last_name as last")
-    @groups = @groups_with_manager_name.select("groups.id as id, groups.name as name, groups.manager_user_id as man_id, CONCAT(users.first_name, ' ', users.last_name) as man_name")
+    @groups = @groups_with_manager_name.select("groups.name as name, CONCAT(users.first_name, ' ', users.last_name) as man_name")
   end
 
   # GET /groups/1
