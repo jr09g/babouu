@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   resources :received_expense_reports
 
   resources :relationships do
-    get autocomplete_user_email, :on => :collection
+    get :autocomplete_user_email, :on => :collection
   end
 
   resources :groups
