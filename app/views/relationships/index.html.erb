@@ -18,7 +18,7 @@
   <tbody>
     <% @relationships.each do |relationship| %>
       <% @users_roles.each do |user_role| %>
-        <% if relationship.user_id == user_role.user %>
+        <%# if relationship.user_id == user_role.user %>
           <tr>
             <td><%= user_role.user %></td>
             <td><%= user_role.first %></td>
@@ -28,7 +28,7 @@
             <td><%= link_to 'Manage Role', edit_users_role_path(user_role.ur_id) %></td>
             <td><%= link_to 'Remove Relationship', relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
-        <% end %>
+        <%# end %>
       <% end %>
     <% end %>
   </tbody>
