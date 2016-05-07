@@ -15,9 +15,9 @@ class GroupsController < ApplicationController
   def show
     @users_group = UsersGroup.joins(:user).where(:group_id => @group.id)
     #below variable is a custom join of groups and users tables to retrieve manager name
-    @manager_join = Group.joins('INNER JOIN users ON users.id = groups.manager_user_id').where(:id => @group.id)
+    @manager_join = Group.joins('INNER JOIN users ON users.id = groups.manager_user_id').where(:manager_user_id => @group.manager_user_id)
     #
-    @manager_name = @manager_join.select("CONCAT(users.first_name, ' ', users.last_name) as man_name")
+    @manager_name = @manager_join.select("groups.id as id, CONCAT(users.first_name, ' ', users.last_name) as man_name")
     #below variable allows to view a groups index with the full manager name concatenated to one field
     @group_show = @users_group.select("CONCAT(users.first_name, ' ', users.last_name) as emp_name")
   end
