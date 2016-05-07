@@ -190,14 +190,14 @@ class SpendingTrendsController < ApplicationController
     end
 
     #total expenses this year month by month
-    @months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    @monthly_total = @biz_users.select("date_trunc('month', receipts.plain_date), receipt_items.price").group("month").sum("receipt_items.price")
+    #@months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    #@monthly_total = @biz_users.select("date_trunc('month', receipts.plain_date), receipt_items.price").group("month").sum("receipt_items.price")
 
-    @monthly_array = []
+    #@monthly_array = []
 
-    @monthly_total.sort.each do |month|
-      @monthly_array << month[1].to_f
-    end
+    #@monthly_total.sort.each do |month|
+    #  @monthly_array << month[1].to_f
+    #end
 
     #all charts below
     @biz_chart_sum_year = LazyHighCharts::HighChart.new('graph') do |f|
@@ -226,18 +226,18 @@ class SpendingTrendsController < ApplicationController
           f.chart({defaultSeriesType: "column"})
     end
 
-    @biz_chart_sum_by_month = LazyHighCharts::HighChart.new('graph') do |f|
-        f.title(text: "Monthly Total")
-        f.xAxis(categories: @months)
-        f.series(name: "Sum", yAxis: 0, data: @monthly_array)
+    #@biz_chart_sum_by_month = LazyHighCharts::HighChart.new('graph') do |f|
+    #    f.title(text: "Monthly Total")
+    #    f.xAxis(categories: @months)
+    #    f.series(name: "Sum", yAxis: 0, data: @monthly_array)
 
-        f.yAxis [
-        {title: {text: "Amount($)", margin: 70} }
-          ]
+    #    f.yAxis [
+    #    {title: {text: "Amount($)", margin: 70} }
+    #      ]
 
-          f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
-          f.chart({defaultSeriesType: "column"})
-    end
+    #      f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+    #      f.chart({defaultSeriesType: "column"})
+    #end
 		
 	end
 end
