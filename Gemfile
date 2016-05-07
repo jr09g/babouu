@@ -31,10 +31,6 @@ gem 'rolify', '~> 5.0'
 gem 'authority', '~> 3.1'
 #paperclip added to enable attachments to receipts
 gem 'paperclip', '~> 4.3.0'
-#gem for google tesseract ocr
-gem 'rtesseract', '~> 1.3', '>= 1.3.1'
-#quick_magick installed as a requirement for rtesseract gem
-gem 'mini_magick', '~> 4.4'
 #lazy_high_charts added to implement data charts for spending habits
 gem 'lazy_high_charts', '~> 1.5', '>= 1.5.5'
 #groupdate added to allow for easy date grouping of models for charting through chartkick
@@ -45,6 +41,8 @@ gem 'active_median', '~> 0.1.3'
 gem 'aws-sdk-rails', '~> 1.0'
 #this gem is being bundles specifically for processing with paperclip attachments to S3
 gem 'aws-sdk'#, '~> 1.6'
+#autocomplete is for fields in business profiles
+gem 'rails4-autocomplete', '~> 1.1', '>= 1.1.1'
 #rubyracer added to assist with asset precompile
 gem 'therubyracer', '~> 0.12.2'
 #windows does not include zoneinfo files, so bundle the tzinfo-data gem

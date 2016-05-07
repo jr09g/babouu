@@ -20,3 +20,6 @@
 //= require highcharts/highcharts
 //= require highcharts/highcharts-more
 //= require highcharts/highstock
+//
+//= require jquery-ui/autocomplete
+//= require autocomplete-rails

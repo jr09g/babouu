@@ -2,6 +2,7 @@ class RelationshipsController < ApplicationController
   before_action :set_relationship, only: [:show, :edit, :update, :destroy]
   before_action :set_user_role, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_business!
+  autocomplete :user, :email
 
   # GET /relationships
   # GET /relationships.json
@@ -22,6 +23,7 @@ class RelationshipsController < ApplicationController
   # GET /relationships/new
   def new
     @relationship = Relationship.new
+    @users = User.all
   end
 
   # GET /relationships/1/edit
@@ -37,7 +39,7 @@ class RelationshipsController < ApplicationController
 
     respond_to do |format|
       if @relationship.save
-        format.html { redirect_to @relationship, notice: 'Relationship was successfully created.' }
+        format.html { redirect_to relationships_path, notice: 'Relationship was successfully created.' }
         format.json { render :show, status: :created, location: @relationship }
       else
         format.html { render :new }
@@ -83,6 +85,6 @@ class RelationshipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def relationship_params
-      params.require(:relationship).permit(:user_id)
+      params.require(:relationship).permit(:user_id, :email)
     end
 end
