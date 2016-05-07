@@ -28,6 +28,10 @@
     <%= f.text_field :receipt_desc %>
   </div>
   <div class="field">
+    <%= f.label :price %><br>
+    <%= f.number_field :price, step: 0.01 %>
+  </div>
+  <div class="field">
     <%= f.label :company_name %><br>
     <%= f.text_field :company_name %>
   </div>
