@@ -7,8 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Manager user</th>
-      <th>First Name</th>
-      <th>Last Name</th>
+      <th>Manager Name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,8 +17,7 @@
       <tr>
         <td><%= group.name %></td>
         <td><%= group.man_id %></td>
-        <td><%= group.first %></td>
-        <td><%= group.last %></td>
+        <td><%= group.man_name %></td>
         <td><%= link_to 'Show', group %></td>
         <td><%= link_to 'Edit', edit_group_path(group) %></td>
         <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
