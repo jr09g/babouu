@@ -14,7 +14,7 @@ gem 'bootstrap-sass', '~> 3.3.5.1'
 #see https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 #use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', "~> 2.3.0"
 #turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 #build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

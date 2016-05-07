@@ -23,7 +23,6 @@ class RelationshipsController < ApplicationController
   # GET /relationships/new
   def new
     @relationship = Relationship.new
-    @users = User.all
   end
 
   # GET /relationships/1/edit
@@ -85,6 +84,6 @@ class RelationshipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def relationship_params
-      params.require(:relationship).permit(:user_id, :email)
+      params.require(:relationship).permit(:user_id)
     end
 end

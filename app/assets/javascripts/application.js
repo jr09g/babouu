@@ -21,3 +21,5 @@
 //= require highcharts/highcharts-more
 //= require highcharts/highstock
 //
+//= require jquery-ui
+//= require autocomplete-rails
