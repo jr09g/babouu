@@ -4,7 +4,11 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    #@groups = Group.all
+    #
+    @groups_with_manager_name = Group.joins('INNER JOIN users ON users.id = groups.manager_user_id')
+    #
+    @groups = @groups_with_manager_name.select("groups.id as id, groups.name as name, groups.manager_user_id as man_id,users.first_name as first, users.last_name as last")
   end
 
   # GET /groups/1
