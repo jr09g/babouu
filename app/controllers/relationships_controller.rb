@@ -12,6 +12,8 @@ class RelationshipsController < ApplicationController
     @users_roles_pre = User.joins(:users_role)
     #below variable does the second join and selects the fields needed to display relationship
     @users_roles = @users_roles_pre.joins('INNER JOIN roles on roles.id = users_roles.role_id').select("users_roles.id as ur_id, users.id as user, users.first_name as first, users.last_name as last, users.email as email, roles.name as role")
+    #
+    
   end
 
   # GET /relationships/1

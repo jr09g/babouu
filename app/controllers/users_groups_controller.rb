@@ -20,6 +20,8 @@ class UsersGroupsController < ApplicationController
     @business_users = Relationship.joins(:user).where(:business_id => current_business.id)
     #instance variable to return groups that belong to the current business
     @business_groups = Group.where(:business_id => current_business.id)
+    #TEST
+    @group_list = UsersGroup.joins(:group).select("users_groups.user_id as user, users_groups.group_id as group, groups.name as group")
   end
 
   # GET /users_groups/1/edit
